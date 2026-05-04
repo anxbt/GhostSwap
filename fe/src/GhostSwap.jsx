@@ -4,18 +4,17 @@ import {
   BrowserProvider,
   Contract,
   MaxUint256,
-  Signature,
-  SigningKey,
+  isAddress,
   keccak256,
   parseUnits,
-  solidityPacked,
 } from "ethers";
 import { Ghost, Lock, Eye, Shield, ChevronDown, ArrowDown, Clock, ArrowLeft } from "lucide-react";
 import { TOKENS, findTokenByAddress } from "./config/tokens";
 import { CONTRACTS, POOL_CONFIG, getExpectedChainId, chainNameById } from "./config/contracts";
 import { POST_SETTLE_REVEAL_ABI } from "./lib/postSettleRevealAbi";
-import { MOCK_ZK_VERIFIER_ABI, POOL_SWAP_TEST_ABI } from "./lib/swapAbis";
+import { POOL_SWAP_TEST_ABI } from "./lib/swapAbis";
 import { shortAddress, toNumberSafe } from "./lib/format";
+import { encryptMinOut, mapCofheError } from "./hooks/useCofhe";
 
 const SwapState = {
   IDLE: "idle",
@@ -26,16 +25,27 @@ const SwapState = {
   REVEALED: "revealed",
 };
 
-const EUINT128_UTYPE = 6;
-const DEFAULT_SECURITY_ZONE = 0;
 const HOOK_NONCE_STORAGE_KEY = "ghostswap:hook-nonce";
 const TRACKED_SWAP_STORAGE_KEY = "ghostswap:tracked-swaps";
 const HISTORY_PAGE_SIZE = 8;
 const HISTORY_LOOKBACK_BLOCKS = 100_000;
 const MIN_SQRT_PRICE_LIMIT_X96 = 4295128740n;
 const MAX_SQRT_PRICE_LIMIT_X96 = 1461446703485210103287273052203988822378723970341n;
-const MOCK_ZK_SIGNER_PRIVATE_KEY =
-  import.meta.env.VITE_MOCK_ZK_SIGNER_PRIVATE_KEY || "0x6c8d7f768a6bb4aafe85e8a2f5a9680355239c7e14646ed62b044e39de154512";
+const INTENT_SIGNING_DOMAIN = {
+  name: "GhostSwapIntent",
+  version: "1",
+};
+const INTENT_DEADLINE_SECONDS = Number(import.meta.env.VITE_INTENT_DEADLINE_SECONDS || 20 * 60);
+const INTENT_AUTHORIZATION_TYPES = {
+  IntentAuthorization: [
+    { name: "trader", type: "address" },
+    { name: "sender", type: "address" },
+    { name: "poolId", type: "bytes32" },
+    { name: "nonce", type: "uint256" },
+    { name: "deadline", type: "uint256" },
+    { name: "ctHash", type: "uint256" },
+  ],
+};
 const ERC20_ABI = [
   "function balanceOf(address owner) view returns (uint256)",
   "function allowance(address owner,address spender) view returns (uint256)",
@@ -118,29 +128,24 @@ function getSqrtPriceLimitX96(zeroForOne) {
   return zeroForOne ? MIN_SQRT_PRICE_LIMIT_X96 + 1n : MAX_SQRT_PRICE_LIMIT_X96 - 1n;
 }
 
-function signMockEncryptedInput(ctHash, verifierContextAddress, chainId) {
-  const digest = keccak256(
-    solidityPacked(
-      ["uint256", "uint8", "uint8", "address", "uint256"],
-      [ctHash, EUINT128_UTYPE, DEFAULT_SECURITY_ZONE, verifierContextAddress, BigInt(chainId)]
-    )
+function computePoolId({ token0, token1, fee, tickSpacing, hooks }) {
+  return keccak256(
+    AbiCoder.defaultAbiCoder().encode(["address", "address", "uint24", "int24", "address"], [token0, token1, fee, tickSpacing, hooks])
   );
-
-  const signature = Signature.from(new SigningKey(MOCK_ZK_SIGNER_PRIVATE_KEY).sign(digest)).serialized;
-
-  return {
-    ctHash,
-    securityZone: DEFAULT_SECURITY_ZONE,
-    utype: EUINT128_UTYPE,
-    signature,
-  };
 }
 
 function mapSubmitError(error) {
+  const cofheError = mapCofheError(error);
+  if (cofheError && cofheError !== "CoFHE operation failed.") {
+    return cofheError;
+  }
+
   const message = error?.shortMessage || error?.message || "Swap submission failed.";
   if (message.includes("NonceUsed")) return "Nonce already used. Retry once to use the next nonce.";
   if (message.includes("PendingIntentExists")) return "Previous intent is still pending. Reveal or settle it first.";
-  if (message.includes("InvalidHookData")) return "Hook data is invalid. Check CoFHE mock verifier configuration.";
+  if (message.includes("InvalidHookData")) return "Hook data is invalid. Ensure encrypted input and intent signature are generated correctly.";
+  if (message.includes("ExpiredIntent")) return "Intent signature expired. Retry the swap.";
+  if (message.includes("InvalidIntentSignature")) return "Invalid trader signature on hook data.";
   return message;
 }
 
@@ -169,12 +174,6 @@ function TokenSelector({ selected, onSelect, disabled = false }) {
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
-  useEffect(() => {
-    if (disabled) {
-      setOpen(false);
-    }
-  }, [disabled]);
-
   return (
     <div ref={ref} className="relative">
       <button
@@ -193,7 +192,7 @@ function TokenSelector({ selected, onSelect, disabled = false }) {
         <ChevronDown size={16} fill="currentColor" />
       </button>
 
-      {open && (
+      {open && !disabled && (
         <div className="absolute top-[calc(100%+6px)] left-0 bg-ghost-card border border-white/10 rounded-sm overflow-hidden z-[100] min-w-[160px] shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
           {TOKENS.map(t => (
             <button
@@ -605,10 +604,6 @@ export default function GhostSwap({ onBack }) {
     return new Contract(CONTRACTS.swapRouter, POOL_SWAP_TEST_ABI, signer);
   }
 
-  function getMockVerifier(providerOrSigner) {
-    return new Contract(CONTRACTS.mockZkVerifier, MOCK_ZK_VERIFIER_ABI, providerOrSigner);
-  }
-
   function getErc20(tokenAddress, providerOrSigner) {
     return new Contract(tokenAddress, ERC20_ABI, providerOrSigner);
   }
@@ -642,42 +637,57 @@ export default function GhostSwap({ onBack }) {
       throw new Error("Wallet signer is required to build encrypted hook data.");
     }
 
-    const swapRouter = getSwapRouterContract(wallet.signer);
-    let verifierContextAddress = traderAddress;
-    try {
-      // In v4 router flow, CoFHE verification is evaluated against PoolManager context.
-      verifierContextAddress = await swapRouter.manager();
-    } catch {
-      verifierContextAddress = traderAddress;
-    }
-
-    const nonce = getStoredHookNonce(verifierContextAddress, chainId);
-    const verifier = getMockVerifier(wallet.signer);
-
-    const exists = await verifier.exists();
-    if (!exists) {
-      throw new Error("Mock verifier contract not found on this chain.");
-    }
-
-    const ctHash = await verifier.zkVerifyCalcCtHash(
+    const nonce = getStoredHookNonce(traderAddress, chainId);
+    const deadline = Math.floor(Date.now() / 1000) + INTENT_DEADLINE_SECONDS;
+    const encryptedMinOutInput = await encryptMinOut({
       minOutRaw,
-      EUINT128_UTYPE,
-      verifierContextAddress,
-      DEFAULT_SECURITY_ZONE,
-      chainId
+      chainId,
+      traderAddress,
+      ethereumProvider: window.ethereum,
+    });
+
+    const poolId = computePoolId({
+      token0: POOL_CONFIG.token0,
+      token1: POOL_CONFIG.token1,
+      fee: POOL_CONFIG.fee,
+      tickSpacing: POOL_CONFIG.tickSpacing,
+      hooks: CONTRACTS.postSettleRevealHook,
+    });
+
+    const intentSignature = await wallet.signer.signTypedData(
+      {
+        ...INTENT_SIGNING_DOMAIN,
+        chainId,
+        verifyingContract: CONTRACTS.postSettleRevealHook,
+      },
+      INTENT_AUTHORIZATION_TYPES,
+      {
+        trader: traderAddress,
+        sender: CONTRACTS.swapRouter,
+        poolId,
+        nonce: BigInt(nonce),
+        deadline: BigInt(deadline),
+        ctHash: BigInt(encryptedMinOutInput.ctHash),
+      }
     );
-
-    const insertTx = await verifier.insertCtHash(ctHash, minOutRaw);
-    await insertTx.wait();
-
-    const signedInput = signMockEncryptedInput(ctHash, verifierContextAddress, chainId);
 
     const hookData = AbiCoder.defaultAbiCoder().encode(
-      ["tuple(uint256 ctHash,uint8 securityZone,uint8 utype,bytes signature)", "uint256"],
-      [signedInput, BigInt(nonce)]
+      ["tuple(uint256 ctHash,uint8 securityZone,uint8 utype,bytes signature)", "uint256", "address", "uint256", "bytes"],
+      [
+        [
+          BigInt(encryptedMinOutInput.ctHash),
+          Number(encryptedMinOutInput.securityZone),
+          Number(encryptedMinOutInput.utype),
+          encryptedMinOutInput.signature,
+        ],
+        BigInt(nonce),
+        traderAddress,
+        BigInt(deadline),
+        intentSignature,
+      ]
     );
 
-    setStoredHookNonce(verifierContextAddress, chainId, nonce + 1);
+    setStoredHookNonce(traderAddress, chainId, nonce + 1);
 
     return { hookData, nonce };
   }
@@ -718,15 +728,25 @@ export default function GhostSwap({ onBack }) {
       const amountSpecified = -parseUnits(amountIn, tokenIn.decimals);
       const minOutRaw = parseUnits(minOut, tokenOut.decimals);
       const sqrtPriceLimitX96 = getSqrtPriceLimitX96(zeroForOne);
+      const complianceAddress = complianceAddr.trim();
+
+      if (complianceAddress && !isAddress(complianceAddress)) {
+        throw new Error("Compliance address is invalid.");
+      }
 
       await ensureTransferReadiness(-amountSpecified);
 
       const { hookData } = await buildHookData(minOutRaw, wallet.address);
 
+      const hook = getHookContract(wallet.signer);
+      if (complianceAddress) {
+        const authTx = await hook.setAuthorizedRevealer(complianceAddress, true);
+        await authTx.wait();
+      }
+
       setSwapState(SwapState.SUBMITTED);
 
       const swapRouter = getSwapRouterContract(wallet.signer);
-      const hook = getHookContract(wallet.signer);
       const tx = await swapRouter.swap(
         {
           currency0: POOL_CONFIG.token0,
@@ -1290,7 +1310,7 @@ export default function GhostSwap({ onBack }) {
                       className="w-full bg-white/5 border border-white/10 rounded-sm px-3.5 py-2.5 text-ghost-text-secondary text-[12px] font-mono outline-none"
                     />
                     <div className="text-[10px] text-ghost-text-dim mt-1.5">
-                      This address receives a permit to view your trade post-settlement only.
+                      This address is authorized in-hook to call reveal on your settled swaps.
                     </div>
                   </div>
                 )}

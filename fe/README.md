@@ -21,9 +21,13 @@ cp .env.example .env
 Required values:
 - `VITE_CHAIN_ID`
 - `VITE_POST_SETTLE_HOOK`
+- `VITE_VAULT_ADDRESS`
+- `VITE_VAULT_PERIPHERY`
+- `VITE_SWAP_ROUTER`
 - `VITE_POOL_TOKEN0`
 - `VITE_POOL_TOKEN1`
 - Token metadata addresses used in UI (`VITE_TOKEN_*`)
+- Optional: `VITE_INTENT_DEADLINE_SECONDS` (default `1200`)
 
 4. Start dev server.
 
@@ -39,6 +43,7 @@ npm run build
 
 ## Notes
 
-- Local Anvil defaults are included for mock verifier contracts and swap router in `src/config/contracts.js`.
+- Wave 2 uses `@cofhe/sdk` for browser-side encryption and EIP-712 signed intent payloads.
+- `@cofhe/sdk` encryption is configured for Arbitrum Sepolia (`421614`).
 - The submit flow enforces token balance and router allowance checks before swap submission.
 - Trade history is loaded from hook events and displayed with pagination.

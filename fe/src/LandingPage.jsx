@@ -360,7 +360,7 @@ export default function LandingPage({ onLaunchApp }) {
               n: "01",
               title: "Draft Intent",
               desc: "You enter your swap parameters. Your minimum price is encrypted client-side using Fhenix CoFHE before leaving your browser.",
-              tag: "cofhejs.encrypt()",
+              tag: "@cofhe/sdk encryptInputs()",
             },
             {
               n: "02",

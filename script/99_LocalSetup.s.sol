@@ -17,6 +17,8 @@ import {PoolSwapTest} from "@uniswap/v4-core/src/test/PoolSwapTest.sol";
 
 import {HookMiner} from "v4-periphery/src/utils/HookMiner.sol";
 import {PostSettleRevealHook} from "../src/hooks/PostSettleRevealHook.sol";
+import {GhostVault} from "../src/GhostVault.sol";
+import {GhostVaultPeriphery} from "../src/periphery/GhostVaultPeriphery.sol";
 
 import {MockERC20} from "solmate/src/test/utils/mocks/MockERC20.sol";
 
@@ -47,6 +49,8 @@ contract LocalSetupScript is Script {
         address manager;
         address swapRouter;
         address hook;
+        address vault;
+        address vaultPeriphery;
         address token0;
         address token1;
     }
@@ -71,7 +75,7 @@ contract LocalSetupScript is Script {
         DexAddrs memory dex = _deployDex(owner);
         vm.stopBroadcast();
 
-        _writeFrontendEnv(owner, dex.hook, dex.swapRouter, cofhe.zkVerifier, cofhe.zkVerifierSigner, dex.token0, dex.token1);
+        _writeFrontendEnv(owner, dex.hook, dex.vault, dex.vaultPeriphery, dex.swapRouter, dex.token0, dex.token1);
 
         console2.log("\nLocal setup complete.");
         console2.log("TASK_MANAGER_ADDRESS:", cofhe.taskManager);
@@ -81,6 +85,8 @@ contract LocalSetupScript is Script {
         console2.log("PoolManager:", dex.manager);
         console2.log("SwapRouter:", dex.swapRouter);
         console2.log("PostSettleRevealHook:", dex.hook);
+        console2.log("GhostVault:", dex.vault);
+        console2.log("GhostVaultPeriphery:", dex.vaultPeriphery);
         console2.log("Token0:", dex.token0);
         console2.log("Token1:", dex.token1);
         console2.log("Funded owner:", owner);
@@ -124,6 +130,12 @@ contract LocalSetupScript is Script {
         token0.mint(owner, 100_000 ether);
         token1.mint(owner, 100_000 ether);
         address hook = _deployHook(manager, owner);
+        GhostVault vault = new GhostVault(address(token1), hook);
+        GhostVaultPeriphery periphery = new GhostVaultPeriphery(address(swapRouter), address(vault), owner);
+
+        vault.setOperator(address(periphery));
+
+        PostSettleRevealHook(hook).setSurplusVault(address(vault));
         PostSettleRevealHook(hook).setAuthorizedRevealer(owner, true);
         _initPoolAndLiquidity(manager, lpRouter, token0, token1, hook);
 
@@ -131,6 +143,8 @@ contract LocalSetupScript is Script {
             manager: address(manager),
             swapRouter: address(swapRouter),
             hook: hook,
+            vault: address(vault),
+            vaultPeriphery: address(periphery),
             token0: address(token0),
             token1: address(token1)
         });
@@ -179,17 +193,18 @@ contract LocalSetupScript is Script {
     function _writeFrontendEnv(
         address owner,
         address hook,
+        address vault,
+        address vaultPeriphery,
         address swapRouter,
-        address zkVerifier,
-        address zkVerifierSigner,
         address token0,
         address token1
     ) internal {
         string memory envBody = "VITE_CHAIN_ID=31337\n";
         envBody = string.concat(envBody, "VITE_POST_SETTLE_HOOK=", vm.toString(hook), "\n");
+        envBody = string.concat(envBody, "VITE_VAULT_ADDRESS=", vm.toString(vault), "\n");
+        envBody = string.concat(envBody, "VITE_VAULT_PERIPHERY=", vm.toString(vaultPeriphery), "\n");
         envBody = string.concat(envBody, "VITE_SWAP_ROUTER=", vm.toString(swapRouter), "\n");
-        envBody = string.concat(envBody, "VITE_MOCK_ZK_VERIFIER=", vm.toString(zkVerifier), "\n");
-        envBody = string.concat(envBody, "VITE_MOCK_ZK_VERIFIER_SIGNER=", vm.toString(zkVerifierSigner), "\n");
+        envBody = string.concat(envBody, "VITE_INTENT_DEADLINE_SECONDS=1200\n");
         envBody = string.concat(envBody, "VITE_POOL_TOKEN0=", vm.toString(token0), "\n");
         envBody = string.concat(envBody, "VITE_POOL_TOKEN1=", vm.toString(token1), "\n");
         envBody = string.concat(envBody, "VITE_POOL_FEE=3000\n");

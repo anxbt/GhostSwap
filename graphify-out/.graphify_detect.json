@@ -1,0 +1,51 @@
+{
+  "files": {
+    "code": [
+      "hardhat.config.ts",
+      "fe/tailwind.config.js",
+      "fe/vite.config.js",
+      "fe/eslint.config.js",
+      "fe/postcss.config.js",
+      "fe/src/main.jsx",
+      "fe/src/App.jsx",
+      "fe/src/LandingPage.jsx",
+      "fe/src/GhostSwap.jsx",
+      "fe/src/config/contracts.js",
+      "fe/src/hooks/useCofhe.js",
+      "fe/src/lib/format.js",
+      "fe/src/lib/postSettleRevealAbi.js",
+      "fe/src/lib/swapAbis.js"
+    ],
+    "document": [
+      "README.md",
+      "remappings.txt",
+      "AGENTS.md",
+      "instructions.md",
+      "fe/index.html",
+      "fe/README.md",
+      "docs/fhe-mock-devrel-note.md",
+      "graphify-out/graph.html",
+      "graphify-out/GRAPH_REPORT.md",
+      "fhe-assistant-main/README.md",
+      "fhe-assistant-main/core.md"
+    ],
+    "paper": [],
+    "image": [
+      "fe/public/icons.svg",
+      "fe/public/favicon.svg",
+      "fe/src/assets/hero.png",
+      "fe/src/assets/vite.svg",
+      "fe/src/assets/react.svg"
+    ],
+    "video": []
+  },
+  "total_files": 30,
+  "total_words": 24097,
+  "needs_graph": false,
+  "warning": "Corpus is ~24,097 words - fits in a single context window. You may not need a graph.",
+  "skipped_sensitive": [
+    "test/utils/SortTokens.sol",
+    "fe/src/config/tokens.js"
+  ],
+  "graphifyignore_patterns": 0
+}

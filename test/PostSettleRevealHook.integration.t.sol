@@ -23,6 +23,12 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
     using PoolIdLibrary for PoolKey;
 
     uint256 internal constant REVEAL_DELAY = 11;
+    uint256 internal constant INTENT_DEADLINE_WINDOW = 30 minutes;
+    bytes32 internal constant EIP712_DOMAIN_TYPEHASH =
+        keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
+    bytes32 internal constant INTENT_AUTHORIZATION_TYPEHASH = keccak256(
+        "IntentAuthorization(address trader,address sender,bytes32 poolId,uint256 nonce,uint256 deadline,uint256 ctHash)"
+    );
 
     event IntentCaptured(
         uint256 indexed swapId,
@@ -56,10 +62,12 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
     CoFheTest internal cft;
     PostSettleRevealHook internal hook;
 
-    address internal trader = makeAddr("trader");
+    uint256 internal traderPk = uint256(keccak256("ghostswap-integration-trader"));
+    address internal trader;
 
     function setUp() public {
         cft = new CoFheTest(false);
+        trader = vm.addr(traderPk);
 
         deployFreshManagerAndRouters();
         deployMintAndApprove2Currencies();
@@ -78,8 +86,8 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
     }
 
     function test_routerSwapFlowTriggersHookLifecycle() public {
-        // In router flow, the encrypted input is verified against PoolManager as caller.
-        bytes memory hookData = _buildHookData(1e6, 1, address(manager));
+        bytes32 poolId = PoolId.unwrap(key.toId());
+        bytes memory hookData = _buildHookData(1, 1, address(manager), address(swapRouter), trader, traderPk, poolId);
 
         vm.recordLogs();
 
@@ -94,7 +102,7 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
         assertTrue(_hasEvent(logs, keccak256("RevealReady(uint256,address,uint256)"), address(hook)));
 
         (address intentTrader, , , , IPostSettleReveal.SwapState stateAfterSwap) = hook.getSwapIntent(1);
-        assertEq(intentTrader, address(swapRouter));
+        assertEq(intentTrader, trader);
         assertEq(uint256(stateAfterSwap), uint256(IPostSettleReveal.SwapState.SettledPendingReveal));
 
         (, int128 delta0, int128 delta1, int256 amountSpecified, uint256 settledAtBlock, uint256 readyBlock) =
@@ -104,14 +112,12 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
         assertTrue(delta0 != 0 || delta1 != 0);
         assertEq(readyBlock, settledAtBlock + REVEAL_DELAY);
 
-        // In router path, the hook stores `sender` (router) as trader; whitelist caller for test reveal checks.
-        hook.setAuthorizedRevealer(trader, true);
-
         vm.expectRevert(abi.encodeWithSignature("RevealNotReady(uint256,uint256,uint256)", 1, readyBlock, block.number));
         vm.prank(trader);
         hook.revealSwapDetails(1);
 
         vm.roll(readyBlock);
+        vm.warp(block.timestamp + 11);
 
         vm.recordLogs();
 
@@ -148,9 +154,50 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
         }
     }
 
-    function _buildHookData(uint128 minOutPlaintext, uint256 nonce, address signer) internal returns (bytes memory) {
-        InEuint128 memory minOut = cft.createInEuint128(minOutPlaintext, signer);
-        return abi.encode(minOut, nonce);
+    function _buildHookData(
+        uint128 minOutPlaintext,
+        uint256 nonce,
+        address encryptionSigner,
+        address sender,
+        address traderAddress,
+        uint256 traderPrivateKey,
+        bytes32 poolId
+    ) internal returns (bytes memory) {
+        InEuint128 memory minOut = cft.createInEuint128(minOutPlaintext, encryptionSigner);
+        uint256 deadline = block.timestamp + INTENT_DEADLINE_WINDOW;
+        bytes32 digest = _intentDigest(traderAddress, sender, poolId, nonce, deadline, minOut.ctHash);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(traderPrivateKey, digest);
+        bytes memory signature = abi.encodePacked(r, s, v);
+
+        return abi.encode(minOut, nonce, traderAddress, deadline, signature);
+    }
+
+    function _intentDigest(
+        address traderAddress,
+        address sender,
+        bytes32 poolId,
+        uint256 nonce,
+        uint256 deadline,
+        uint256 ctHash
+    ) internal view returns (bytes32) {
+        bytes32 structHash = keccak256(
+            abi.encode(INTENT_AUTHORIZATION_TYPEHASH, traderAddress, sender, poolId, nonce, deadline, ctHash)
+        );
+
+        return keccak256(abi.encodePacked("\x19\x01", _domainSeparator(), structHash));
+    }
+
+    function _domainSeparator() internal view returns (bytes32) {
+        return keccak256(
+            abi.encode(
+                EIP712_DOMAIN_TYPEHASH,
+                keccak256(bytes("GhostSwapIntent")),
+                keccak256(bytes("1")),
+                block.chainid,
+                address(hook)
+            )
+        );
     }
 
     function _hasEvent(Vm.Log[] memory logs, bytes32 topic0, address emitter) internal pure returns (bool) {
