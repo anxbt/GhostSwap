@@ -1,74 +1,82 @@
 # 👻 GhostSwap
 
-> **An encrypted execution vault on Uniswap v4. Depositors earn yield from surplus recaptured from MEV solvers.**
+> **Private swap execution on Uniswap v4. Your reservation price is encrypted before it leaves your browser — solvers compete on a floor they mathematically cannot read, and recaptured surplus becomes yield for vault depositors.**
 
 Built on **Fhenix CoFHE** · **Uniswap v4 Hooks** · **Arbitrum**
 
 ---
 
-## What GhostSwap Actually Is
+## 🟢 Live on Arbitrum Sepolia
 
-GhostSwap is a **vault protocol** — not a standalone swap interface.
+The full encrypted lifecycle — **encrypt → swap → reveal** — runs end-to-end on the **live Fhenix CoFHE coprocessor** (not mocks).
 
-Users deposit assets into the `GhostVault`. The vault executes swaps on behalf of depositors through its paired Uniswap v4 hook (`GhostSwapHook`). The hook encrypts each swap's reservation price using Fhenix CoFHE, forcing solvers to fill at honest prices instead of extracting the surplus between market price and the trader's floor.
-
-**The recaptured surplus becomes yield for vault depositors.**
-
-This is the economic loop: privacy → better execution → surplus capture → yield for depositors → more deposits → more TVL.
-
----
-
-## The Problem — And Why It's Worth Billions
-
-When you swap on any DEX, your `amountOutMinimum` — the worst price you'll accept — is broadcast in plaintext to every solver before your trade executes. The solver doesn't give you a good price. They give you exactly 1 wei above your floor.
-
-```
-Example — standard Uniswap swap:
-  You want:   22 ETH → DAI
-  Best market price: 3,300 DAI/ETH
-  Your floor:        3,100 DAI/ETH  ← visible to every solver
-
-  Solver reads your floor → fills you at 3,102 DAI/ETH
-  You receive:    68,244 DAI
-  Solver extracts: 4,356 DAI  (invisible, legal, routine)
-```
-
-This happens on every transparent DEX. Estimated **$500M+ extracted annually** from DeFi users through this exact mechanism. Nobody pays for it directly — it's baked into worse execution prices that users never notice.
-
-**Existing solutions don't close this gap:**
-
-| Solution | Solves | Misses |
+| Contract | Address | Explorer |
 |---|---|---|
-| Flashbots Protect | Public mempool bots | Solver still sees your floor |
-| MEV Blocker | Sandwich attacks | Solver-side extraction unchanged |
-| CoW Protocol | Batch matching | Solver committee sees order parameters |
-| 1inch Fusion | Intent-based execution | Resolvers see reservation prices |
-| **GhostSwap** | **Solver mathematically cannot read your floor** | — |
+| **PostSettleRevealHook** (the v4 hook) | `0x8924a551733B93D5F486922cf76C7A8F8C81C0C0` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0x8924a551733B93D5F486922cf76C7A8F8C81C0C0) |
+| **GhostVault** | `0xc37Ca537735e1DB1CEde55bbA53De087fd4321e6` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0xc37Ca537735e1DB1CEde55bbA53De087fd4321e6) |
+| **GhostVaultPeriphery** | `0x14F8485da345d5430A2Ec25F24F80e1FFa99A45E` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0x14F8485da345d5430A2Ec25F24F80e1FFa99A45E) |
+| **SwapRouter** (PoolSwapTest) | `0x30319f077cd66c0189cfFc065547Ad607622FE14` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0x30319f077cd66c0189cfFc065547Ad607622FE14) |
+| **PoolManager** (canonical Uniswap v4) | `0xFB3e0C6F74eB1a21CC1Da29aeC80D2Dfe6C9a317` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0xFB3e0C6F74eB1a21CC1Da29aeC80D2Dfe6C9a317) |
+| **gETH** (test token0) | `0x905EBaEBED3aa0b9b957081cC48D71f400f7fC25` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0x905EBaEBED3aa0b9b957081cC48D71f400f7fC25) |
+| **gUSDC** (test token1) | `0xACbA3E1c01727DfE0f0D9b0F3172F2BE205B4f9f` | [Arbiscan ↗](https://sepolia.arbiscan.io/address/0xACbA3E1c01727DfE0f0D9b0F3172F2BE205B4f9f) |
+
+**On-chain proof — full lifecycle:**
+
+| Step | Tx | Explorer |
+|---|---|---|
+| 🔐 Encrypted swap (ciphertext in calldata) | `0xe87ab2a3…584dd3` | [View tx ↗](https://sepolia.arbiscan.io/tx/0xe87ab2a3d8d23ce4a00b306a417b3e52066d9ea34e866594179de34c8c584dd3) |
+| 👁️ Reveal trade details (after delay) | `0x89bc1650…1c9b12` | [View tx ↗](https://sepolia.arbiscan.io/tx/0x89bc1650eecebf1f01b61da809ca450cdd1e29eb7220a0b736ce0f47c61c9b12) |
+
+> Open the swap tx → **Input Data** on Arbiscan: the `amountOutMinimum` appears as **ciphertext, not a plaintext number**. That's the whole product.
+
+**Network:** Arbitrum Sepolia (chainId `421614`) · **Reveal delay:** 15 blocks · **Tests:** 83 passing (Foundry)
 
 ---
 
-## The Architecture — Vault + Hook
+## What GhostSwap Is
 
-The architectural moat is the **tight coupling between vault and hook.** Neither works alone. Forking one gives you a broken system.
+Every swap on every transparent DEX broadcasts your `amountOutMinimum` — the worst price you'll accept — in plaintext before settlement. Solvers read the floor and fill at it, keeping the surplus. This is solver-side price extraction: legal, invisible, systematic.
+
+GhostSwap encrypts that floor **client-side with Fhenix CoFHE** and encodes it into the swap's `hookData`. The Uniswap v4 hook verifies the encrypted input on-chain, runs the slippage comparison **directly on ciphertext** (`FHE.gte`), and never decrypts your minimum. Recaptured surplus is routed to `GhostVault` depositors as yield.
+
+```
+Standard Uniswap                         GhostSwap
+─────────────────                        ─────────
+Market price : 3,300 USDC/ETH            Market price : 3,300 USDC/ETH
+Your floor   : 3,100 USDC (VISIBLE)      Your floor   : [encrypted]
+Solver fills : 3,101 USDC                Solver fills : 3,250 USDC (must compete)
+You receive  : 3,101 USDC                You receive  : 3,250 USDC
+Surplus      : 0 (solver keeps 199)      Surplus      : 150 → vault depositors
+```
+
+**Why FHE (not ZK or TEE):** ZK proves knowledge of a value but the solver must still decrypt it to compute against it. TEEs trust hardware vendors. **FHE computes on ciphertext directly** — `FHE.gte(actualOut, encFloor)` returns an encrypted boolean without ever decrypting the floor. The guarantee is mathematical.
+
+---
+
+## Architecture — Vault + Hook
+
+The moat is the **tight coupling** between vault and hook. Neither works alone.
 
 ```mermaid
 graph TB
     subgraph Users["Users"]
-        D["Depositors<br/>DAOs, whales, treasuries"]
+        D["Depositors<br/>DAOs · whales · treasuries"]
+        T["Traders"]
     end
 
     subgraph Protocol["GhostSwap Protocol"]
-        subgraph Periphery["GhostVault Periphery"]
+        subgraph Periphery["GhostVaultPeriphery"]
             DEP["Deposit / Withdraw<br/>share accounting"]
-            BATCH["Intent Batching<br/>encrypted intent queue"]
-            YIELD["Surplus Distribution<br/>proportional yield"]
+            BIND["Auction execution binding<br/>only winning solver executes"]
+            YIELD["Surplus distribution<br/>proportional yield"]
         end
-
-        subgraph HookLayer["GhostSwapHook"]
-            BS["beforeSwap<br/>capture encrypted intent"]
-            AS["afterSwap<br/>record surplus captured"]
-            AUCTION["Solver Auction<br/>FHE.max on encrypted bids"]
+        subgraph HookLayer["PostSettleRevealHook"]
+            BS["beforeSwap<br/>verify encrypted intent (EIP-712 + ZK)"]
+            AS["afterSwap<br/>FHE.gte slippage + record surplus"]
+            REV["revealSwapDetails<br/>time-gated reveal"]
+            EMG["Emergency resolution<br/>cancel · auto-release"]
         end
+        VAULT["GhostVault<br/>recordSurplus · claimSurplus"]
     end
 
     subgraph Chain["Chain Infrastructure"]
@@ -76,220 +84,197 @@ graph TB
         COFHE["Fhenix CoFHE Coprocessor"]
     end
 
-    subgraph Solvers["Solvers"]
-        S["Encrypted Bid Submission"]
-    end
-
-    D -->|deposit ETH/stables| DEP
-    DEP --> BATCH
-    BATCH -->|encrypted intent| BS
-    BS --> AUCTION
-    AUCTION -->|FHE computation| COFHE
-    Solvers --> S --> AUCTION
-    AUCTION --> PM
+    T -->|encrypted swap| BS
+    D -->|deposit| DEP
+    BS --> PM
     PM --> AS
-    AS -->|surplus recaptured| YIELD
-    YIELD -->|yield distribution| D
+    AS -->|FHE ops| COFHE
+    AS -->|surplus| VAULT
+    VAULT --> YIELD --> D
+    AS --> REV
+    AS --> EMG
 
     style Protocol fill:#0e0d0b,stroke:#d4a359,color:#d4a359
     style Periphery fill:#1a1508,stroke:#d4a359
     style HookLayer fill:#0a1a0a,stroke:#7ab87a
 ```
 
-### Why This Is Defensible
-
-**Fork the hook alone → useless.** The hook expects calls from the vault's specific intent-batching flow. No vault = no intent queue = no batch auctions = the hook does nothing a standard AMM doesn't already do.
-
-**Fork the vault alone → broken.** The vault expects specific post-auction callbacks from the paired hook — surplus accounting, FHE-sealed settlement reporting, encrypted share updates. A standard Uniswap pool produces none of these. Depositors receive no yield because the surplus capture mechanism is gone.
-
-**The defensibility is economic, not just technical.** Depositors in the vault earn yield. Yield attracts more deposits. More deposits = deeper encrypted batches = more solver competition = more surplus captured. The flywheel requires both components running together.
+- **Fork the hook alone → useless.** No vault = no intent queue, no surplus accounting, no yield.
+- **Fork the vault alone → broken.** A standard pool produces none of the FHE-sealed settlement callbacks the vault needs.
+- The defensibility is **economic**: depositors earn yield → more deposits → deeper encrypted batches → more solver competition → more surplus captured.
 
 ---
 
-## Why FHE — And Why We Own The Trade-Off
+## The Lifecycle — Encrypt → Swap → Reveal
 
-### Why Not ZK or TEE
+This is the exact flow that runs live on Arbitrum Sepolia.
+
+```mermaid
+sequenceDiagram
+    actor Trader
+    participant UI as GhostSwap UI
+    participant SDK as @cofhe/sdk
+    participant Router as Swap Router
+    participant PM as v4 PoolManager
+    participant Hook as PostSettleRevealHook
+    participant CoFHE as Fhenix CoFHE
+
+    Trader->>UI: enter amount + minimum (floor)
+    UI->>SDK: encrypt(floor) bound to PoolManager
+    SDK->>CoFHE: ZK-prove + fetch attestation
+    SDK-->>UI: ctHash + signature
+    UI->>Trader: sign EIP-712 intent (binds ctHash, nonce, deadline)
+    UI->>Router: swap(poolKey, params, hookData = ciphertext + sig)
+    Router->>PM: unlock + swap
+    PM->>Hook: beforeSwap(sender, key, params, hookData)
+    Hook->>CoFHE: verifyInput(ciphertext) → euint128 floor
+    Note over Hook: state = IntentCaptured
+    PM->>PM: execute swap at honest price
+    PM->>Hook: afterSwap(delta)
+    Hook->>CoFHE: FHE.gte(actualOut, encFloor) + allowGlobal + queue decrypt
+    Hook-->>PM: settle · start 15-block reveal timer
+    Note over Hook: state = SettledPendingReveal
+    Trader->>UI: wait 15 blocks → "Reveal My Trade"
+    UI->>Hook: revealSwapDetails(swapId)
+    Hook-->>UI: Revealed(delta0, delta1, amountSpecified)
+    Note over Hook: state = RevealedToAuthorized
+```
+
+### State machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> DraftIntent: user prepares encrypted intent
+    DraftIntent --> IntentCaptured: beforeSwap — verify + store euint128 floor
+    IntentCaptured --> SettledPendingReveal: afterSwap — settle + queue FHE.gte
+    SettledPendingReveal --> RevealedToAuthorized: revealSwapDetails (after 15 blocks)
+    SettledPendingReveal --> EmergencyResolved: cancel (6h) / auto-release (24h)
+    RevealedToAuthorized --> [*]
+    EmergencyResolved --> [*]
+```
+
+---
+
+## Fund Safety — Emergency Resolution
+
+FHE on EVM is a **coprocessor model**: privacy is mathematical, but liveness depends on Fhenix operating their coprocessor. We own that trade-off explicitly — and we make sure a coprocessor stall can **never** lock trader funds.
 
 ```mermaid
 graph TD
-    A[Need: solver computes against user's minimum<br/>without reading it]
+    P["Swap settled<br/>(SettledPendingReveal)"] --> Q{CoFHE result<br/>returns?}
+    Q -->|yes| R["revealSwapDetails<br/>trade revealed ✅"]
+    Q -->|stalls| W["staged decrypt poller<br/>warns the user"]
+    W -->|after 6h| C["cancelStuckSwap<br/>trader reclaims (Scenario C)"]
+    W -->|after 24h| A["autoReleaseStuckSwap<br/>floor released (Scenario A)"]
+    W -->|auction 1h| X["cancelStuckAuction<br/>auction voided (Scenario B)"]
+
+    style R fill:#1a2e1a,stroke:#7ab87a,color:#7ab87a
+    style C fill:#2e2a1a,stroke:#d4a359,color:#d4a359
+    style A fill:#2e2a1a,stroke:#d4a359,color:#d4a359
+```
+
+| Scenario | Delay | Who | Outcome |
+|---|---|---|---|
+| **C — Manual cancel** | 6h | Trader | Swap voided, input returned |
+| **A — Auto-release** | 24h | Anyone | Floor released to trader, vault gets nothing |
+| **B — Auction cancel** | 1h | Trader | Auction voided, retry on standard Uniswap |
+
+**Priority rule:** trader funds always take precedence over vault yield. Delays are **owner-settable** (`setEmergencyDelays`) so the emergency paths can be demonstrated live without waiting hours. `publishDecryptResult` verifies an **ECDSA signature** against an immutable CoFHE verifier before any plaintext is accepted on-chain.
+
+---
+
+## The "Reveal My Trade" Dialog — Explained
+
+After a swap settles, trade details are **time-locked** for a reveal delay (15 blocks). The pending-reveal panel is where the trader waits and then unlocks the trade. Here's what every element means.
+
+<!-- 📸 Add screenshots here -->
+![Reveal My Trade — pending](docs/screenshots/reveal-pending.png)
+![Reveal My Trade — ready](docs/screenshots/reveal-ready.png)
+![Reveal My Trade — revealed](docs/screenshots/reveal-revealed.png)
+
+| UI element | What it means |
+|---|---|
+| **Swap #N** | The on-chain `swapId` assigned by the hook in `afterSwap` (from the `SettlementRecorded` event). |
+| **Block #… → Reveal at #…** | The current block vs. the `decryptReadyBlock` (= `settledAtBlock + 15`). *Note: on Arbitrum the contract uses **L1 block numbers**, so the UI reads `l1BlockNumber`, not the L2 block.* |
+| **Progress bar — "X of 15 blocks"** | How far through the reveal delay you are. Until it fills, the trade stays sealed. |
+| **Status line** (e.g. "Verifying encrypted fill…", "CoFHE taking longer than expected. Funds are safe.") | The staged decrypt poller: `waiting` (0–2 min) → `coprocessor_delayed` (2 min–6h) → `stuck_cancellable` (6–24h) → `auto_release_available` (24h+). |
+| **Reveal My Trade** | Calls `revealSwapDetails(swapId)`. Enabled once the delay passes. Unlocks the trade details: `delta0` (token0 in/out), `delta1` (token1 in/out), `amountSpecified`. Moves state → `RevealedToAuthorized`. |
+| **Cancel Stuck Swap** | Emergency Scenario C (`cancelStuckSwap`) — appears only if the swap is genuinely stuck past the cancel delay. |
+| **Auto-Release Swap** | Emergency Scenario A (`autoReleaseStuckSwap`) — appears only after the fallback delay. |
+| *"Only swaps submitted from this wallet/browser are surfaced here."* | The UI tracks your own `swapId`s locally; it isn't a global indexer. |
+
+**Reading the revealed details:** for a `1 gETH → gUSDC` swap, a reveal of `delta0 = -1000000000000000000`, `delta1 = +987158034397061298` means you sent **1.0 gETH** and received **~0.987 gUSDC** — and crucially, your encrypted floor was enforced on-chain without ever being published in plaintext.
+
+---
+
+## Why FHE — And The Honest Trade-Off
+
+```mermaid
+graph TD
+    A["Need: solver computes against your<br/>minimum without reading it"]
     A --> ZK[Zero-Knowledge Proofs]
-    A --> TEE[Trusted Execution Environment]
+    A --> TEE[Trusted Execution Env]
     A --> FHE[Fully Homomorphic Encryption]
-
-    ZK --> ZF["Proves knowledge of a value —<br/>but solver still needs to decrypt it<br/>to compute against it"]
-    TEE --> TF["Hides computation in hardware —<br/>requires trusting Intel/AMD manufacturers<br/>and the operator running the enclave"]
-    FHE --> FT["Computes on ciphertext directly —<br/>FHE.gt(solverBid, encFloor) returns<br/>an encrypted boolean without decryption"]
-
+    ZK --> ZF["Proves knowledge of a value —<br/>solver still must decrypt to compute"]
+    TEE --> TF["Hides compute in hardware —<br/>trust Intel/AMD + the operator"]
+    FHE --> FT["Computes on ciphertext directly —<br/>FHE.gte(bid, encFloor) → encrypted bool"]
     style FT fill:#1a2e1a,stroke:#7ab87a,color:#7ab87a
     style ZF fill:#2e1a1a,stroke:#e07070,color:#e07070
     style TF fill:#2e1a1a,stroke:#e07070,color:#e07070
 ```
 
-### The Honest FHE Trade-Off
-
-FHE on EVM is **not fully decentralized today.** We're stating this explicitly because any serious reviewer or auditor will ask.
-
-Fhenix CoFHE is a **coprocessor model.** When a contract calls `FHE.decrypt()` or `FHE.gt()`:
-
-1. The computation request is emitted as an on-chain event
-2. Fhenix's off-chain coprocessor detects the event
-3. The coprocessor performs the actual FHE computation on its hardware
-4. The result is posted back on-chain
-
-**What this means in practice:**
-
 | Property | GhostSwap reality |
 |---|---|
-| Can the solver read your floor? | No — mathematically guaranteed by FHE |
-| Can Fhenix read your floor? | No — the coprocessor processes ciphertext without decryption keys |
-| Does the system work if Fhenix coprocessor goes offline? | No — reveals and enforcement would stall |
-| Is this weaker than a fully on-chain ZK system? | Yes — decentralization-wise. Stronger privacy-wise. |
+| Can the solver read your floor? | **No** — mathematically guaranteed by FHE |
+| Can Fhenix read your floor? | **No** — the coprocessor processes ciphertext without decryption keys |
+| Does it work if the coprocessor goes offline? | Reveal/surplus stall — but **emergency paths return funds** |
+| Weaker than fully on-chain ZK? | Decentralization-wise yes; privacy-wise stronger |
 
-**We call this "trust-minimized execution," not "trustless execution."** The privacy guarantee is mathematical. The liveness guarantee depends on Fhenix operating their coprocessor. This is the same trade-off every L2 makes with their sequencer today. It's the current state of FHE on EVM — and Fhenix's roadmap moves toward progressive decentralization of the coprocessor.
-
-If you need fully on-chain verifiable privacy today, GhostSwap is not for you. If you need solver-side privacy that actually works on production EVM networks in 2026, FHE via Fhenix is the only primitive that does it.
+We call this **trust-minimized execution**, not trustless. The privacy guarantee is mathematical; the liveness guarantee depends on Fhenix — the same trade-off every L2 makes with its sequencer today.
 
 ---
 
-## How The Vault Generates TVL
-
-This is the core economic question. Why would anyone deposit into GhostVault instead of swapping directly?
-
-### The Flywheel
+## The Flywheel — Why TVL Exists
 
 ```mermaid
 graph LR
-    A[Depositor deposits<br/>ETH into vault] --> B[Vault batches<br/>encrypted intents]
-    B --> C[Encrypted solver auction<br/>via hook + FHE]
+    A[Depositor deposits<br/>into vault] --> B[Vault batches<br/>encrypted intents]
+    B --> C[Encrypted solver auction<br/>hook + FHE]
     C --> D[Solver fills at honest price<br/>cannot see reservation]
     D --> E[Surplus between floor<br/>and honest fill captured]
     E --> F[Surplus distributed<br/>proportionally to depositors]
     F --> A
-
     style C fill:#0e0d0b,stroke:#d4a359,color:#d4a359
     style E fill:#1a2e1a,stroke:#7ab87a,color:#7ab87a
     style F fill:#1a2e1a,stroke:#7ab87a,color:#7ab87a
 ```
 
-### Who Deposits And Why
+The pitch to a DAO treasury isn't "please use our privacy feature." It's: **"Your treasury is losing 0.3–0.8% to solver extraction on every rebalance. We turn that loss into yield."** That's a number a CFO understands.
 
-**DAO treasuries.** A DAO selling 10,000 ETH over 30 days loses an estimated 0.2-0.8% to solver-side extraction on current DEXes. Depositing into GhostVault:
-- Orders execute privately → no reservation price leakage
-- Surplus recaptured → appears as positive yield on the deposit
-- Treasury optics: "we converted MEV loss into yield" — easily defended in governance
-
-**Market-neutral yield seekers.** The vault's yield comes from MEV extraction that was going to solvers. This yield is uncorrelated with market direction. Unlike LP positions with impermanent loss risk, vault depositors are exposed only to the underlying asset's price — all the yield comes from surplus recapture.
-
-**Privacy-sensitive traders.** Hedge funds, market makers, and traders with competitive strategies who cannot broadcast their reservation prices onchain without leaking information to competitors.
-
-### Realistic TVL Scaling
-
-| Stage | TVL target | Unlock |
+| Competitor | What they do | Why GhostSwap differs |
 |---|---|---|
-| Wave 2-3 | $10K-$50K | Testnet proof, first DAO treasury pilot |
-| Wave 4-5 | $100K-$500K | Mainnet launch, audit, 2-3 DAO integrations |
-| Year 1 post-launch | $2M-$10M | Karpatkey/Llama/Steakhouse integration |
-| Year 2 | $50M+ | Institutional adoption, solver network maturity |
-
-**Let's be honest about the hard truth:** getting the first $100K is harder than getting from $10M to $100M. The pitch to the first DAO depositor needs a specific, quantified dollar-loss analysis of their historical treasury operations. That's a manual, relationship-driven sale. There's no shortcut.
+| CoW Protocol | Batch matching with solver committee | Committee reads order params; our solvers see ciphertext |
+| 1inch Fusion | Intent execution with resolvers | Resolvers see reservation prices |
+| Flashbots SUAVE | Private order flow | Operator-level trust; ours is mathematical |
+| TWAMM | Time-weighted splitting | Solves price *impact*, not *leakage* — **we compose, not compete** |
 
 ---
 
-## Realistic Competition And Positioning
-
-| Competitor | What they do | Why GhostVault is different |
-|---|---|---|
-| CoW Protocol | Batch matching with solver committee | Solver committee reads order parameters; GhostSwap solvers see ciphertext |
-| 1inch Fusion | Intent-based execution with resolvers | Resolvers see reservation prices; same extraction problem |
-| Flashbots SUAVE | Private order flow via MEV-share | Still operator-level trust; GhostSwap is mathematical |
-| TWAMM (Uniswap) | Time-weighted order splitting | Solves market impact, not price leakage — **we compose with TWAMM, not compete** |
-| Arrakis / Gamma | Active LP management vaults | Different problem — LP position management, not trade execution |
-
-**The line we draw:** *"TWAMM solves price impact. GhostSwap solves price leakage. Serious execution needs both."*
-
-This is the pitch that wins. Not "privacy is important" — "you are currently losing basis points to solvers on every single treasury operation, and here is the exact mechanism to stop it and turn it into yield."
-
----
-
-## Hook Lifecycle — State Machine
-
-```mermaid
-stateDiagram-v2
-    [*] --> DraftIntent: User enters swap via vault
-    DraftIntent --> IntentCaptured: beforeSwap — store euint128 floor
-    IntentCaptured --> SettledPendingReveal: afterSwap — record settlement + surplus
-    SettledPendingReveal --> DecryptReady: 15 blocks (CoFHE finality window)
-    DecryptReady --> Revealed: vault callback — surplus distributed to depositors
-    Revealed --> [*]
-```
-
----
-
-## Wave Roadmap
-
-```mermaid
-gantt
-    title GhostSwap Wave-by-Wave Build
-    dateFormat YYYY-MM-DD
-    axisFormat %b %d
-
-    section Wave 1 Foundation
-    Problem architecture spec       :done, w1a, 2026-03-21, 10d
-    Hook scaffold state machine     :done, w1b, 2026-03-21, 10d
-    Frontend integration            :done, w1c, 2026-03-21, 10d
-
-    section Wave 2 Real Crypto Vault v0
-    Real cofhe sdk encryption       :w2a, after w1c, 10d
-    EIP 712 router identity fix     :w2b, after w1c, 10d
-    GhostVault skeleton contract    :w2c, after w1c, 10d
-
-    section Wave 3 Vault Operational
-    Deposit withdraw share accounting :w3a, after w2c, 10d
-    FHE gt slippage enforcement       :w3b, after w2c, 10d
-    First surplus distribution        :w3c, after w3a, 5d
-
-    section Wave 4 Solver Auction
-    Multi solver encrypted bids     :w4a, after w3c, 10d
-    FHE max winner selection        :w4b, after w3c, 10d
-    Surplus depositor yield flow    :w4c, after w4a, 5d
-
-    section Wave 5 Audit Launch
-    Gas optimization                :w5a, after w4c, 10d
-    Audit subsidy application       :w5b, after w4c, 10d
-    Mainnet launch first DAO pilot  :w5c, after w5a, 10d
-```
-
-**Wave 1 — Foundation** *(complete)*
-Hook lifecycle, state machine, local devnet end-to-end, mock FHE.
-
-**Wave 2 — Real Cryptography + Vault Skeleton**
-Migrate to `@cofhe/sdk` (cofhejs is sunset). EIP-712 signed intents fixing router identity. First version of `GhostVault.sol` contract — basic deposit/withdraw, no yield distribution yet.
-
-**Wave 3 — Vault Operational**
-Vault shares accounting. `FHE.gt()` check queued in `afterSwap` and finalized before reveal — below-minimum fills are rejected during slippage finalization. Surplus distribution mechanism v1. First end-to-end: deposit → encrypted swap → surplus captured → depositor yield.
-
-**Wave 4 — Solver Auction**
-Multi-solver encrypted bid submission. `FHE.max()` on ciphertext selects winner. Surplus redistribution flow completed. This is the wave where GhostSwap transforms from privacy primitive to honest price discovery engine.
-
-**Wave 5 — Production**
-Gas benchmarks vs baseline Uniswap v4. Security assumptions documented formally. Apply to Uniswap Hook Design Lab audit subsidy. Mainnet launch with one DAO treasury as first depositor.
-
---
 ## Current Status
 
 | Component | Status | Notes |
 |---|---|---|
-| Hook state machine | Working | All 5 states transition correctly on Anvil |
-| Block-based reveal delay | Working | 15-block enforcement (CoFHE finality window) |
-| Trader-only reveal auth | Working | Wave 2 adds EIP-712 router identity fix |
-| Local devnet E2E | Working | Anvil + `cofhe-mock-contracts` |
-| Frontend → contract | Connected | Real calls + `@cofhe/sdk` encryption + signed intents |
-| Forge test suite | Passing | Hook + vault tests green on Foundry |
-| **Vault contract** | Working | `GhostVault` deposit/withdraw shares + surplus attribution |
-| **Real FHE encryption** | Working | `@cofhe/sdk` migration complete |
-| **Surplus distribution** | Wave 3 in progress | Async slippage finalization + vault surplus forwarding implemented |
-| **Solver auction** | Wave 4 | FHE.max mechanic designed, not yet implemented |
+| Hook lifecycle (beforeSwap → afterSwap → reveal) | ✅ Live | End-to-end on Arbitrum Sepolia |
+| EIP-712 signed intents (EOA + ERC-1271) | ✅ Live | Nonce replay protection |
+| Encrypted-input verification on live CoFHE | ✅ Live | Proof bound to PoolManager (verifyInput caller) |
+| `FHE.gte` slippage enforcement | ✅ Live | Queued in afterSwap |
+| Time-gated reveal | ✅ Live | 15-block delay, L1-block aware |
+| Emergency resolution (cancel / auto-release / auction-cancel) | ✅ Done | Owner-settable delays |
+| `publishDecryptResult` ECDSA verification | ✅ Done | vs immutable CoFHE verifier |
+| GhostVault deposit/withdraw + surplus accounting | ✅ Done | `cumulativeSurplusPerShareX18` |
+| Solver auction (`FHE.max` winner selection) | ✅ Done | Periphery execution binding |
+| Surplus finalization (async) | ⏳ Coprocessor-gated | `finalizeSlippageCheck` completes once CoFHE returns decrypt results |
+| Foundry test suite | ✅ 83 passing | Hook + vault + periphery + emergency |
 
 ---
 
@@ -297,13 +282,13 @@ Gas benchmarks vs baseline Uniswap v4. Security assumptions documented formally.
 
 | Layer | Technology |
 |---|---|
-| Smart Contracts | Solidity 0.8.26 + Foundry |
+| Smart Contracts | Solidity 0.8.26 + Foundry (`via_ir`) |
 | FHE | Fhenix `FHE.sol` + CoFHE coprocessor |
 | Hook Framework | Uniswap v4 `BaseHook` |
 | Client SDK | `@cofhe/sdk` (replaces deprecated cofhejs) |
-| Frontend | React + Vite + Tailwind + Viem 2 |
-| Testnet | Arbitrum Sepolia |
-| Local Dev | Anvil + `cofhe-mock-contracts` |
+| Frontend | React + Vite + Tailwind + Ethers v6 |
+| Network | Arbitrum Sepolia (`421614`) |
+| Local Dev | Anvil + `cofhe-foundry-mocks` |
 
 ---
 
@@ -311,32 +296,69 @@ Gas benchmarks vs baseline Uniswap v4. Security assumptions documented formally.
 
 ```bash
 # Clone
-git clone https://github.com/anxbt/fhe-hook-template
-cd fhe-hook-template
+git clone https://github.com/anxbt/fhe-hook-template GhostSwap
+cd GhostSwap
 
 # Contracts
 forge install
-forge test -vv
-
-# Local devnet
-anvil --block-time 2
-forge script script/99_LocalSetup.s.sol --rpc-url localhost --broadcast
-
-# Frontend
-cd fe && npm install && npm run dev
+forge build
+forge test         # 83 passing
 ```
 
-### Environment Variables
+### Deploy to Arbitrum Sepolia (full stack, one command)
 
 ```bash
-PRIVATE_KEY=
-ARBITRUM_SEPOLIA_RPC=
-ETHERSCAN_API_KEY=
+export PRIVATE_KEY=0x...                 # funded Arb Sepolia deployer
+export ARBITRUM_SEPOLIA_RPC=https://sepolia-rollup.arbitrum.io/rpc
+# COFHE_VERIFIER_ADDRESS defaults to deployer (legacy reveal path)
 
-# Frontend (Vite)
-VITE_HOOK_ADDRESS=
-VITE_VAULT_ADDRESS=Œ,
-VITE_CHAIN_ID=421614
+forge script script/DeploySepolia.s.sol:DeploySepoliaScript \
+  --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast --slow
+```
+
+This deploys hook + vault + periphery + test tokens, initializes the v4 pool with liquidity, and writes `deployments/arbitrum-sepolia.json` **and** `fe/.env`.
+
+### Run the frontend
+
+```bash
+cd fe && npm install && npm run dev
+# open http://localhost:5173, connect a wallet on Arbitrum Sepolia (421614)
+```
+
+### Headless end-to-end (no browser)
+
+```bash
+cd fe
+PRIVATE_KEY=0x... node scripts/autoswap.mjs   # encrypt → swap → reveal
+```
+
+### Local devnet
+
+```bash
+anvil --block-time 2
+forge script script/99_LocalSetup.s.sol --rpc-url localhost --broadcast   # writes fe/.env for chain 31337
+```
+
+---
+
+## Repository Layout
+
+```
+src/
+  hooks/PostSettleRevealHook.sol      # the v4 hook — intent capture, FHE slippage, reveal, emergency
+  GhostVault.sol                      # depositor vault — shares + surplus distribution
+  periphery/GhostVaultPeriphery.sol   # intent queue + auction execution binding
+  interface/IPostSettleReveal.sol     # state machine, events, custom errors
+script/
+  DeploySepolia.s.sol                 # full-stack Arbitrum Sepolia deploy
+  99_LocalSetup.s.sol                 # local Anvil setup
+test/                                 # 83 Foundry tests
+fe/
+  src/GhostSwap.jsx                   # the app — swap card, reveal panel, recent trades
+  src/hooks/useCofhe.js               # @cofhe/sdk encryption (bound to PoolManager)
+  src/hooks/useDecryptPoller.js       # staged reveal-timeout logic
+  src/lib/errorHandling.js            # ERC-7751 / CoFHE revert decoding
+  scripts/autoswap.mjs                # headless encrypt → swap → reveal harness
 ```
 
 ---
@@ -350,22 +372,6 @@ VITE_CHAIN_ID=421614
 
 ---
 
-## Why This Becomes A Protocol, Not Just A Hook
+*Built for the Fhenix × AKINDO Private By Design Buildathon · Uniswap v4 · Arbitrum*
 
-A hook alone gets forked. A vault alone has no privacy advantage. A vault tightly coupled to an encrypted-execution hook, where depositors earn yield from surplus that was previously extracted by solvers — **that's a protocol with a moat and a reason for TVL to exist.**
-
-The pitch to a DAO treasury is not "please use our privacy feature." It's: **"Your treasury is currently losing 0.3-0.8% to solver extraction on every rebalance. We turn that loss into yield for you."** That's a number a CFO understands.
-
-The FHE centralization trade-off is real and we own it explicitly. The alternative — pretending the CoFHE coprocessor doesn't exist — is the kind of claim that gets a protocol dismissed by serious reviewers. We'd rather ship trust-minimized privacy that actually works than claim trustless perfection that doesn't exist yet in practice.
-
----
-
-*Built for Fhenix × AKINDO Private By Design Buildathon · Uniswap v4 · Arbitrum*
-
-*Privacy by math. Yield from recaptured surplus. TVL from depositors who trust the numbers.*
-
-<!-- Natural next steps:
-
-Wire periphery execution so solver bids are tied to actual routed fills.
-Enforce auction-finalization checkpoints in the reveal/settlement path.
-Expose auction status and winner data to the frontend history panel. -->
+*Privacy by math. Yield from recaptured surplus. Funds safe even when the coprocessor stalls.*
