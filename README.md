@@ -1,3 +1,5 @@
+<img width="545" height="548" alt="Screenshot 2026-06-01 at 5 46 29 PM" src="https://github.com/user-attachments/assets/4337bcf2-afa2-4de7-b96f-179a9ba6273a" />
+<img width="467" height="265" alt="Screenshot 2026-06-01 at 5 45 53 PM" src="https://github.com/user-attachments/assets/909f59b9-3a7b-4d56-a5eb-f502348c05a4" />
 # 👻 GhostSwap
 
 > **Private swap execution on Uniswap v4. Your reservation price is encrypted before it leaves your browser — solvers compete on a floor they mathematically cannot read, and recaptured surplus becomes yield for vault depositors.**
@@ -188,9 +190,9 @@ graph TD
 After a swap settles, trade details are **time-locked** for a reveal delay (15 blocks). The pending-reveal panel is where the trader waits and then unlocks the trade. Here's what every element means.
 
 <!-- 📸 Add screenshots here -->
-![Reveal My Trade — pending](docs/screenshots/reveal-pending.png)
-![Reveal My Trade — ready](docs/screenshots/reveal-ready.png)
-![Reveal My Trade — revealed](docs/screenshots/reveal-revealed.png)
+<img width="545" height="548" alt="Screenshot 2026-06-01 at 5 46 29 PM" src="https://github.com/user-attachments/assets/cbce9953-fec1-4935-9373-3c3f417d41a9" />
+<img width="467" height="265" alt="Screenshot 2026-06-01 at 5 45 53 PM" src="https://github.com/user-attachments/assets/dfe6a4c2-4c2c-40ad-b793-f91f6239bd54" />
+
 
 | UI element | What it means |
 |---|---|
