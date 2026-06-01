@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   AbiCoder,
   BrowserProvider,
@@ -14,7 +14,10 @@ import { CONTRACTS, POOL_CONFIG, getExpectedChainId, chainNameById } from "./con
 import { POST_SETTLE_REVEAL_ABI } from "./lib/postSettleRevealAbi";
 import { POOL_SWAP_TEST_ABI } from "./lib/swapAbis";
 import { shortAddress, toNumberSafe } from "./lib/format";
-import { encryptMinOut, mapCofheError } from "./hooks/useCofhe";
+import { encryptMinOut, mapCofheError, SUPPORTED_CHAIN_ID } from "./hooks/useCofhe";
+import { decodeError, extractRevertData } from "./lib/errorHandling";
+import { useCoFheHealth } from "./hooks/useCoFheHealth";
+import { useDecryptPoller } from "./hooks/useDecryptPoller";
 
 const SwapState = {
   IDLE: "idle",
@@ -128,25 +131,24 @@ function getSqrtPriceLimitX96(zeroForOne) {
   return zeroForOne ? MIN_SQRT_PRICE_LIMIT_X96 + 1n : MAX_SQRT_PRICE_LIMIT_X96 - 1n;
 }
 
+// On Arbitrum, the contract's `block.number` is the L1 block number (~10.9M), but the standard
+// eth_blockNumber / getBlockNumber returns the L2 block number (~272M). The hook's reveal/timeout
+// math is in L1 blocks, so the UI must compare against the L1 number — exposed as `l1BlockNumber`
+// on each block. Falls back to the normal block number on chains without it (e.g. local Anvil).
+async function getContractBlockNumber(provider) {
+  try {
+    const blk = await provider.send("eth_getBlockByNumber", ["latest", false]);
+    if (blk?.l1BlockNumber) return Number(BigInt(blk.l1BlockNumber));
+  } catch {
+    // fall through to the standard block number
+  }
+  return Number(await provider.getBlockNumber());
+}
+
 function computePoolId({ token0, token1, fee, tickSpacing, hooks }) {
   return keccak256(
     AbiCoder.defaultAbiCoder().encode(["address", "address", "uint24", "int24", "address"], [token0, token1, fee, tickSpacing, hooks])
   );
-}
-
-function mapSubmitError(error) {
-  const cofheError = mapCofheError(error);
-  if (cofheError && cofheError !== "CoFHE operation failed.") {
-    return cofheError;
-  }
-
-  const message = error?.shortMessage || error?.message || "Swap submission failed.";
-  if (message.includes("NonceUsed")) return "Nonce already used. Retry once to use the next nonce.";
-  if (message.includes("PendingIntentExists")) return "Previous intent is still pending. Reveal or settle it first.";
-  if (message.includes("InvalidHookData")) return "Hook data is invalid. Ensure encrypted input and intent signature are generated correctly.";
-  if (message.includes("ExpiredIntent")) return "Intent signature expired. Retry the swap.";
-  if (message.includes("InvalidIntentSignature")) return "Invalid trader signature on hook data.";
-  return message;
 }
 
 function Noise() {
@@ -362,7 +364,7 @@ function TransactionHistory({ visible, entries, page, totalPages, onPrevPage, on
   );
 }
 
-function PendingRevealPanel({ swap, currentBlock, onReveal }) {
+function PendingRevealPanel({ swap, currentBlock, onReveal, onCancel, onAutoRelease, pollerStatus }) {
   if (!swap) return null;
 
   const readyBlock = swap.decryptReadyBlock || 0;
@@ -372,6 +374,10 @@ function PendingRevealPanel({ swap, currentBlock, onReveal }) {
   const totalRevealDelay = readyBlock > settledAtBlock ? readyBlock - settledAtBlock : 0;
   const elapsedRevealDelay = totalRevealDelay > 0 ? Math.min(totalRevealDelay, Math.max(currentBlock - settledAtBlock, 0)) : 0;
   const progressSegments = totalRevealDelay > 0 ? Math.max(0, Math.min(15, Math.round((elapsedRevealDelay / totalRevealDelay) * 15))) : 0;
+
+  const status = pollerStatus || {};
+  const showCancelButton = status.canCancel && !canReveal;
+  const showAutoReleaseButton = status.canAutoRelease;
 
   return (
     <div className="mt-5 border border-ghost-green/15 bg-ghost-green/5 rounded-sm p-4 animate-fade-up">
@@ -387,6 +393,15 @@ function PendingRevealPanel({ swap, currentBlock, onReveal }) {
         <Clock size={12} fill="currentColor" />
         Block #{currentBlock || "-"} {"->"} Reveal at #{readyBlock || "-"}
       </div>
+
+      {status.message && (
+        <div className="text-[10px] text-ghost-gold mb-2 flex items-center gap-1.5">
+          {status.status === "coprocessor_delayed" || status.status === "stuck_cancellable" ? (
+            <span className="text-ghost-gold">⚠</span>
+          ) : null}
+          {status.message}
+        </div>
+      )}
 
       {totalRevealDelay > 0 ? (
         <div className="flex items-center justify-between gap-4 mb-3">
@@ -419,6 +434,24 @@ function PendingRevealPanel({ swap, currentBlock, onReveal }) {
         <Eye size={16} fill="currentColor" />
         {canReveal ? "Reveal My Trade" : `Reveal in ${blocksRemaining} blocks`}
       </button>
+
+      {showAutoReleaseButton && (
+        <button
+          onClick={onAutoRelease}
+          className="w-full mt-2 p-3 rounded-sm text-[12px] font-mono font-medium tracking-[0.08em] uppercase flex items-center justify-center gap-2 bg-gradient-to-br from-[#4a7a4a] to-[#2d5a2d] border-none text-[#e8f5e8] cursor-pointer hover:brightness-110 active:scale-[0.98] transition-all duration-150"
+        >
+          Auto-Release Swap
+        </button>
+      )}
+
+      {showCancelButton && !showAutoReleaseButton && (
+        <button
+          onClick={onCancel}
+          className="w-full mt-2 p-3 rounded-sm text-[12px] font-mono tracking-[0.08em] uppercase flex items-center justify-center gap-2 bg-ghost-red/10 border border-ghost-red/25 text-ghost-red cursor-pointer hover:bg-ghost-red/20 transition-colors"
+        >
+          Cancel Stuck Swap
+        </button>
+      )}
     </div>
   );
 }
@@ -449,6 +482,28 @@ export default function GhostSwap({ onBack }) {
   const [uiError, setUiError] = useState("");
   const [uiNotice, setUiNotice] = useState(null);
   const disconnectingRef = useRef(false);
+  // Emergency delays read from chain (owner-settable; shortened for live demos).
+  const [emergencyDelays, setEmergencyDelays] = useState({ cancel: null, fallback: null });
+
+  // The CoFHE SDK is bound to Arbitrum Sepolia; encryption only works when the wallet is on that
+  // chain. Surface that as the privacy-service health signal (no wallet popups, truthful proxy).
+  const cofheHealthClient = useMemo(() => {
+    if (!wallet?.chainId) return null;
+    return { healthCheck: async () => Number(wallet.chainId) === Number(SUPPORTED_CHAIN_ID) };
+  }, [wallet?.chainId]);
+  const cofheHealth = useCoFheHealth(cofheHealthClient);
+  const decryptPoller = useDecryptPoller(
+    trackedPendingSwap
+      ? {
+          swapId: trackedPendingSwap.id,
+          createdAtBlock: trackedPendingSwap.settledAtBlock,
+          currentBlock: currentBlock,
+          state: trackedPendingSwap.state,
+          cancelDelayBlocks: emergencyDelays.cancel,
+          fallbackDelayBlocks: emergencyDelays.fallback,
+        }
+      : null
+  );
 
   const poolToken0 = findTokenByAddress(POOL_CONFIG.token0);
   const poolToken1 = findTokenByAddress(POOL_CONFIG.token1);
@@ -550,7 +605,7 @@ export default function GhostSwap({ onBack }) {
       await syncLatestSwap(provider, address, chainId);
       return { provider, signer, address, chainId };
     } catch (error) {
-      setUiError(error?.shortMessage || error?.message || "Wallet connection failed.");
+      setUiError(decodeError(error));
       return null;
     }
   }
@@ -644,6 +699,7 @@ export default function GhostSwap({ onBack }) {
       chainId,
       traderAddress,
       ethereumProvider: window.ethereum,
+      bindAddress: CONTRACTS.poolManager,
     });
 
     const poolId = computePoolId({
@@ -764,7 +820,10 @@ export default function GhostSwap({ onBack }) {
           takeClaims: POOL_CONFIG.takeClaims,
           settleUsingBurn: POOL_CONFIG.settleUsingBurn,
         },
-        hookData
+        hookData,
+        // Explicit gas limit bypasses ethers' eth_estimateGas, which with MetaMask + the L2 RPC
+        // can throw an opaque "could not coalesce error" instead of a decodable revert.
+        { gasLimit: 6000000n }
       );
 
       setSwapState(SwapState.SETTLING);
@@ -796,7 +855,11 @@ export default function GhostSwap({ onBack }) {
       await syncLatestSwap(wallet.provider, wallet.address, wallet.chainId);
     } catch (error) {
       setSwapState(SwapState.IDLE);
-      setUiError(mapSubmitError(error));
+      // Surface the raw revert in the console for debugging (selector + nested provider data).
+      const rawRevertData = extractRevertData(error);
+      console.error("[GhostSwap] swap failed. RAW REVERT DATA (copy this):", rawRevertData);
+      console.error("[GhostSwap] full error object:", error);
+      setUiError(decodeError(error));
     }
   }
 
@@ -824,7 +887,7 @@ export default function GhostSwap({ onBack }) {
         return;
       }
 
-      const block = await provider.getBlockNumber();
+      const block = await getContractBlockNumber(provider);
       setCurrentBlock(block);
 
       const nextSwapId = toNumberSafe(await hook.nextSwapId());
@@ -868,6 +931,7 @@ export default function GhostSwap({ onBack }) {
             const decryptReadyBlock = toNumberSafe(settlement[5]);
             const amountSpecified = settlement[3].toString();
             const isRevealed = state === 4 || revealedIds.has(swapId);
+            const isEmergencyResolved = state === 5;
 
             return {
               id: swapId,
@@ -880,6 +944,7 @@ export default function GhostSwap({ onBack }) {
               delta1: settlement[2].toString(),
               revealed: isRevealed,
               canReveal: (state === 2 || state === 3) && block >= decryptReadyBlock,
+              emergencyResolved: isEmergencyResolved,
             };
           } catch {
             return null;
@@ -894,7 +959,7 @@ export default function GhostSwap({ onBack }) {
       const trackedRecords = trackedSwapIds.map((swapId) => recordsById.get(swapId)).filter(Boolean);
       const pendingTracked = trackedRecords.find((entry) => !entry.revealed);
       const latestTrackedResolved = trackedRecords.find((entry) => entry.revealed);
-      const unresolvedTrackedIds = trackedRecords.filter((entry) => !entry.revealed).map((entry) => entry.id);
+      const unresolvedTrackedIds = trackedRecords.filter((entry) => !entry.revealed && !entry.emergencyResolved).map((entry) => entry.id);
 
       setTrackedSwapIds(address, chainId, CONTRACTS.postSettleRevealHook, unresolvedTrackedIds);
 
@@ -906,7 +971,9 @@ export default function GhostSwap({ onBack }) {
           canReveal: entry.canReveal,
           text: entry.revealed
             ? `Swap #${entry.id} revealed · delta0 ${entry.delta0} · delta1 ${entry.delta1}`
-            : `Swap #${entry.id} pending reveal${trackedSwapIdSet.has(entry.id) ? " · tracked" : ""} · recorded sender ${shortAddress(entry.trader)} · block #${entry.settledAtBlock}`,
+            : entry.emergencyResolved
+              ? `Swap #${entry.id} emergency resolved · block #${entry.settledAtBlock}`
+              : `Swap #${entry.id} pending reveal${trackedSwapIdSet.has(entry.id) ? " · tracked" : ""} · recorded sender ${shortAddress(entry.trader)} · block #${entry.settledAtBlock}`,
         }))
       );
 
@@ -936,18 +1003,41 @@ export default function GhostSwap({ onBack }) {
         setSwapState(SwapState.IDLE);
       }
     } catch (error) {
-      setUiError(error?.shortMessage || error?.message || "Failed to sync latest swap.");
+      setUiError(decodeError(error));
     } finally {
       setHistoryLoading(false);
     }
   }
 
+  // Read the owner-settable emergency delays from chain so the cancel/auto-release buttons
+  // surface at exactly the cadence the contract will accept (these can be shortened for demos).
+  useEffect(() => {
+    if (!wallet?.provider || !hasHookConfig) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const hook = getHookContract(wallet.provider);
+        const [cancel, fallback] = await Promise.all([
+          hook.CANCEL_DELAY_BLOCKS(),
+          hook.FALLBACK_DELAY_BLOCKS(),
+        ]);
+        if (!cancelled) {
+          setEmergencyDelays({ cancel: Number(cancel), fallback: Number(fallback) });
+        }
+      } catch {
+        // Fall back to the poller's built-in defaults if the read fails.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [wallet, hasHookConfig]);
+
   useEffect(() => {
     if (!trackedPendingSwap || !wallet?.provider) return;
 
     const interval = setInterval(() => {
-      wallet.provider
-        .getBlockNumber()
+      getContractBlockNumber(wallet.provider)
         .then((block) => {
           setCurrentBlock(block);
         })
@@ -1017,7 +1107,47 @@ export default function GhostSwap({ onBack }) {
       await tx.wait();
       await syncLatestSwap();
     } catch (error) {
-      setUiError(error?.shortMessage || error?.message || "Reveal transaction failed.");
+      setUiError(decodeError(error));
+    }
+  };
+
+  const cancelStuckSwap = async () => {
+    const swapId = trackedPendingSwap?.id;
+    if (!wallet?.signer || !swapId) {
+      setUiError("No swap to cancel.");
+      return;
+    }
+
+    try {
+      setUiError("");
+      setUiNotice(null);
+      const hook = getHookContract(wallet.signer);
+      const tx = await hook.cancelStuckSwap(swapId);
+      await tx.wait();
+      setUiNotice({ tone: "success", text: "Swap cancelled. Your tokens from the swap are already in your wallet." });
+      await syncLatestSwap();
+    } catch (error) {
+      setUiError(decodeError(error));
+    }
+  };
+
+  const autoReleaseStuckSwap = async () => {
+    const swapId = trackedPendingSwap?.id;
+    if (!wallet?.signer || !swapId) {
+      setUiError("No swap to auto-release.");
+      return;
+    }
+
+    try {
+      setUiError("");
+      setUiNotice(null);
+      const hook = getHookContract(wallet.signer);
+      const tx = await hook.autoReleaseStuckSwap(swapId);
+      await tx.wait();
+      setUiNotice({ tone: "success", text: "Swap auto-released. Your tokens from the swap are already in your wallet." });
+      await syncLatestSwap();
+    } catch (error) {
+      setUiError(decodeError(error));
     }
   };
 
@@ -1287,7 +1417,7 @@ export default function GhostSwap({ onBack }) {
               </button>
             )}
 
-            <PendingRevealPanel swap={trackedPendingSwap} currentBlock={currentBlock} onReveal={reveal} />
+            <PendingRevealPanel swap={trackedPendingSwap} currentBlock={currentBlock} onReveal={reveal} onCancel={cancelStuckSwap} onAutoRelease={autoReleaseStuckSwap} pollerStatus={decryptPoller} />
 
             {/* Compliance toggle */}
             {!isBusy && (
@@ -1343,7 +1473,13 @@ export default function GhostSwap({ onBack }) {
       </div>
 
       {/* Footer */}
-      <div className="mt-8 text-[10px] text-ghost-text-dim tracking-[0.06em] text-center relative z-10">
+      <div className="mt-8 text-[10px] text-ghost-text-dim tracking-[0.06em] text-center relative z-10 flex items-center justify-center gap-2">
+        <span className={`w-1.5 h-1.5 rounded-full inline-block ${
+          cofheHealth.status === "healthy" ? "bg-ghost-green" :
+          cofheHealth.status === "degraded" ? "bg-ghost-gold animate-pulse-slow" :
+          cofheHealth.status === "offline" ? "bg-ghost-red" :
+          "bg-ghost-text-dim animate-pulse-slow"
+        }`} />
         Built on Fhenix CoFHE · Uniswap v4 Hook · {chainLabel}
       </div>
     </div>

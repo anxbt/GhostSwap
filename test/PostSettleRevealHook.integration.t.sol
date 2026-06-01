@@ -64,16 +64,19 @@ contract PostSettleRevealHookIntegrationTest is Test, Deployers {
 
     uint256 internal traderPk = uint256(keccak256("ghostswap-integration-trader"));
     address internal trader;
+    uint256 internal cofheVerifierPk = uint256(keccak256("cofhe-verifier"));
+    address internal cofheVerifier;
 
     function setUp() public {
         cft = new CoFheTest(false);
         trader = vm.addr(traderPk);
+        cofheVerifier = vm.addr(cofheVerifierPk);
 
         deployFreshManagerAndRouters();
         deployMintAndApprove2Currencies();
 
         address flags = address(uint160(Hooks.BEFORE_SWAP_FLAG | Hooks.AFTER_SWAP_FLAG) ^ (0x6666 << 144));
-        bytes memory constructorArgs = abi.encode(manager, REVEAL_DELAY, address(this));
+        bytes memory constructorArgs = abi.encode(manager, REVEAL_DELAY, address(this), cofheVerifier);
         deployCodeTo("PostSettleRevealHook.sol:PostSettleRevealHook", constructorArgs, flags);
         hook = PostSettleRevealHook(flags);
 

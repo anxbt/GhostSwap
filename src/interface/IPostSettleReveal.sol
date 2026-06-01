@@ -9,7 +9,8 @@ interface IPostSettleReveal {
         IntentCaptured,
         SettledPendingReveal,
         DecryptReady,
-        RevealedToAuthorized
+        RevealedToAuthorized,
+        EmergencyResolved
     }
 
     struct SwapIntent {
@@ -41,8 +42,10 @@ interface IPostSettleReveal {
         uint256 bidCount;
         bool queued;
         bool finalized;
+        bool cancelled;
         address winner;
         uint128 winningBidAmountOut;
+        uint256 queuedAtBlock;
     }
 
     error Unauthorized(address caller);
@@ -65,6 +68,13 @@ interface IPostSettleReveal {
     error SolverAuctionAlreadyFinalized(uint256 swapId);
     error SolverAuctionWinnerNotFound(uint256 swapId);
     error SolverAuctionClosed(uint256 swapId, SwapState state);
+    error CancelDelayNotElapsed(uint256 swapId, uint256 readyBlock, uint256 currentBlock);
+    error FallbackDelayNotElapsed(uint256 swapId, uint256 readyBlock, uint256 currentBlock);
+    error AuctionTimeoutNotElapsed(uint256 swapId, uint256 timeoutBlock, uint256 currentBlock);
+    error SwapAlreadyEmergencyResolved(uint256 swapId);
+    error InvalidEmergencyState(uint256 swapId, SwapState state);
+    error InvalidCoFHESignature(address recovered, address expected);
+    error AuctionAlreadyCancelled(uint256 swapId);
 
     event IntentCaptured(
         uint256 indexed swapId,
@@ -115,13 +125,45 @@ interface IPostSettleReveal {
         uint256 bidCount
     );
 
+    // Wave 3: FHE Enforcement events
+    event DecryptResultPublished(bytes32 indexed ctHash, uint128 decryptedValue);
+
+    // Wave 4: Solver Auction events
+    event SolverRegistered(address indexed solver);
+    event SolverUnregistered(address indexed solver);
+    event AuctionWinnerExecutionBound(uint256 indexed swapId, address indexed winner, bytes32 calldataHash);
+
+    // Emergency resolution events
+    event SwapEmergencyResolved(uint256 indexed swapId, address indexed caller, string reason);
+    event AuctionCancelled(uint256 indexed swapId, address indexed caller);
+    event EmergencyDelaysUpdated(uint256 cancelBlocks, uint256 fallbackBlocks, uint256 auctionBlocks);
+
     function revealSwapDetails(uint256 swapId) external;
     function finalizeSlippageCheck(uint256 swapId) external;
     function submitSolverBid(uint256 swapId, InEuint128 calldata encryptedBidInput) external;
     function queueSolverAuction(uint256 swapId) external;
     function finalizeSolverAuction(uint256 swapId) external;
     function setSurplusVault(address vault) external;
+
+    // Wave 3: FHE Enforcement functions
+    function publishDecryptResult(bytes32 ctHash, uint128 decryptedValue, bytes calldata signature) external;
+    function enforceEncryptedMinimum(uint256 swapId, uint128 decryptedMinOut) external;
+    function isDecryptReady(bytes32 ctHash) external view returns (bool);
+    function getPublishedDecryptResult(bytes32 ctHash) external view returns (uint128, bool);
+
+    // Wave 4: Solver management
+    function registerSolver(address solver) external;
+    function unregisterSolver(address solver) external;
+    function isSolverAllowed(address solver) external view returns (bool);
+    function bindAuctionWinnerExecution(uint256 swapId, bytes32 calldataHash) external;
+    function getAuctionExecutionBinding(uint256 swapId) external view returns (bool, address, bytes32);
+
     function getSolverAuction(uint256 swapId) external view returns (SolverAuction memory);
     function getSolverBidCount(uint256 swapId) external view returns (uint256);
     function getSlippageOutcome(uint256 swapId) external view returns (uint128, uint128, uint128, bool);
+
+    // Emergency resolution functions
+    function cancelStuckSwap(uint256 swapId) external;
+    function autoReleaseStuckSwap(uint256 swapId) external;
+    function cancelStuckAuction(uint256 swapId) external;
 }

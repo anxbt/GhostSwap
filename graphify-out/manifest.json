@@ -1,0 +1,118 @@
+{
+  "/Users/rishav/Desktop/GhostSwap/hardhat.config.ts": {
+    "mtime": 1773894702.5835128,
+    "hash": "2d97522ef501f4f6322d77c4bb08d9a8"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/tailwind.config.js": {
+    "mtime": 1773990412.8308396,
+    "hash": "cbf4f754648c02d4365fcc9eef8822cd"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/vite.config.js": {
+    "mtime": 1773990289.5571203,
+    "hash": "88439104b3c207f17d33ef3160e3b080"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/eslint.config.js": {
+    "mtime": 1773990289.552465,
+    "hash": "49c8473bcfcec3aef596a5fb04a6df06"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/postcss.config.js": {
+    "mtime": 1773990415.1272738,
+    "hash": "ef3ba2a81ba19f8ea5ddf625521e96f0"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/main.jsx": {
+    "mtime": 1773990289.5568116,
+    "hash": "e13723e2574429d9a6d849727e3ff695"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/App.jsx": {
+    "mtime": 1773990432.4464939,
+    "hash": "17e9320ac04f206695141a1cef717200"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx": {
+    "mtime": 1776520841.7897844,
+    "hash": "c699a21ca5ce9d8027ae48fd62856ec2"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx": {
+    "mtime": 1776520841.7897906,
+    "hash": "aa41fe88ed4c6df1acca51357f0ece12"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js": {
+    "mtime": 1776520841.7897773,
+    "hash": "129d164f2c476cf0cc07647c704c9a0b"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js": {
+    "mtime": 1776520841.7897635,
+    "hash": "86a8a8dd07691d30e8f70639302aac5b"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js": {
+    "mtime": 1774076330.4650087,
+    "hash": "95b6f452c3cb7f7ba7745b2308266f45"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/lib/postSettleRevealAbi.js": {
+    "mtime": 1774076330.4649794,
+    "hash": "30ebf438e035d4b181a1d2c81c2bdfad"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/lib/swapAbis.js": {
+    "mtime": 1774076330.4649963,
+    "hash": "354fd0f2692befbda95584d2f7e6b08f"
+  },
+  "/Users/rishav/Desktop/GhostSwap/rough.txt": {
+    "mtime": 1778316889.522268,
+    "hash": "59a339dfb99d68b68de0d2f3e08ff9f3"
+  },
+  "/Users/rishav/Desktop/GhostSwap/README.md": {
+    "mtime": 1777461538.5529685,
+    "hash": "821c3c18900b0c65317bd7b38570792a"
+  },
+  "/Users/rishav/Desktop/GhostSwap/remappings.txt": {
+    "mtime": 1773894702.5842638,
+    "hash": "7f543d063b217e9d5e9a579147114108"
+  },
+  "/Users/rishav/Desktop/GhostSwap/AGENTS.md": {
+    "mtime": 1777444810.2533512,
+    "hash": "f07b9404a71a45b783c9ebe550db4459"
+  },
+  "/Users/rishav/Desktop/GhostSwap/instructions.md": {
+    "mtime": 1776359380.7218666,
+    "hash": "c4c24e767598521bb37734f013e2dd63"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/index.html": {
+    "mtime": 1773990429.4047275,
+    "hash": "19bb4d0160b371266be470ef019322d3"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/README.md": {
+    "mtime": 1776520841.7897997,
+    "hash": "c5b6ae88a32b6ed4aca4bcf11bcb9fe1"
+  },
+  "/Users/rishav/Desktop/GhostSwap/docs/fhe-mock-devrel-note.md": {
+    "mtime": 1774078856.1724434,
+    "hash": "97aee0f6142cc1d2752c7e31376d03fe"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fhe-assistant-main/README.md": {
+    "mtime": 1773894786.406095,
+    "hash": "82555c3e298157bac06aadef1bf84002"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fhe-assistant-main/core.md": {
+    "mtime": 1773894786.4070702,
+    "hash": "8779e9beab98d9cf34f635fc104723df"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/public/icons.svg": {
+    "mtime": 1773990289.5539699,
+    "hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/public/favicon.svg": {
+    "mtime": 1773990289.5534499,
+    "hash": "7e840862161341271697daa99a40d76b"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/assets/hero.png": {
+    "mtime": 1773990289.5555255,
+    "hash": "5cf2b0762834cdddc0dd3ec1397b5011"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/assets/vite.svg": {
+    "mtime": 1773990289.556292,
+    "hash": "9960a24288958394ac50e57ff638b036"
+  },
+  "/Users/rishav/Desktop/GhostSwap/fe/src/assets/react.svg": {
+    "mtime": 1773990289.5559776,
+    "hash": "f0402b67b6ce880f65666bb49e841696"
+  }
+}

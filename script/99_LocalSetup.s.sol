@@ -72,7 +72,7 @@ contract LocalSetupScript is Script {
 
         vm.startBroadcast();
         CofheAddrs memory cofhe = _deployCofhe(owner);
-        DexAddrs memory dex = _deployDex(owner);
+        DexAddrs memory dex = _deployDex(owner, cofhe.zkVerifierSigner);
         vm.stopBroadcast();
 
         _writeFrontendEnv(owner, dex.hook, dex.vault, dex.vaultPeriphery, dex.swapRouter, dex.token0, dex.token1);
@@ -117,7 +117,7 @@ contract LocalSetupScript is Script {
         });
     }
 
-    function _deployDex(address owner) internal returns (DexAddrs memory out) {
+    function _deployDex(address owner, address cofheVerifier) internal returns (DexAddrs memory out) {
         IPoolManager manager = IPoolManager(address(new PoolManager(address(0))));
         PoolModifyLiquidityTest lpRouter = new PoolModifyLiquidityTest(manager);
         PoolSwapTest swapRouter = new PoolSwapTest(manager);
@@ -129,9 +129,9 @@ contract LocalSetupScript is Script {
 
         token0.mint(owner, 100_000 ether);
         token1.mint(owner, 100_000 ether);
-        address hook = _deployHook(manager, owner);
+        address hook = _deployHook(manager, owner, cofheVerifier);
         GhostVault vault = new GhostVault(address(token1), hook);
-        GhostVaultPeriphery periphery = new GhostVaultPeriphery(address(swapRouter), address(vault), owner);
+        GhostVaultPeriphery periphery = new GhostVaultPeriphery(address(swapRouter), address(vault), hook, owner);
 
         vault.setOperator(address(periphery));
 
@@ -150,13 +150,13 @@ contract LocalSetupScript is Script {
         });
     }
 
-    function _deployHook(IPoolManager manager, address owner) internal returns (address) {
+    function _deployHook(IPoolManager manager, address owner, address cofheVerifier) internal returns (address) {
         uint160 flags = uint160(Hooks.BEFORE_SWAP_FLAG | Hooks.AFTER_SWAP_FLAG);
-        bytes memory constructorArgs = abi.encode(manager, uint256(11), owner);
+        bytes memory constructorArgs = abi.encode(manager, uint256(11), owner, cofheVerifier);
         (address expectedHookAddress, bytes32 salt) =
             HookMiner.find(CREATE2_DEPLOYER, flags, type(PostSettleRevealHook).creationCode, constructorArgs);
 
-        PostSettleRevealHook hook = new PostSettleRevealHook{salt: salt}(manager, 11, owner);
+        PostSettleRevealHook hook = new PostSettleRevealHook{salt: salt}(manager, 11, owner, cofheVerifier);
         require(address(hook) == expectedHookAddress, "LocalSetupScript: hook address mismatch");
         return address(hook);
     }

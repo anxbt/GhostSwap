@@ -12,9 +12,11 @@ import {BalanceDelta} from "@uniswap/v4-core/src/types/BalanceDelta.sol";
 import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "@uniswap/v4-core/src/types/BeforeSwapDelta.sol";
 import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 import {IERC1271} from "@openzeppelin/contracts/interfaces/IERC1271.sol";
 
-import {FHE, ebool, euint128, InEuint128} from "@fhenixprotocol/cofhe-contracts/FHE.sol";
+import {FHE, ebool, euint128, InEuint128, TASK_MANAGER_ADDRESS} from "@fhenixprotocol/cofhe-contracts/FHE.sol";
+import {ITaskManager} from "@fhenixprotocol/cofhe-contracts/ICofhe.sol";
 
 import {IPostSettleReveal} from "../interface/IPostSettleReveal.sol";
 import {IGhostVault} from "../interface/IGhostVault.sol";
@@ -42,6 +44,13 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
 
     uint256 public immutable revealDelayBlocks;
     address public immutable owner;
+    address public immutable COFHE_VERIFIER;
+
+    // Emergency timeout windows. Owner-settable so they can be shortened for live testnet demos.
+    // Defaults match production values (~6h / ~24h / ~1h at 12s blocks).
+    uint256 public CANCEL_DELAY_BLOCKS = 1800; // ~6 hours at 12s blocks
+    uint256 public FALLBACK_DELAY_BLOCKS = 7200; // ~24 hours at 12s blocks
+    uint256 public AUCTION_TIMEOUT_BLOCKS = 300; // ~1 hour at 12s blocks
 
     uint256 public nextSwapId = 1;
 
@@ -61,6 +70,16 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
     mapping(uint256 => euint128) internal _winningEncryptedBidBySwapId;
     mapping(uint256 => ebool[]) internal _winningBidMatchesBySwapId;
 
+    // Wave 3: FHE enforcement state
+    mapping(bytes32 => uint128) internal _publishedDecryptResults; // ctHash -> decryptedValue
+    mapping(bytes32 => bool) internal _decryptResultPublished; // ctHash -> published flag
+    mapping(uint256 => bool) internal _encryptedMinimumEnforced; // swapId -> enforced flag
+
+    // Wave 4: Solver auction + execution binding
+    mapping(address => bool) public allowedSolvers; // solver allowlist
+    mapping(uint256 => bytes32) internal _auctionWinnerCalldataHash; // swapId -> calldataHash for binding
+    mapping(uint256 => bool) internal _auctionWinnerExecutionBound; // swapId -> bound flag
+
     address public surplusVault;
 
     modifier onlyOwner() {
@@ -68,12 +87,13 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
         _;
     }
 
-    constructor(IPoolManager _poolManager, uint256 _revealDelayBlocks, address _owner)
+    constructor(IPoolManager _poolManager, uint256 _revealDelayBlocks, address _owner, address _cofheVerifier)
         BaseHook(_poolManager)
         EIP712("GhostSwapIntent", "1")
     {
         revealDelayBlocks = _revealDelayBlocks;
         owner = _owner;
+        COFHE_VERIFIER = _cofheVerifier;
     }
 
     function getHookPermissions() public pure override returns (Hooks.Permissions memory) {
@@ -250,6 +270,7 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
         }
 
         if (intent.state == SwapState.RevealedToAuthorized) revert AlreadyRevealed(swapId);
+        if (intent.state == SwapState.EmergencyResolved) revert SwapAlreadyEmergencyResolved(swapId);
 
         if (intent.state != SwapState.SettledPendingReveal && intent.state != SwapState.DecryptReady) {
             revert InvalidState(swapId, SwapState.SettledPendingReveal, intent.state);
@@ -261,8 +282,19 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
             revert RevealNotReady(swapId, record.decryptReadyBlock, block.number);
         }
 
+        // Finalize the encrypted slippage check only if the async CoFHE decryption is ready.
+        // The reveal of trade details must not be blocked on the coprocessor: if the decrypt
+        // result is not yet available, surplus is finalized later via finalizeSlippageCheck().
+        // When the result IS ready, this still propagates real outcomes (e.g. FillBelowEncryptedMinimum).
         if (!_slippageOutcomes[swapId].passed) {
-            finalizeSlippageCheck(swapId);
+            ebool minimumCheck = _minimumCheckBySwapId[swapId];
+            bool decryptReady = false;
+            if (ebool.unwrap(minimumCheck) != 0) {
+                (, decryptReady) = FHE.getDecryptResultSafe(minimumCheck);
+            }
+            if (decryptReady) {
+                finalizeSlippageCheck(swapId);
+            }
         }
 
         if (intent.state == SwapState.SettledPendingReveal) {
@@ -340,6 +372,7 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
 
         auction.bidCount = bidCount;
         auction.queued = true;
+        auction.queuedAtBlock = block.number;
 
         emit SolverAuctionQueued(swapId, bidCount);
     }
@@ -391,6 +424,19 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
     function setSurplusVault(address vault) external onlyOwner {
         surplusVault = vault;
         emit SurplusVaultSet(vault);
+    }
+
+    /// @notice Owner-settable emergency timeout windows (in blocks).
+    /// @dev Production defaults are 1800 / 7200 / 300. Shortened on testnet to demo the
+    ///      cancel / auto-release / auction-cancel paths without waiting hours.
+    function setEmergencyDelays(uint256 cancelBlocks, uint256 fallbackBlocks, uint256 auctionBlocks)
+        external
+        onlyOwner
+    {
+        CANCEL_DELAY_BLOCKS = cancelBlocks;
+        FALLBACK_DELAY_BLOCKS = fallbackBlocks;
+        AUCTION_TIMEOUT_BLOCKS = auctionBlocks;
+        emit EmergencyDelaysUpdated(cancelBlocks, fallbackBlocks, auctionBlocks);
     }
 
     function getSwapIntent(uint256 swapId) external view returns (address, bytes32, uint256, uint256, SwapState) {
@@ -482,9 +528,236 @@ contract PostSettleRevealHook is BaseHook, EIP712, IPostSettleReveal {
         euint128 encryptedActualAmountOut = FHE.asEuint128(actualAmountOut);
         minimumCheck = FHE.gte(encryptedActualAmountOut, encryptedMinOut);
 
+        // The live CoFHE coprocessor requires a ciphertext to be globally allowed before it can
+        // be decrypted (createDecryptTask reverts otherwise). cofhe-contracts 0.0.13 ships no
+        // FHE.allowGlobal wrapper, so call the TaskManager directly — this mirrors the 0.1.x
+        // FHE.allowGlobal implementation: allowGlobal(uint256(unwrap(ctHash))).
+        // FHE.decrypt() hardcodes msg.sender as the decrypt requestor; inside a v4 hook that is
+        // the PoolManager, which the live coprocessor rejects. Call createDecryptTask directly
+        // with this hook as the requestor (== the caller), after marking the ciphertext globally
+        // decryptable. Wrapped in best-effort low-level calls so a coprocessor-side rejection
+        // cannot revert the whole swap (the slippage check finalizes asynchronously).
         FHE.allowThis(minimumCheck);
-        FHE.decrypt(minimumCheck);
+        ITaskManager(TASK_MANAGER_ADDRESS).allowGlobal(ebool.unwrap(minimumCheck));
+        TASK_MANAGER_ADDRESS.call(
+            abi.encodeWithSelector(ITaskManager.createDecryptTask.selector, ebool.unwrap(minimumCheck), address(this))
+        );
         FHE.allowThis(encryptedMinOut);
-        FHE.decrypt(encryptedMinOut);
+        ITaskManager(TASK_MANAGER_ADDRESS).allowGlobal(euint128.unwrap(encryptedMinOut));
+        TASK_MANAGER_ADDRESS.call(
+            abi.encodeWithSelector(ITaskManager.createDecryptTask.selector, euint128.unwrap(encryptedMinOut), address(this))
+        );
+    }
+
+    // ===== Wave 3: FHE Enforcement & Reveal =====
+
+    /// @notice Publish a decrypted result obtained from the CoFHE SDK (client-side decryptForTx)
+    /// @dev Called to make the result available for enforcement via `enforceEncryptedMinimum`.
+    ///      The signature should be validated on the client and this call is idempotent.
+    /// @param ctHash The ciphertext hash being decrypted
+    /// @param decryptedValue The plaintext result from CoFHE SDK `decryptForTx()`
+    /// @param signature CoFHE SDK signature authorizing this decryption (for future on-chain validation)
+    function publishDecryptResult(bytes32 ctHash, uint128 decryptedValue, bytes calldata signature) external {
+        // Verify the signature was produced by the CoFHE verifier
+        bytes32 messageHash = keccak256(abi.encodePacked(ctHash, decryptedValue));
+        bytes32 ethSignedHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        address recovered = ECDSA.recover(ethSignedHash, signature);
+        if (recovered != COFHE_VERIFIER) revert InvalidCoFHESignature(recovered, COFHE_VERIFIER);
+
+        _publishedDecryptResults[ctHash] = decryptedValue;
+        _decryptResultPublished[ctHash] = true;
+
+        emit DecryptResultPublished(ctHash, decryptedValue);
+    }
+
+    /// @notice Enforce encrypted minimum: verify actual fill >= decrypted minimum and attribute surplus
+    /// @dev Called after `publishDecryptResult` confirms the decrypt. Sender can be anyone.
+    ///      Reverts if actual fill < decrypted minimum. On pass, forwards surplus to vault.
+    /// @param swapId The swap being enforced
+    /// @param decryptedMinOut The plaintext minimum (previously published via `publishDecryptResult`)
+    function enforceEncryptedMinimum(uint256 swapId, uint128 decryptedMinOut) external {
+        SwapIntent storage intent = _swapIntents[swapId];
+        if (intent.trader == address(0)) revert MissingIntent(msg.sender);
+        if (_encryptedMinimumEnforced[swapId]) {
+            // Already enforced; allow re-call but short-circuit
+            return;
+        }
+
+        SlippageOutcome storage outcome = _slippageOutcomes[swapId];
+        if (!outcome.passed) {
+            // If slippage check hasn't passed yet, finalize it
+            finalizeSlippageCheck(swapId);
+        }
+
+        // Enforce: actual >= decrypted minimum
+        if (outcome.actualAmountOut < decryptedMinOut) {
+            revert FillBelowEncryptedMinimum(swapId, outcome.actualAmountOut, decryptedMinOut);
+        }
+
+        // Mark as enforced
+        _encryptedMinimumEnforced[swapId] = true;
+
+        // Calculate and forward surplus to vault
+        uint128 surplus = outcome.actualAmountOut - decryptedMinOut;
+        if (surplus > 0 && surplusVault != address(0)) {
+            // For Wave 4: if this is an auction winner execution, the vault is the trader
+            IGhostVault(surplusVault).recordSurplus(swapId, surplus, intent.trader);
+            emit SurplusForwardedToVault(swapId, surplusVault, surplus);
+        }
+    }
+
+    /// @notice Check if a decrypted result is ready/published
+    /// @param ctHash The ciphertext hash
+    /// @return ready True if result has been published via `publishDecryptResult`
+    function isDecryptReady(bytes32 ctHash) external view returns (bool ready) {
+        return _decryptResultPublished[ctHash];
+    }
+
+    /// @notice Get a previously published decrypted result (if ready)
+    /// @param ctHash The ciphertext hash
+    /// @return value The decrypted value (0 if not ready)
+    /// @return ready True if result is available
+    function getPublishedDecryptResult(bytes32 ctHash) external view returns (uint128 value, bool ready) {
+        ready = _decryptResultPublished[ctHash];
+        if (ready) {
+            value = _publishedDecryptResults[ctHash];
+        }
+    }
+
+    // ===== Wave 4: Solver Auction + Execution Binding =====
+
+    /// @notice Register a solver on the allowlist
+    /// @dev Only owner can call. Solvers must be registered to submit bids.
+    /// @param solver The solver address to allow
+    function registerSolver(address solver) external onlyOwner {
+        allowedSolvers[solver] = true;
+        emit SolverRegistered(solver);
+    }
+
+    /// @notice Unregister a solver from the allowlist
+    /// @dev Only owner can call.
+    /// @param solver The solver address to remove
+    function unregisterSolver(address solver) external onlyOwner {
+        allowedSolvers[solver] = false;
+        emit SolverUnregistered(solver);
+    }
+
+    /// @notice Check if a solver is allowed to submit bids
+    /// @param solver The solver address
+    /// @return True if solver is registered
+    function isSolverAllowed(address solver) external view returns (bool) {
+        return allowedSolvers[solver];
+    }
+
+    /// @notice Bind an auction winner's execution to a specific calldata hash
+    /// @dev Called after `finalizeSolverAuction` to lock the periphery execution.
+    ///      Only the auction winner can execute this intent (enforced by periphery).
+    /// @param swapId The swap whose auction was finalized
+    /// @param calldataHash Optional: hash of the intended router calldata for replay protection
+    function bindAuctionWinnerExecution(uint256 swapId, bytes32 calldataHash) external {
+        SolverAuction storage auction = _solverAuctions[swapId];
+        if (!auction.finalized) revert SolverAuctionNotQueued(swapId);
+
+        // Only owner or the winning solver can bind execution
+        if (msg.sender != owner && msg.sender != auction.winner) {
+            revert Unauthorized(msg.sender);
+        }
+
+        _auctionWinnerCalldataHash[swapId] = calldataHash;
+        _auctionWinnerExecutionBound[swapId] = true;
+
+        emit AuctionWinnerExecutionBound(swapId, auction.winner, calldataHash);
+    }
+
+    /// @notice Check if an auction winner's execution is bound
+    /// @param swapId The swap
+    /// @return bound True if bound
+    /// @return winner The winning solver address
+    /// @return calldataHash Optional replay-protection hash
+    function getAuctionExecutionBinding(uint256 swapId)
+        external
+        view
+        returns (bool bound, address winner, bytes32 calldataHash)
+    {
+        bound = _auctionWinnerExecutionBound[swapId];
+        SolverAuction storage auction = _solverAuctions[swapId];
+        winner = auction.winner;
+        calldataHash = _auctionWinnerCalldataHash[swapId];
+    }
+
+    // ===== Emergency Resolution Functions =====
+
+    /// @notice Cancel a stuck swap after the cancel delay has elapsed (Scenario C)
+    /// @dev Only the original trader can cancel. Marks the swap as EmergencyResolved.
+    ///      The swap has already settled on Uniswap — this does NOT refund tokens.
+    ///      It marks the swap as resolved so the trader can proceed without the FHE result.
+    /// @param swapId The swap to cancel
+    function cancelStuckSwap(uint256 swapId) external {
+        SwapIntent storage intent = _swapIntents[swapId];
+        if (intent.trader == address(0)) revert MissingIntent(msg.sender);
+        if (msg.sender != intent.trader) revert Unauthorized(msg.sender);
+        if (intent.state == SwapState.RevealedToAuthorized) revert AlreadyRevealed(swapId);
+        if (intent.state == SwapState.EmergencyResolved) revert SwapAlreadyEmergencyResolved(swapId);
+        if (intent.state != SwapState.SettledPendingReveal && intent.state != SwapState.DecryptReady) {
+            revert InvalidEmergencyState(swapId, intent.state);
+        }
+
+        uint256 cancelReadyBlock = intent.createdAtBlock + CANCEL_DELAY_BLOCKS;
+        if (block.number < cancelReadyBlock) {
+            revert CancelDelayNotElapsed(swapId, cancelReadyBlock, block.number);
+        }
+
+        intent.state = SwapState.EmergencyResolved;
+
+        emit SwapEmergencyResolved(swapId, msg.sender, "cancel");
+    }
+
+    /// @notice Auto-release a stuck swap after the fallback delay has elapsed (Scenario A)
+    /// @dev Anyone can call after the fallback delay. Marks the swap as EmergencyResolved.
+    ///      The vault receives no surplus from this swap. Trader funds are already in their wallet.
+    /// @param swapId The swap to auto-release
+    function autoReleaseStuckSwap(uint256 swapId) external {
+        SwapIntent storage intent = _swapIntents[swapId];
+        if (intent.trader == address(0)) revert MissingIntent(msg.sender);
+        if (intent.state == SwapState.RevealedToAuthorized) revert AlreadyRevealed(swapId);
+        if (intent.state == SwapState.EmergencyResolved) revert SwapAlreadyEmergencyResolved(swapId);
+        if (intent.state != SwapState.SettledPendingReveal && intent.state != SwapState.DecryptReady) {
+            revert InvalidEmergencyState(swapId, intent.state);
+        }
+
+        uint256 fallbackReadyBlock = intent.createdAtBlock + FALLBACK_DELAY_BLOCKS;
+        if (block.number < fallbackReadyBlock) {
+            revert FallbackDelayNotElapsed(swapId, fallbackReadyBlock, block.number);
+        }
+
+        intent.state = SwapState.EmergencyResolved;
+
+        emit SwapEmergencyResolved(swapId, msg.sender, "auto_release");
+    }
+
+    /// @notice Cancel a stuck solver auction after the auction timeout has elapsed (Scenario B)
+    /// @dev Only the original trader can cancel. Marks the auction as cancelled and the swap as EmergencyResolved.
+    ///      No swap was executed — the auction was the execution path, so cancelling it voids the trade.
+    /// @param swapId The swap whose auction to cancel
+    function cancelStuckAuction(uint256 swapId) external {
+        SwapIntent storage intent = _swapIntents[swapId];
+        if (intent.trader == address(0)) revert MissingIntent(msg.sender);
+        if (msg.sender != intent.trader) revert Unauthorized(msg.sender);
+
+        SolverAuction storage auction = _solverAuctions[swapId];
+        if (!auction.queued) revert SolverAuctionNotQueued(swapId);
+        if (auction.cancelled) revert AuctionAlreadyCancelled(swapId);
+        if (auction.finalized) revert SolverAuctionAlreadyFinalized(swapId);
+
+        uint256 auctionTimeoutBlock = auction.queuedAtBlock + AUCTION_TIMEOUT_BLOCKS;
+        if (block.number < auctionTimeoutBlock) {
+            revert AuctionTimeoutNotElapsed(swapId, auctionTimeoutBlock, block.number);
+        }
+
+        auction.cancelled = true;
+        intent.state = SwapState.EmergencyResolved;
+
+        emit AuctionCancelled(swapId, msg.sender);
+        emit SwapEmergencyResolved(swapId, msg.sender, "auction_cancel");
     }
 }

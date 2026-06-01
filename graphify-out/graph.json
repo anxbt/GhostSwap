@@ -6,950 +6,3982 @@
     {
       "label": "hardhat.config.ts",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/hardhat.config.ts",
+      "source_file": "hardhat.config.ts",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_hardhat_config_ts",
-      "community": 7,
-      "norm_label": "hardhat.config.ts"
+      "community": 18,
+      "norm_label": "hardhat.config.ts",
+      "id": "hardhat_config_ts"
     },
     {
       "label": "tailwind.config.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/tailwind.config.js",
+      "source_file": "fe/tailwind.config.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_tailwind_config_js",
-      "community": 8,
-      "norm_label": "tailwind.config.js"
+      "community": 19,
+      "norm_label": "tailwind.config.js",
+      "id": "fe_tailwind_config_js"
     },
     {
       "label": "vite.config.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/vite.config.js",
+      "source_file": "fe/vite.config.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_vite_config_js",
-      "community": 9,
-      "norm_label": "vite.config.js"
+      "community": 20,
+      "norm_label": "vite.config.js",
+      "id": "fe_vite_config_js"
     },
     {
       "label": "eslint.config.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/eslint.config.js",
+      "source_file": "fe/eslint.config.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_eslint_config_js",
-      "community": 10,
-      "norm_label": "eslint.config.js"
+      "community": 21,
+      "norm_label": "eslint.config.js",
+      "id": "fe_eslint_config_js"
     },
     {
       "label": "postcss.config.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/postcss.config.js",
+      "source_file": "fe/postcss.config.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_postcss_config_js",
-      "community": 11,
-      "norm_label": "postcss.config.js"
+      "community": 22,
+      "norm_label": "postcss.config.js",
+      "id": "fe_postcss_config_js"
     },
     {
       "label": "main.jsx",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/main.jsx",
+      "source_file": "fe/src/main.jsx",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_main_jsx",
-      "community": 12,
-      "norm_label": "main.jsx"
+      "community": 23,
+      "norm_label": "main.jsx",
+      "id": "fe_src_main_jsx"
     },
     {
       "label": "App.jsx",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/App.jsx",
+      "source_file": "fe/src/App.jsx",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_app_jsx",
-      "community": 6,
-      "norm_label": "app.jsx"
+      "community": 16,
+      "norm_label": "app.jsx",
+      "id": "fe_src_app_jsx"
     },
     {
       "label": "App()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/App.jsx",
+      "source_file": "fe/src/App.jsx",
       "source_location": "L5",
-      "id": "app_app",
-      "community": 6,
-      "norm_label": "app()"
+      "community": 16,
+      "norm_label": "app()",
+      "id": "app_app"
     },
     {
       "label": "LandingPage.jsx",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "community": 2,
-      "norm_label": "landingpage.jsx"
+      "community": 13,
+      "norm_label": "landingpage.jsx",
+      "id": "fe_src_landingpage_jsx"
     },
     {
       "label": "Redacted()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L4",
-      "id": "landingpage_redacted",
-      "community": 2,
-      "norm_label": "redacted()"
+      "community": 13,
+      "norm_label": "redacted()",
+      "id": "landingpage_redacted"
     },
     {
       "label": "MempoolRow()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L106",
-      "id": "landingpage_mempoolrow",
-      "community": 2,
-      "norm_label": "mempoolrow()"
+      "community": 13,
+      "norm_label": "mempoolrow()",
+      "id": "landingpage_mempoolrow"
     },
     {
       "label": "Reveal()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L129",
-      "id": "landingpage_reveal",
-      "community": 2,
-      "norm_label": "reveal()"
-    },
-    {
-      "label": "LandingPage()",
-      "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
-      "source_location": "L157",
-      "id": "landingpage_landingpage",
-      "community": 2,
-      "norm_label": "landingpage()"
-    },
-    {
-      "label": "GhostSwap.jsx",
-      "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "community": 0,
-      "norm_label": "ghostswap.jsx"
+      "community": 13,
+      "norm_label": "reveal()",
+      "id": "landingpage_reveal"
     },
     {
       "label": "toStorageKey()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L55",
-      "id": "ghostswap_tostoragekey",
-      "community": 5,
-      "norm_label": "tostoragekey()"
+      "community": 0,
+      "norm_label": "tostoragekey()",
+      "id": "ghostswap_tostoragekey"
     },
     {
       "label": "toTrackedSwapStorageKey()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L59",
-      "id": "ghostswap_totrackedswapstoragekey",
-      "community": 3,
-      "norm_label": "totrackedswapstoragekey()"
+      "community": 0,
+      "norm_label": "totrackedswapstoragekey()",
+      "id": "ghostswap_totrackedswapstoragekey"
     },
     {
       "label": "normalizeSwapIds()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L63",
-      "id": "ghostswap_normalizeswapids",
-      "community": 3,
-      "norm_label": "normalizeswapids()"
+      "community": 0,
+      "norm_label": "normalizeswapids()",
+      "id": "ghostswap_normalizeswapids"
     },
     {
       "label": "getStoredHookNonce()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L68",
-      "id": "ghostswap_getstoredhooknonce",
-      "community": 5,
-      "norm_label": "getstoredhooknonce()"
-    },
-    {
-      "label": "setStoredHookNonce()",
-      "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L80",
-      "id": "ghostswap_setstoredhooknonce",
-      "community": 5,
-      "norm_label": "setstoredhooknonce()"
+      "community": 0,
+      "norm_label": "getstoredhooknonce()",
+      "id": "ghostswap_getstoredhooknonce"
     },
     {
       "label": "getTrackedSwapIds()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L92",
-      "id": "ghostswap_gettrackedswapids",
-      "community": 3,
-      "norm_label": "gettrackedswapids()"
-    },
-    {
-      "label": "setTrackedSwapIds()",
-      "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L103",
-      "id": "ghostswap_settrackedswapids",
-      "community": 3,
-      "norm_label": "settrackedswapids()"
+      "community": 0,
+      "norm_label": "gettrackedswapids()",
+      "id": "ghostswap_gettrackedswapids"
     },
     {
       "label": "addTrackedSwapId()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L123",
-      "id": "ghostswap_addtrackedswapid",
-      "community": 3,
-      "norm_label": "addtrackedswapid()"
+      "community": 0,
+      "norm_label": "addtrackedswapid()",
+      "id": "ghostswap_addtrackedswapid"
     },
     {
       "label": "getSqrtPriceLimitX96()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L127",
-      "id": "ghostswap_getsqrtpricelimitx96",
       "community": 0,
-      "norm_label": "getsqrtpricelimitx96()"
+      "norm_label": "getsqrtpricelimitx96()",
+      "id": "ghostswap_getsqrtpricelimitx96"
     },
     {
       "label": "computePoolId()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L131",
-      "id": "ghostswap_computepoolid",
       "community": 0,
-      "norm_label": "computepoolid()"
+      "norm_label": "computepoolid()",
+      "id": "ghostswap_computepoolid"
     },
     {
       "label": "mapSubmitError()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L137",
-      "id": "ghostswap_mapsubmiterror",
-      "community": 4,
-      "norm_label": "mapsubmiterror()"
+      "community": 12,
+      "norm_label": "mapsubmiterror()",
+      "id": "ghostswap_mapsubmiterror"
     },
     {
       "label": "Noise()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L152",
-      "id": "ghostswap_noise",
       "community": 0,
-      "norm_label": "noise()"
+      "norm_label": "noise()",
+      "id": "ghostswap_noise"
     },
     {
       "label": "TokenSelector()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L165",
-      "id": "ghostswap_tokenselector",
       "community": 0,
-      "norm_label": "tokenselector()"
+      "norm_label": "tokenselector()",
+      "id": "ghostswap_tokenselector"
     },
     {
       "label": "StatusBadge()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L228",
-      "id": "ghostswap_statusbadge",
       "community": 0,
-      "norm_label": "statusbadge()"
+      "norm_label": "statusbadge()",
+      "id": "ghostswap_statusbadge"
     },
     {
       "label": "MempoolComparison()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L249",
-      "id": "ghostswap_mempoolcomparison",
       "community": 0,
-      "norm_label": "mempoolcomparison()"
+      "norm_label": "mempoolcomparison()",
+      "id": "ghostswap_mempoolcomparison"
     },
     {
       "label": "TransactionHistory()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L297",
-      "id": "ghostswap_transactionhistory",
       "community": 0,
-      "norm_label": "transactionhistory()"
+      "norm_label": "transactionhistory()",
+      "id": "ghostswap_transactionhistory"
     },
     {
       "label": "PendingRevealPanel()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L365",
-      "id": "ghostswap_pendingrevealpanel",
       "community": 0,
-      "norm_label": "pendingrevealpanel()"
+      "norm_label": "pendingrevealpanel()",
+      "id": "ghostswap_pendingrevealpanel"
     },
     {
       "label": "GhostSwap()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L426",
-      "id": "ghostswap_ghostswap",
-      "community": 1,
-      "norm_label": "ghostswap()"
+      "community": 0,
+      "norm_label": "ghostswap()",
+      "id": "ghostswap_ghostswap"
     },
     {
       "label": "RevealedView()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L1353",
-      "id": "ghostswap_revealedview",
       "community": 0,
-      "norm_label": "revealedview()"
+      "norm_label": "revealedview()",
+      "id": "ghostswap_revealedview"
     },
     {
       "label": "contracts.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js",
+      "source_file": "fe/src/config/contracts.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_config_contracts_js",
-      "community": 1,
-      "norm_label": "contracts.js"
+      "community": 0,
+      "norm_label": "contracts.js",
+      "id": "fe_src_config_contracts_js"
     },
     {
       "label": "getExpectedChainId()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js",
+      "source_file": "fe/src/config/contracts.js",
       "source_location": "L20",
-      "id": "contracts_getexpectedchainid",
-      "community": 1,
-      "norm_label": "getexpectedchainid()"
+      "community": 0,
+      "norm_label": "getexpectedchainid()",
+      "id": "contracts_getexpectedchainid"
     },
     {
       "label": "chainNameById()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js",
+      "source_file": "fe/src/config/contracts.js",
       "source_location": "L25",
-      "id": "contracts_chainnamebyid",
-      "community": 1,
-      "norm_label": "chainnamebyid()"
+      "community": 0,
+      "norm_label": "chainnamebyid()",
+      "id": "contracts_chainnamebyid"
     },
     {
       "label": "useCofhe.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "community": 4,
-      "norm_label": "usecofhe.js"
+      "community": 12,
+      "norm_label": "usecofhe.js",
+      "id": "fe_src_hooks_usecofhe_js"
     },
     {
       "label": "normalizeEncryptedInput()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L8",
-      "id": "usecofhe_normalizeencryptedinput",
-      "community": 4,
-      "norm_label": "normalizeencryptedinput()"
+      "community": 12,
+      "norm_label": "normalizeencryptedinput()",
+      "id": "usecofhe_normalizeencryptedinput"
     },
     {
       "label": "encryptMinOut()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L24",
-      "id": "usecofhe_encryptminout",
-      "community": 4,
-      "norm_label": "encryptminout()"
+      "community": 12,
+      "norm_label": "encryptminout()",
+      "id": "usecofhe_encryptminout"
     },
     {
       "label": "mapCofheError()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L63",
-      "id": "usecofhe_mapcofheerror",
-      "community": 4,
-      "norm_label": "mapcofheerror()"
+      "community": 12,
+      "norm_label": "mapcofheerror()",
+      "id": "usecofhe_mapcofheerror"
     },
     {
       "label": "format.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js",
+      "source_file": "fe/src/lib/format.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_lib_format_js",
-      "community": 1,
-      "norm_label": "format.js"
+      "community": 0,
+      "norm_label": "format.js",
+      "id": "fe_src_lib_format_js"
     },
     {
       "label": "shortAddress()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js",
+      "source_file": "fe/src/lib/format.js",
       "source_location": "L1",
-      "id": "format_shortaddress",
-      "community": 1,
-      "norm_label": "shortaddress()"
+      "community": 0,
+      "norm_label": "shortaddress()",
+      "id": "format_shortaddress"
     },
     {
       "label": "toNumberSafe()",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js",
+      "source_file": "fe/src/lib/format.js",
       "source_location": "L7",
-      "id": "format_tonumbersafe",
-      "community": 1,
-      "norm_label": "tonumbersafe()"
+      "community": 0,
+      "norm_label": "tonumbersafe()",
+      "id": "format_tonumbersafe"
     },
     {
       "label": "postSettleRevealAbi.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/postSettleRevealAbi.js",
+      "source_file": "fe/src/lib/postSettleRevealAbi.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_lib_postsettlerevealabi_js",
-      "community": 13,
-      "norm_label": "postsettlerevealabi.js"
+      "community": 24,
+      "norm_label": "postsettlerevealabi.js",
+      "id": "fe_src_lib_postsettlerevealabi_js"
     },
     {
       "label": "swapAbis.js",
       "file_type": "code",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/swapAbis.js",
+      "source_file": "fe/src/lib/swapAbis.js",
       "source_location": "L1",
-      "id": "users_rishav_desktop_ghostswap_fe_src_lib_swapabis_js",
+      "community": 25,
+      "norm_label": "swapabis.js",
+      "id": "fe_src_lib_swapabis_js"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "readme.md",
+      "id": "readme_md"
+    },
+    {
+      "label": "What GhostSwap Actually Is",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L9",
+      "community": 0,
+      "norm_label": "what ghostswap actually is",
+      "id": "ghostswap_readme_what_ghostswap_actually_is"
+    },
+    {
+      "label": "The Problem \u2014 And Why It's Worth Billions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "community": 0,
+      "norm_label": "the problem \u2014 and why it's worth billions",
+      "id": "ghostswap_readme_the_problem_and_why_it_s_worth_billions"
+    },
+    {
+      "label": "code:block1 (Example \u2014 standard Uniswap swap:)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "community": 0,
+      "norm_label": "code:block1 (example \u2014 standard uniswap swap:)",
+      "id": "ghostswap_readme_codeblock_1"
+    },
+    {
+      "label": "The Architecture \u2014 Vault + Hook",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "community": 7,
+      "norm_label": "the architecture \u2014 vault + hook",
+      "id": "ghostswap_readme_the_architecture_vault_hook"
+    },
+    {
+      "label": "code:mermaid (graph TB)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L54",
+      "community": 7,
+      "norm_label": "code:mermaid (graph tb)",
+      "id": "ghostswap_readme_codeblock_2"
+    },
+    {
+      "label": "Why This Is Defensible",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L99",
+      "community": 7,
+      "norm_label": "why this is defensible",
+      "id": "ghostswap_readme_why_this_is_defensible"
+    },
+    {
+      "label": "Why FHE \u2014 And Why We Own The Trade-Off",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L109",
+      "community": 7,
+      "norm_label": "why fhe \u2014 and why we own the trade-off",
+      "id": "ghostswap_readme_why_fhe_and_why_we_own_the_trade_off"
+    },
+    {
+      "label": "Why Not ZK or TEE",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L111",
+      "community": 7,
+      "norm_label": "why not zk or tee",
+      "id": "ghostswap_readme_why_not_zk_or_tee"
+    },
+    {
+      "label": "The Honest FHE Trade-Off",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L129",
+      "community": 7,
+      "norm_label": "the honest fhe trade-off",
+      "id": "ghostswap_readme_the_honest_fhe_trade_off"
+    },
+    {
+      "label": "How The Vault Generates TVL",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L155",
+      "community": 7,
+      "norm_label": "how the vault generates tvl",
+      "id": "ghostswap_readme_how_the_vault_generates_tvl"
+    },
+    {
+      "label": "The Flywheel",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "community": 7,
+      "norm_label": "the flywheel",
+      "id": "ghostswap_readme_the_flywheel"
+    },
+    {
+      "label": "Who Deposits And Why",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L175",
+      "community": 7,
+      "norm_label": "who deposits and why",
+      "id": "ghostswap_readme_who_deposits_and_why"
+    },
+    {
+      "label": "Realistic TVL Scaling",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "community": 7,
+      "norm_label": "realistic tvl scaling",
+      "id": "ghostswap_readme_realistic_tvl_scaling"
+    },
+    {
+      "label": "Realistic Competition And Positioning",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L199",
+      "community": 0,
+      "norm_label": "realistic competition and positioning",
+      "id": "ghostswap_readme_realistic_competition_and_positioning"
+    },
+    {
+      "label": "Hook Lifecycle \u2014 State Machine",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L215",
+      "community": 0,
+      "norm_label": "hook lifecycle \u2014 state machine",
+      "id": "ghostswap_readme_hook_lifecycle_state_machine"
+    },
+    {
+      "label": "code:mermaid (stateDiagram-v2)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L217",
+      "community": 0,
+      "norm_label": "code:mermaid (statediagram-v2)",
+      "id": "ghostswap_readme_codeblock_5"
+    },
+    {
+      "label": "Wave Roadmap",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L229",
+      "community": 0,
+      "norm_label": "wave roadmap",
+      "id": "ghostswap_readme_wave_roadmap"
+    },
+    {
+      "label": "code:mermaid (gantt)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L231",
+      "community": 0,
+      "norm_label": "code:mermaid (gantt)",
+      "id": "ghostswap_readme_codeblock_6"
+    },
+    {
+      "label": "Current Status",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L279",
+      "community": 0,
+      "norm_label": "current status",
+      "id": "ghostswap_readme_current_status"
+    },
+    {
+      "label": "Tech Stack",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L296",
+      "community": 0,
+      "norm_label": "tech stack",
+      "id": "ghostswap_readme_tech_stack"
+    },
+    {
+      "label": "Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L310",
       "community": 14,
-      "norm_label": "swapabis.js"
+      "norm_label": "setup",
+      "id": "ghostswap_readme_setup"
+    },
+    {
+      "label": "code:bash (# Clone)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L312",
+      "community": 14,
+      "norm_label": "code:bash (# clone)",
+      "id": "ghostswap_readme_codeblock_7"
+    },
+    {
+      "label": "Environment Variables",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L329",
+      "community": 14,
+      "norm_label": "environment variables",
+      "id": "ghostswap_readme_environment_variables"
+    },
+    {
+      "label": "code:bash (PRIVATE_KEY=)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L331",
+      "community": 14,
+      "norm_label": "code:bash (private_key=)",
+      "id": "ghostswap_readme_codeblock_8"
+    },
+    {
+      "label": "Resources",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L344",
+      "community": 0,
+      "norm_label": "resources",
+      "id": "ghostswap_readme_resources"
+    },
+    {
+      "label": "Why This Becomes A Protocol, Not Just A Hook",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L353",
+      "community": 0,
+      "norm_label": "why this becomes a protocol, not just a hook",
+      "id": "ghostswap_readme_why_this_becomes_a_protocol_not_just_a_hook"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "community": 17,
+      "norm_label": "agents.md",
+      "id": "agents_md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "community": 17,
+      "norm_label": "graphify",
+      "id": "ghostswap_agents_graphify"
+    },
+    {
+      "label": "instructions.md",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L1",
+      "community": 4,
+      "norm_label": "instructions.md",
+      "id": "instructions_md"
+    },
+    {
+      "label": "GhostSwap \u2014 INSTRUCTIONS.md",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L1",
+      "community": 4,
+      "norm_label": "ghostswap \u2014 instructions.md",
+      "id": "ghostswap_instructions_ghostswap_instructions_md"
+    },
+    {
+      "label": "1. Overview",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L8",
+      "community": 4,
+      "norm_label": "1. overview",
+      "id": "ghostswap_instructions_1_overview"
+    },
+    {
+      "label": "Project Goal",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L10",
+      "community": 4,
+      "norm_label": "project goal",
+      "id": "ghostswap_instructions_project_goal"
+    },
+    {
+      "label": "Problem Statement",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L18",
+      "community": 4,
+      "norm_label": "problem statement",
+      "id": "ghostswap_instructions_problem_statement"
+    },
+    {
+      "label": "Core FHE Functionality",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L30",
+      "community": 4,
+      "norm_label": "core fhe functionality",
+      "id": "ghostswap_instructions_core_fhe_functionality"
+    },
+    {
+      "label": "2. Tech Stack",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L45",
+      "community": 4,
+      "norm_label": "2. tech stack",
+      "id": "ghostswap_instructions_2_tech_stack"
+    },
+    {
+      "label": "Smart Contracts",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L47",
+      "community": 4,
+      "norm_label": "smart contracts",
+      "id": "ghostswap_instructions_smart_contracts"
+    },
+    {
+      "label": "Frontend",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L60",
+      "community": 4,
+      "norm_label": "frontend",
+      "id": "ghostswap_instructions_frontend"
+    },
+    {
+      "label": "Networks",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L71",
+      "community": 4,
+      "norm_label": "networks",
+      "id": "ghostswap_instructions_networks"
+    },
+    {
+      "label": "3. SDK Migration \u2014 CRITICAL CONTEXT",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L80",
+      "community": 5,
+      "norm_label": "3. sdk migration \u2014 critical context",
+      "id": "ghostswap_instructions_3_sdk_migration_critical_context"
+    },
+    {
+      "label": "Why The SDK Changed",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L85",
+      "community": 5,
+      "norm_label": "why the sdk changed",
+      "id": "ghostswap_instructions_why_the_sdk_changed"
+    },
+    {
+      "label": "Installation",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L94",
+      "community": 5,
+      "norm_label": "installation",
+      "id": "ghostswap_instructions_installation"
+    },
+    {
+      "label": "code:bash (# Remove old SDK)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L96",
+      "community": 5,
+      "norm_label": "code:bash (# remove old sdk)",
+      "id": "ghostswap_instructions_codeblock_1"
+    },
+    {
+      "label": "Migration Reference",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L104",
+      "community": 5,
+      "norm_label": "migration reference",
+      "id": "ghostswap_instructions_migration_reference"
+    },
+    {
+      "label": "Initialization",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L106",
+      "community": 5,
+      "norm_label": "initialization",
+      "id": "ghostswap_instructions_initialization"
+    },
+    {
+      "label": "code:ts (// BEFORE (cofhejs) \u2014 DEPRECATED)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L108",
+      "community": 5,
+      "norm_label": "code:ts (// before (cofhejs) \u2014 deprecated)",
+      "id": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "label": "Encrypting Inputs",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L128",
+      "community": 5,
+      "norm_label": "encrypting inputs",
+      "id": "ghostswap_instructions_encrypting_inputs"
+    },
+    {
+      "label": "Decrypting for UI (View)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L148",
+      "community": 5,
+      "norm_label": "decrypting for ui (view)",
+      "id": "ghostswap_instructions_decrypting_for_ui_view"
+    },
+    {
+      "label": "Decrypting for Onchain Publishing (NEW \u2014 not in cofhejs)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L164",
+      "community": 5,
+      "norm_label": "decrypting for onchain publishing (new \u2014 not in cofhejs)",
+      "id": "ghostswap_instructions_decrypting_for_onchain_publishing_new_not_in_cofhejs"
+    },
+    {
+      "label": "code:ts (// This pattern did not exist in cofhejs)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L166",
+      "community": 5,
+      "norm_label": "code:ts (// this pattern did not exist in cofhejs)",
+      "id": "ghostswap_instructions_codeblock_5"
+    },
+    {
+      "label": "Permits",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L177",
+      "community": 5,
+      "norm_label": "permits",
+      "id": "ghostswap_instructions_permits"
+    },
+    {
+      "label": "Error Handling",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L188",
+      "community": 5,
+      "norm_label": "error handling",
+      "id": "ghostswap_instructions_error_handling"
+    },
+    {
+      "label": "Type Renames",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L208",
+      "community": 5,
+      "norm_label": "type renames",
+      "id": "ghostswap_instructions_type_renames"
+    },
+    {
+      "label": "Import Path Changes",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L218",
+      "community": 5,
+      "norm_label": "import path changes",
+      "id": "ghostswap_instructions_import_path_changes"
+    },
+    {
+      "label": "4. Project Structure",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L230",
+      "community": 4,
+      "norm_label": "4. project structure",
+      "id": "ghostswap_instructions_4_project_structure"
+    },
+    {
+      "label": "code:block8 (ghostswap/)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L232",
+      "community": 4,
+      "norm_label": "code:block8 (ghostswap/)",
+      "id": "ghostswap_instructions_codeblock_8"
+    },
+    {
+      "label": "Key Files Explained",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L266",
+      "community": 4,
+      "norm_label": "key files explained",
+      "id": "ghostswap_instructions_key_files_explained"
+    },
+    {
+      "label": "5. FHE Patterns",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L283",
+      "community": 6,
+      "norm_label": "5. fhe patterns",
+      "id": "ghostswap_instructions_5_fhe_patterns"
+    },
+    {
+      "label": "Pattern 1 \u2014 Encrypt Before Send",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L285",
+      "community": 6,
+      "norm_label": "pattern 1 \u2014 encrypt before send",
+      "id": "ghostswap_instructions_pattern_1_encrypt_before_send"
+    },
+    {
+      "label": "code:ts (// frontend/src/hooks/useCofhe.js)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L290",
+      "community": 6,
+      "norm_label": "code:ts (// frontend/src/hooks/usecofhe.js)",
+      "id": "ghostswap_instructions_codeblock_9"
+    },
+    {
+      "label": "Pattern 2 \u2014 Store Encrypted Onchain",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L311",
+      "community": 6,
+      "norm_label": "pattern 2 \u2014 store encrypted onchain",
+      "id": "ghostswap_instructions_pattern_2_store_encrypted_onchain"
+    },
+    {
+      "label": "code:solidity (// In beforeSwap)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L313",
+      "community": 6,
+      "norm_label": "code:solidity (// in beforeswap)",
+      "id": "ghostswap_instructions_codeblock_10"
+    },
+    {
+      "label": "Pattern 3 \u2014 Async Decrypt with Permit",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L342",
+      "community": 6,
+      "norm_label": "pattern 3 \u2014 async decrypt with permit",
+      "id": "ghostswap_instructions_pattern_3_async_decrypt_with_permit"
+    },
+    {
+      "label": "code:solidity (// reveal() initiates decrypt \u2014 result comes back via callba)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L347",
+      "community": 6,
+      "norm_label": "code:solidity (// reveal() initiates decrypt \u2014 result comes back via callba)",
+      "id": "ghostswap_instructions_codeblock_11"
+    },
+    {
+      "label": "code:ts (// Frontend \u2014 after reveal() tx confirms, decrypt for view)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L364",
+      "community": 6,
+      "norm_label": "code:ts (// frontend \u2014 after reveal() tx confirms, decrypt for view)",
+      "id": "ghostswap_instructions_codeblock_12"
+    },
+    {
+      "label": "Pattern 4 \u2014 FHE Comparison (Wave 3)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L377",
+      "community": 6,
+      "norm_label": "pattern 4 \u2014 fhe comparison (wave 3)",
+      "id": "ghostswap_instructions_pattern_4_fhe_comparison_wave_3"
+    },
+    {
+      "label": "code:solidity (// afterSwap \u2014 enforce encrypted minimum)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L379",
+      "community": 6,
+      "norm_label": "code:solidity (// afterswap \u2014 enforce encrypted minimum)",
+      "id": "ghostswap_instructions_codeblock_13"
+    },
+    {
+      "label": "Block Delay \u2014 Why 15 Blocks",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L405",
+      "community": 6,
+      "norm_label": "block delay \u2014 why 15 blocks",
+      "id": "ghostswap_instructions_block_delay_why_15_blocks"
+    },
+    {
+      "label": "6. Coding Standards",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L415",
+      "community": 8,
+      "norm_label": "6. coding standards",
+      "id": "ghostswap_instructions_6_coding_standards"
+    },
+    {
+      "label": "Solidity",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L417",
+      "community": 8,
+      "norm_label": "solidity",
+      "id": "ghostswap_instructions_solidity"
+    },
+    {
+      "label": "code:solidity (// SPDX-License-Identifier: MIT)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L419",
+      "community": 8,
+      "norm_label": "code:solidity (// spdx-license-identifier: mit)",
+      "id": "ghostswap_instructions_codeblock_14"
+    },
+    {
+      "label": "Naming",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L436",
+      "community": 8,
+      "norm_label": "naming",
+      "id": "ghostswap_instructions_naming"
+    },
+    {
+      "label": "Custom Errors Over Require Strings",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L448",
+      "community": 8,
+      "norm_label": "custom errors over require strings",
+      "id": "ghostswap_instructions_custom_errors_over_require_strings"
+    },
+    {
+      "label": "code:solidity (// DO THIS)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L450",
+      "community": 8,
+      "norm_label": "code:solidity (// do this)",
+      "id": "ghostswap_instructions_codeblock_15"
+    },
+    {
+      "label": "TypeScript / Frontend",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L460",
+      "community": 8,
+      "norm_label": "typescript / frontend",
+      "id": "ghostswap_instructions_typescript_frontend"
+    },
+    {
+      "label": "Foundry Testing",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L468",
+      "community": 8,
+      "norm_label": "foundry testing",
+      "id": "ghostswap_instructions_foundry_testing"
+    },
+    {
+      "label": "code:bash (# Run all tests)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L470",
+      "community": 8,
+      "norm_label": "code:bash (# run all tests)",
+      "id": "ghostswap_instructions_codeblock_16"
+    },
+    {
+      "label": "7. User Stories",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L493",
+      "community": 9,
+      "norm_label": "7. user stories",
+      "id": "ghostswap_instructions_7_user_stories"
+    },
+    {
+      "label": "Trader \u2014 Private Swap",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L495",
+      "community": 9,
+      "norm_label": "trader \u2014 private swap",
+      "id": "ghostswap_instructions_trader_private_swap"
+    },
+    {
+      "label": "code:block17 (As a trader,)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L497",
+      "community": 9,
+      "norm_label": "code:block17 (as a trader,)",
+      "id": "ghostswap_instructions_codeblock_17"
+    },
+    {
+      "label": "Trader \u2014 Reveal Result",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L510",
+      "community": 9,
+      "norm_label": "trader \u2014 reveal result",
+      "id": "ghostswap_instructions_trader_reveal_result"
+    },
+    {
+      "label": "code:block18 (As a trader,)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L512",
+      "community": 9,
+      "norm_label": "code:block18 (as a trader,)",
+      "id": "ghostswap_instructions_codeblock_18"
+    },
+    {
+      "label": "Compliance Party \u2014 Permissioned View (Wave 2)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L524",
+      "community": 9,
+      "norm_label": "compliance party \u2014 permissioned view (wave 2)",
+      "id": "ghostswap_instructions_compliance_party_permissioned_view_wave_2"
+    },
+    {
+      "label": "code:block19 (As a compliance officer at an institution,)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L526",
+      "community": 9,
+      "norm_label": "code:block19 (as a compliance officer at an institution,)",
+      "id": "ghostswap_instructions_codeblock_19"
+    },
+    {
+      "label": "DAO Treasury Manager \u2014 Large Order (Wave 4)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L538",
+      "community": 9,
+      "norm_label": "dao treasury manager \u2014 large order (wave 4)",
+      "id": "ghostswap_instructions_dao_treasury_manager_large_order_wave_4"
+    },
+    {
+      "label": "code:block20 (As a DAO treasury manager,)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L540",
+      "community": 9,
+      "norm_label": "code:block20 (as a dao treasury manager,)",
+      "id": "ghostswap_instructions_codeblock_20"
+    },
+    {
+      "label": "8. APIs and Integrations",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L556",
+      "community": 10,
+      "norm_label": "8. apis and integrations",
+      "id": "ghostswap_instructions_8_apis_and_integrations"
+    },
+    {
+      "label": "Fhenix CoFHE Coprocessor",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L558",
+      "community": 10,
+      "norm_label": "fhenix cofhe coprocessor",
+      "id": "ghostswap_instructions_fhenix_cofhe_coprocessor"
+    },
+    {
+      "label": "Uniswap v4 PoolManager",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L577",
+      "community": 10,
+      "norm_label": "uniswap v4 poolmanager",
+      "id": "ghostswap_instructions_uniswap_v4_poolmanager"
+    },
+    {
+      "label": "@cofhe/sdk (Client SDK)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L593",
+      "community": 10,
+      "norm_label": "@cofhe/sdk (client sdk)",
+      "id": "ghostswap_instructions_cofhe_sdk_client_sdk"
+    },
+    {
+      "label": "code:ts (import { createCofheConfig, createCofheClient } from '@cofhe)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L601",
+      "community": 10,
+      "norm_label": "code:ts (import { createcofheconfig, createcofheclient } from '@cofhe)",
+      "id": "ghostswap_instructions_codeblock_21"
+    },
+    {
+      "label": "Arbiscan (Arbitrum Sepolia Explorer)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L618",
+      "community": 10,
+      "norm_label": "arbiscan (arbitrum sepolia explorer)",
+      "id": "ghostswap_instructions_arbiscan_arbitrum_sepolia_explorer"
+    },
+    {
+      "label": "code:bash (# Verify after deployment)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L622",
+      "community": 10,
+      "norm_label": "code:bash (# verify after deployment)",
+      "id": "ghostswap_instructions_codeblock_22"
+    },
+    {
+      "label": "9. Environment Variables",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L633",
+      "community": 4,
+      "norm_label": "9. environment variables",
+      "id": "ghostswap_instructions_9_environment_variables"
+    },
+    {
+      "label": "code:bash (# .env \u2014 never commit this file)",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L635",
+      "community": 4,
+      "norm_label": "code:bash (# .env \u2014 never commit this file)",
+      "id": "ghostswap_instructions_codeblock_23"
+    },
+    {
+      "label": "10. Known Issues and Wave Targets",
+      "file_type": "document",
+      "source_file": "instructions.md",
+      "source_location": "L654",
+      "community": 4,
+      "norm_label": "10. known issues and wave targets",
+      "id": "ghostswap_instructions_10_known_issues_and_wave_targets"
+    },
+    {
+      "label": "GhostSwap Frontend",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "ghostswap frontend",
+      "id": "fe_readme_ghostswap_frontend"
+    },
+    {
+      "label": "Quick start",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L5",
+      "community": 2,
+      "norm_label": "quick start",
+      "id": "fe_readme_quick_start"
+    },
+    {
+      "label": "code:bash (npm install)",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L9",
+      "community": 2,
+      "norm_label": "code:bash (npm install)",
+      "id": "fe_readme_codeblock_1"
+    },
+    {
+      "label": "code:bash (cp .env.example .env)",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L15",
+      "community": 2,
+      "norm_label": "code:bash (cp .env.example .env)",
+      "id": "fe_readme_codeblock_2"
+    },
+    {
+      "label": "code:bash (npm run dev)",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L34",
+      "community": 2,
+      "norm_label": "code:bash (npm run dev)",
+      "id": "fe_readme_codeblock_3"
+    },
+    {
+      "label": "Build",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L38",
+      "community": 2,
+      "norm_label": "build",
+      "id": "fe_readme_build"
+    },
+    {
+      "label": "code:bash (npm run build)",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L40",
+      "community": 2,
+      "norm_label": "code:bash (npm run build)",
+      "id": "fe_readme_codeblock_4"
+    },
+    {
+      "label": "Notes",
+      "file_type": "document",
+      "source_file": "fe/README.md",
+      "source_location": "L44",
+      "community": 2,
+      "norm_label": "notes",
+      "id": "fe_readme_notes"
+    },
+    {
+      "label": "fhe-mock-devrel-note.md",
+      "file_type": "document",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L1",
+      "community": 15,
+      "norm_label": "fhe-mock-devrel-note.md",
+      "id": "docs_fhe_mock_devrel_note_md"
+    },
+    {
+      "label": "GhostSwap FHE Mock Integration Notes",
+      "file_type": "document",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L1",
+      "community": 15,
+      "norm_label": "ghostswap fhe mock integration notes",
+      "id": "docs_fhe_mock_devrel_note_ghostswap_fhe_mock_integration_notes"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L3",
+      "community": 15,
+      "norm_label": "summary",
+      "id": "docs_fhe_mock_devrel_note_summary"
+    },
+    {
+      "label": "Questions For Maintainers",
+      "file_type": "document",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L8",
+      "community": 15,
+      "norm_label": "questions for maintainers",
+      "id": "docs_fhe_mock_devrel_note_questions_for_maintainers"
+    },
+    {
+      "label": "FHE AI Assistant \ud83d\udd10",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "fhe ai assistant \ud83d\udd10",
+      "id": "fhe_assistant_main_readme_fhe_ai_assistant"
+    },
+    {
+      "label": "\ud83d\ude80 Quick Start (30 seconds)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L7",
+      "community": 2,
+      "norm_label": "\ud83d\ude80 quick start (30 seconds)",
+      "id": "fhe_assistant_main_readme_quick_start_30_seconds"
+    },
+    {
+      "label": "Essential File",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L9",
+      "community": 2,
+      "norm_label": "essential file",
+      "id": "fhe_assistant_main_readme_essential_file"
+    },
+    {
+      "label": "code:block1 (Load this comprehensive reference into any AI:)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L10",
+      "community": 2,
+      "norm_label": "code:block1 (load this comprehensive reference into any ai:)",
+      "id": "fhe_assistant_main_readme_codeblock_1"
+    },
+    {
+      "label": "AI Platforms",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L15",
+      "community": 2,
+      "norm_label": "ai platforms",
+      "id": "fhe_assistant_main_readme_ai_platforms"
+    },
+    {
+      "label": "code:bash (claude \"Read the fhe-assistant/core.md file and help me buil)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L18",
+      "community": 2,
+      "norm_label": "code:bash (claude \"read the fhe-assistant/core.md file and help me buil)",
+      "id": "fhe_assistant_main_readme_codeblock_2"
+    },
+    {
+      "label": "\ud83c\udfaf Proven AI Prompts",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L25",
+      "community": 2,
+      "norm_label": "\ud83c\udfaf proven ai prompts",
+      "id": "fhe_assistant_main_readme_proven_ai_prompts"
+    },
+    {
+      "label": "\ud83d\udd11 Key Success Formula",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L39",
+      "community": 2,
+      "norm_label": "\ud83d\udd11 key success formula",
+      "id": "fhe_assistant_main_readme_key_success_formula"
+    },
+    {
+      "label": "\ud83d\udcc1 What's Inside",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L51",
+      "community": 2,
+      "norm_label": "\ud83d\udcc1 what's inside",
+      "id": "fhe_assistant_main_readme_what_s_inside"
+    },
+    {
+      "label": "code:block3 (\ud83d\udcda core.md    \u2192 Comprehensive FHE library reference (EVERYTHI)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L53",
+      "community": 2,
+      "norm_label": "code:block3 (\ud83d\udcda core.md    \u2192 comprehensive fhe library reference (everythi)",
+      "id": "fhe_assistant_main_readme_codeblock_3"
+    },
+    {
+      "label": "\ud83e\udd1d Community Resources",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L67",
+      "community": 2,
+      "norm_label": "\ud83e\udd1d community resources",
+      "id": "fhe_assistant_main_readme_community_resources"
+    },
+    {
+      "label": "core.md",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "core.md",
+      "id": "fhe_assistant_main_core_md"
+    },
+    {
+      "label": "FHE Library Reference \ud83d\udcda",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "fhe library reference \ud83d\udcda",
+      "id": "fhe_assistant_main_core_fhe_library_reference"
+    },
+    {
+      "label": "\ud83c\udfaf Quick Reference for AI",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L7",
+      "community": 1,
+      "norm_label": "\ud83c\udfaf quick reference for ai",
+      "id": "fhe_assistant_main_core_quick_reference_for_ai"
+    },
+    {
+      "label": "code:solidity (import \"@fhenixprotocol/cofhe-contracts/FHE.sol\";)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L10",
+      "community": 1,
+      "norm_label": "code:solidity (import \"@fhenixprotocol/cofhe-contracts/fhe.sol\";)",
+      "id": "fhe_assistant_main_core_codeblock_1"
+    },
+    {
+      "label": "code:txt (@fhenixprotocol/cofhe-contracts/=lib/cofhe-contracts/contrac)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L15",
+      "community": 1,
+      "norm_label": "code:txt (@fhenixprotocol/cofhe-contracts/=lib/cofhe-contracts/contrac)",
+      "id": "fhe_assistant_main_core_codeblock_2"
+    },
+    {
+      "label": "\ud83d\udd22 Encrypted Data Types",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L22",
+      "community": 1,
+      "norm_label": "\ud83d\udd22 encrypted data types",
+      "id": "fhe_assistant_main_core_encrypted_data_types"
+    },
+    {
+      "label": "**Supported Bit Lengths**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L24",
+      "community": 1,
+      "norm_label": "**supported bit lengths**",
+      "id": "fhe_assistant_main_core_supported_bit_lengths"
+    },
+    {
+      "label": "**Type Definitions**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L37",
+      "community": 1,
+      "norm_label": "**type definitions**",
+      "id": "fhe_assistant_main_core_type_definitions"
+    },
+    {
+      "label": "code:solidity (type ebool is uint256;)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L38",
+      "community": 1,
+      "norm_label": "code:solidity (type ebool is uint256;)",
+      "id": "fhe_assistant_main_core_codeblock_3"
+    },
+    {
+      "label": "\ud83d\udd27 Type Conversion Functions",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L51",
+      "community": 11,
+      "norm_label": "\ud83d\udd27 type conversion functions",
+      "id": "fhe_assistant_main_core_type_conversion_functions"
+    },
+    {
+      "label": "**From Plaintext to Encrypted**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L53",
+      "community": 11,
+      "norm_label": "**from plaintext to encrypted**",
+      "id": "fhe_assistant_main_core_from_plaintext_to_encrypted"
+    },
+    {
+      "label": "code:solidity (// From plaintext values)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L55",
+      "community": 11,
+      "norm_label": "code:solidity (// from plaintext values)",
+      "id": "fhe_assistant_main_core_codeblock_4"
+    },
+    {
+      "label": "code:solidity (// Convert plaintext to encrypted)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L68",
+      "community": 11,
+      "norm_label": "code:solidity (// convert plaintext to encrypted)",
+      "id": "fhe_assistant_main_core_codeblock_5"
+    },
+    {
+      "label": "**Between Encrypted Types (Casting)**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L74",
+      "community": 11,
+      "norm_label": "**between encrypted types (casting)**",
+      "id": "fhe_assistant_main_core_between_encrypted_types_casting"
+    },
+    {
+      "label": "code:solidity (// From ebool to other types)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L76",
+      "community": 11,
+      "norm_label": "code:solidity (// from ebool to other types)",
+      "id": "fhe_assistant_main_core_codeblock_6"
+    },
+    {
+      "label": "code:solidity (// Convert encrypted bool to encrypted uint for arithmetic)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L91",
+      "community": 11,
+      "norm_label": "code:solidity (// convert encrypted bool to encrypted uint for arithmetic)",
+      "id": "fhe_assistant_main_core_codeblock_7"
+    },
+    {
+      "label": "\u2795 Arithmetic Operations",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L97",
+      "community": 1,
+      "norm_label": "\u2795 arithmetic operations",
+      "id": "fhe_assistant_main_core_arithmetic_operations"
+    },
+    {
+      "label": "**Basic Arithmetic**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L101",
+      "community": 1,
+      "norm_label": "**basic arithmetic**",
+      "id": "fhe_assistant_main_core_basic_arithmetic"
+    },
+    {
+      "label": "code:solidity (function add(euint32 lhs, euint32 rhs) internal returns (eui)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L102",
+      "community": 1,
+      "norm_label": "code:solidity (function add(euint32 lhs, euint32 rhs) internal returns (eui)",
+      "id": "fhe_assistant_main_core_codeblock_8"
+    },
+    {
+      "label": "code:solidity (function calculateTotal(euint32 price, euint32 quantity) ext)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L111",
+      "community": 1,
+      "norm_label": "code:solidity (function calculatetotal(euint32 price, euint32 quantity) ext)",
+      "id": "fhe_assistant_main_core_codeblock_9"
+    },
+    {
+      "label": "\ud83d\udd0d Comparison Operations",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L119",
+      "community": 1,
+      "norm_label": "\ud83d\udd0d comparison operations",
+      "id": "fhe_assistant_main_core_comparison_operations"
+    },
+    {
+      "label": "**Comparison Functions**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L124",
+      "community": 1,
+      "norm_label": "**comparison functions**",
+      "id": "fhe_assistant_main_core_comparison_functions"
+    },
+    {
+      "label": "code:solidity (function checkSufficientBalance(euint32 balance, euint32 amo)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L137",
+      "community": 1,
+      "norm_label": "code:solidity (function checksufficientbalance(euint32 balance, euint32 amo)",
+      "id": "fhe_assistant_main_core_codeblock_11"
+    },
+    {
+      "label": "\ud83d\udd00 Logical Operations",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L145",
+      "community": 1,
+      "norm_label": "\ud83d\udd00 logical operations",
+      "id": "fhe_assistant_main_core_logical_operations"
+    },
+    {
+      "label": "**Boolean Logic (ebool only)**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L147",
+      "community": 1,
+      "norm_label": "**boolean logic (ebool only)**",
+      "id": "fhe_assistant_main_core_boolean_logic_ebool_only"
+    },
+    {
+      "label": "code:solidity (function and(ebool lhs, ebool rhs) internal returns (ebool))",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L148",
+      "community": 1,
+      "norm_label": "code:solidity (function and(ebool lhs, ebool rhs) internal returns (ebool))",
+      "id": "fhe_assistant_main_core_codeblock_12"
+    },
+    {
+      "label": "**Bitwise Operations (all euint types)**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L155",
+      "community": 1,
+      "norm_label": "**bitwise operations (all euint types)**",
+      "id": "fhe_assistant_main_core_bitwise_operations_all_euint_types"
+    },
+    {
+      "label": "code:solidity (function checkMultipleConditions(euint32 age, euint32 balanc)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L166",
+      "community": 1,
+      "norm_label": "code:solidity (function checkmultipleconditions(euint32 age, euint32 balanc)",
+      "id": "fhe_assistant_main_core_codeblock_14"
+    },
+    {
+      "label": "\ud83d\udd13 Decryption Methods",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L177",
+      "community": 3,
+      "norm_label": "\ud83d\udd13 decryption methods",
+      "id": "fhe_assistant_main_core_decryption_methods"
+    },
+    {
+      "label": "**\ud83d\udea8 AI Prerequisites for Decryption**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L181",
+      "community": 3,
+      "norm_label": "**\ud83d\udea8 ai prerequisites for decryption**",
+      "id": "fhe_assistant_main_core_ai_prerequisites_for_decryption"
+    },
+    {
+      "label": "**\u23f1\ufe0f Decryption Timing**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L187",
+      "community": 3,
+      "norm_label": "**\u23f1\ufe0f decryption timing**",
+      "id": "fhe_assistant_main_core_decryption_timing"
+    },
+    {
+      "label": "**\ud83d\udccb AI Transaction Flow**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L194",
+      "community": 3,
+      "norm_label": "**\ud83d\udccb ai transaction flow**",
+      "id": "fhe_assistant_main_core_ai_transaction_flow"
+    },
+    {
+      "label": "**FHE.decrypt() - Request Decryption**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L201",
+      "community": 3,
+      "norm_label": "**fhe.decrypt() - request decryption**",
+      "id": "fhe_assistant_main_core_fhe_decrypt_request_decryption"
+    },
+    {
+      "label": "code:solidity (// Available for all encrypted types)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L205",
+      "community": 3,
+      "norm_label": "code:solidity (// available for all encrypted types)",
+      "id": "fhe_assistant_main_core_codeblock_15"
+    },
+    {
+      "label": "code:solidity (function requestDecryption(euint32 encryptedValue) external )",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L218",
+      "community": 3,
+      "norm_label": "code:solidity (function requestdecryption(euint32 encryptedvalue) external )",
+      "id": "fhe_assistant_main_core_codeblock_16"
+    },
+    {
+      "label": "**FHE.getDecryptResult() - Retrieve Decrypted Value**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L230",
+      "community": 3,
+      "norm_label": "**fhe.getdecryptresult() - retrieve decrypted value**",
+      "id": "fhe_assistant_main_core_fhe_getdecryptresult_retrieve_decrypted_value"
+    },
+    {
+      "label": "code:solidity (// Returns plaintext values)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L234",
+      "community": 3,
+      "norm_label": "code:solidity (// returns plaintext values)",
+      "id": "fhe_assistant_main_core_codeblock_17"
+    },
+    {
+      "label": "code:solidity (function useDecryptedValue(euint32 encryptedValue) external )",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L247",
+      "community": 3,
+      "norm_label": "code:solidity (function usedecryptedvalue(euint32 encryptedvalue) external )",
+      "id": "fhe_assistant_main_core_codeblock_18"
+    },
+    {
+      "label": "**FHE.getDecryptResultSafe() - Safe Retrieval**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L255",
+      "community": 3,
+      "norm_label": "**fhe.getdecryptresultsafe() - safe retrieval**",
+      "id": "fhe_assistant_main_core_fhe_getdecryptresultsafe_safe_retrieval"
+    },
+    {
+      "label": "code:solidity (// Returns (value, isDecrypted) tuple)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L259",
+      "community": 3,
+      "norm_label": "code:solidity (// returns (value, isdecrypted) tuple)",
+      "id": "fhe_assistant_main_core_codeblock_19"
+    },
+    {
+      "label": "**AI Decryption Workflow Examples**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L286",
+      "community": 3,
+      "norm_label": "**ai decryption workflow examples**",
+      "id": "fhe_assistant_main_core_ai_decryption_workflow_examples"
+    },
+    {
+      "label": "code:solidity (contract DecryptionExample {)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L289",
+      "community": 3,
+      "norm_label": "code:solidity (contract decryptionexample {)",
+      "id": "fhe_assistant_main_core_codeblock_21"
+    },
+    {
+      "label": "**\ud83d\udd04 AI Common Decryption Patterns**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L332",
+      "community": 3,
+      "norm_label": "**\ud83d\udd04 ai common decryption patterns**",
+      "id": "fhe_assistant_main_core_ai_common_decryption_patterns"
+    },
+    {
+      "label": "code:solidity (function decryptIfReady(euint32 value) external view returns)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L335",
+      "community": 3,
+      "norm_label": "code:solidity (function decryptifready(euint32 value) external view returns)",
+      "id": "fhe_assistant_main_core_codeblock_23"
+    },
+    {
+      "label": "code:solidity (mapping(uint256 => bool) decryptionQueue;)",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L342",
+      "community": 3,
+      "norm_label": "code:solidity (mapping(uint256 => bool) decryptionqueue;)",
+      "id": "fhe_assistant_main_core_codeblock_24"
+    },
+    {
+      "label": "**\ud83d\udea8 AI Common Decryption Errors**",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L358",
+      "community": 3,
+      "norm_label": "**\ud83d\udea8 ai common decryption errors**",
+      "id": "fhe_assistant_main_core_ai_common_decryption_errors"
+    },
+    {
+      "label": "code:block25",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L364",
+      "community": 3,
+      "norm_label": "code:block25",
+      "id": "fhe_assistant_main_core_codeblock_25"
+    },
+    {
+      "label": "code:block41",
+      "file_type": "document",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L823",
+      "community": 3,
+      "norm_label": "code:block41",
+      "id": "fhe_assistant_main_core_codeblock_41"
     }
   ],
   "links": [
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/App.jsx",
+      "source_file": "fe/src/App.jsx",
       "source_location": "L5",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_app_jsx",
-      "_tgt": "app_app",
-      "source": "users_rishav_desktop_ghostswap_fe_src_app_jsx",
-      "target": "app_app",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "fe_src_app_jsx"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L4",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "_tgt": "landingpage_redacted",
-      "source": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "target": "landingpage_redacted",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "landingpage_redacted",
+      "target": "fe_src_landingpage_jsx"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L106",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "_tgt": "landingpage_mempoolrow",
-      "source": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "target": "landingpage_mempoolrow",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "landingpage_mempoolrow",
+      "target": "fe_src_landingpage_jsx"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
+      "source_file": "fe/src/LandingPage.jsx",
       "source_location": "L129",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "_tgt": "landingpage_reveal",
-      "source": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "target": "landingpage_reveal",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "landingpage_reveal",
+      "target": "fe_src_landingpage_jsx"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/LandingPage.jsx",
-      "source_location": "L157",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "_tgt": "landingpage_landingpage",
-      "source": "users_rishav_desktop_ghostswap_fe_src_landingpage_jsx",
-      "target": "landingpage_landingpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L55",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_tostoragekey",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_tostoragekey",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L59",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_totrackedswapstoragekey",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_totrackedswapstoragekey",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_normalizeswapids",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_normalizeswapids",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L68",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_getstoredhooknonce",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_getstoredhooknonce",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L80",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_setstoredhooknonce",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_setstoredhooknonce",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L92",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_gettrackedswapids",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_gettrackedswapids",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L103",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_settrackedswapids",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_settrackedswapids",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L123",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_addtrackedswapid",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_addtrackedswapid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L127",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_getsqrtpricelimitx96",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_getsqrtpricelimitx96",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L131",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_computepoolid",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_computepoolid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L137",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_mapsubmiterror",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_mapsubmiterror",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L152",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_noise",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_noise",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L165",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_tokenselector",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_tokenselector",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L228",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_statusbadge",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_statusbadge",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L249",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_mempoolcomparison",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_mempoolcomparison",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L297",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_transactionhistory",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_transactionhistory",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L365",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_pendingrevealpanel",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_pendingrevealpanel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L426",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_ghostswap",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_ghostswap",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L1353",
-      "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "_tgt": "ghostswap_revealedview",
-      "source": "users_rishav_desktop_ghostswap_fe_src_ghostswap_jsx",
-      "target": "ghostswap_revealedview",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "ghostswap_tostoragekey",
+      "target": "ghostswap_ghostswap"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L60",
       "weight": 1.0,
-      "_src": "ghostswap_totrackedswapstoragekey",
-      "_tgt": "ghostswap_tostoragekey",
+      "confidence_score": 1.0,
       "source": "ghostswap_tostoragekey",
-      "target": "ghostswap_totrackedswapstoragekey",
-      "confidence_score": 1.0
+      "target": "ghostswap_totrackedswapstoragekey"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L73",
-      "weight": 1.0,
-      "_src": "ghostswap_getstoredhooknonce",
-      "_tgt": "ghostswap_tostoragekey",
-      "source": "ghostswap_tostoragekey",
-      "target": "ghostswap_getstoredhooknonce",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L85",
       "weight": 1.0,
-      "_src": "ghostswap_setstoredhooknonce",
-      "_tgt": "ghostswap_tostoragekey",
+      "confidence_score": 1.0,
       "source": "ghostswap_tostoragekey",
-      "target": "ghostswap_setstoredhooknonce",
-      "confidence_score": 1.0
+      "target": "ghostswap_getstoredhooknonce"
     },
     {
-      "relation": "calls",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L97",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L59",
       "weight": 1.0,
-      "_src": "ghostswap_gettrackedswapids",
-      "_tgt": "ghostswap_totrackedswapstoragekey",
+      "confidence_score": 1.0,
       "source": "ghostswap_totrackedswapstoragekey",
-      "target": "ghostswap_gettrackedswapids",
-      "confidence_score": 1.0
+      "target": "ghostswap_ghostswap"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L108",
       "weight": 1.0,
-      "_src": "ghostswap_settrackedswapids",
-      "_tgt": "ghostswap_totrackedswapstoragekey",
+      "confidence_score": 1.0,
       "source": "ghostswap_totrackedswapstoragekey",
-      "target": "ghostswap_settrackedswapids",
-      "confidence_score": 1.0
+      "target": "ghostswap_gettrackedswapids"
     },
     {
-      "relation": "calls",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L97",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L63",
       "weight": 1.0,
-      "_src": "ghostswap_gettrackedswapids",
-      "_tgt": "ghostswap_normalizeswapids",
+      "confidence_score": 1.0,
       "source": "ghostswap_normalizeswapids",
-      "target": "ghostswap_gettrackedswapids",
-      "confidence_score": 1.0
+      "target": "ghostswap_ghostswap"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L109",
       "weight": 1.0,
-      "_src": "ghostswap_settrackedswapids",
-      "_tgt": "ghostswap_normalizeswapids",
+      "confidence_score": 1.0,
       "source": "ghostswap_normalizeswapids",
-      "target": "ghostswap_settrackedswapids",
-      "confidence_score": 1.0
+      "target": "ghostswap_gettrackedswapids"
     },
     {
-      "relation": "calls",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
-      "source_location": "L124",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L80",
       "weight": 1.0,
-      "_src": "ghostswap_addtrackedswapid",
-      "_tgt": "ghostswap_gettrackedswapids",
+      "confidence_score": 1.0,
+      "source": "ghostswap_getstoredhooknonce",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ghostswap_gettrackedswapids",
-      "target": "ghostswap_addtrackedswapid",
-      "confidence_score": 1.0
+      "target": "ghostswap_ghostswap"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L124",
       "weight": 1.0,
-      "_src": "ghostswap_addtrackedswapid",
-      "_tgt": "ghostswap_settrackedswapids",
-      "source": "ghostswap_settrackedswapids",
-      "target": "ghostswap_addtrackedswapid",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "ghostswap_gettrackedswapids",
+      "target": "ghostswap_addtrackedswapid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_addtrackedswapid",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L127",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_getsqrtpricelimitx96",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L131",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_computepoolid",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L137",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_mapsubmiterror",
+      "target": "ghostswap_ghostswap"
     },
     {
       "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L138",
       "weight": 1.0,
-      "_src": "ghostswap_mapsubmiterror",
-      "_tgt": "usecofhe_mapcofheerror",
       "source": "ghostswap_mapsubmiterror",
       "target": "usecofhe_mapcofheerror"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L152",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_noise",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L165",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_tokenselector",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L228",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_statusbadge",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L249",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_mempoolcomparison",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L297",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_transactionhistory",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L365",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_pendingrevealpanel",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/GhostSwap.jsx",
+      "source_location": "L1353",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_revealedview",
+      "target": "ghostswap_ghostswap"
+    },
+    {
       "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L427",
       "weight": 1.0,
-      "_src": "ghostswap_ghostswap",
-      "_tgt": "contracts_getexpectedchainid",
       "source": "ghostswap_ghostswap",
       "target": "contracts_getexpectedchainid"
     },
     {
       "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L1078",
       "weight": 1.0,
-      "_src": "ghostswap_ghostswap",
-      "_tgt": "format_shortaddress",
       "source": "ghostswap_ghostswap",
       "target": "format_shortaddress"
     },
     {
       "relation": "calls",
+      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/GhostSwap.jsx",
+      "source_file": "fe/src/GhostSwap.jsx",
       "source_location": "L1260",
       "weight": 1.0,
-      "_src": "ghostswap_ghostswap",
-      "_tgt": "contracts_chainnamebyid",
       "source": "ghostswap_ghostswap",
       "target": "contracts_chainnamebyid"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "ghostswap_ghostswap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_what_ghostswap_actually_is"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_the_problem_and_why_it_s_worth_billions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_the_architecture_vault_hook"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_why_fhe_and_why_we_own_the_trade_off"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L155",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_how_the_vault_generates_tvl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L199",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_realistic_competition_and_positioning"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L215",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_hook_lifecycle_state_machine"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L229",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_wave_roadmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L279",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_current_status"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L296",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_tech_stack"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L310",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L344",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_resources"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L353",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_ghostswap",
+      "target": "ghostswap_readme_why_this_becomes_a_protocol_not_just_a_hook"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/src/config/contracts.js",
       "source_location": "L20",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_config_contracts_js",
-      "_tgt": "contracts_getexpectedchainid",
-      "source": "users_rishav_desktop_ghostswap_fe_src_config_contracts_js",
-      "target": "contracts_getexpectedchainid",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "contracts_getexpectedchainid",
+      "target": "fe_src_config_contracts_js"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/config/contracts.js",
+      "source_file": "fe/src/config/contracts.js",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_config_contracts_js",
-      "_tgt": "contracts_chainnamebyid",
-      "source": "users_rishav_desktop_ghostswap_fe_src_config_contracts_js",
-      "target": "contracts_chainnamebyid",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "contracts_chainnamebyid",
+      "target": "fe_src_config_contracts_js"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L8",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "_tgt": "usecofhe_normalizeencryptedinput",
-      "source": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "target": "usecofhe_normalizeencryptedinput",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "usecofhe_normalizeencryptedinput",
+      "target": "fe_src_hooks_usecofhe_js"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L24",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "_tgt": "usecofhe_encryptminout",
-      "source": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "target": "usecofhe_encryptminout",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "usecofhe_encryptminout",
+      "target": "fe_src_hooks_usecofhe_js"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L63",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "_tgt": "usecofhe_mapcofheerror",
-      "source": "users_rishav_desktop_ghostswap_fe_src_hooks_usecofhe_js",
-      "target": "usecofhe_mapcofheerror",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "usecofhe_mapcofheerror",
+      "target": "fe_src_hooks_usecofhe_js"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/hooks/useCofhe.js",
+      "source_file": "fe/src/hooks/useCofhe.js",
       "source_location": "L60",
       "weight": 1.0,
-      "_src": "usecofhe_encryptminout",
-      "_tgt": "usecofhe_normalizeencryptedinput",
+      "confidence_score": 1.0,
       "source": "usecofhe_normalizeencryptedinput",
-      "target": "usecofhe_encryptminout",
-      "confidence_score": 1.0
+      "target": "usecofhe_encryptminout"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js",
+      "source_file": "fe/src/lib/format.js",
       "source_location": "L1",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_lib_format_js",
-      "_tgt": "format_shortaddress",
-      "source": "users_rishav_desktop_ghostswap_fe_src_lib_format_js",
-      "target": "format_shortaddress",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "format_shortaddress",
+      "target": "fe_src_lib_format_js"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/Users/rishav/Desktop/GhostSwap/fe/src/lib/format.js",
+      "source_file": "fe/src/lib/format.js",
       "source_location": "L7",
       "weight": 1.0,
-      "_src": "users_rishav_desktop_ghostswap_fe_src_lib_format_js",
-      "_tgt": "format_tonumbersafe",
-      "source": "users_rishav_desktop_ghostswap_fe_src_lib_format_js",
-      "target": "format_tonumbersafe",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "format_tonumbersafe",
+      "target": "fe_src_lib_format_js"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "fe_readme_ghostswap_frontend"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "fhe_assistant_main_readme_fhe_ai_assistant"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_the_problem_and_why_it_s_worth_billions",
+      "target": "ghostswap_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_the_architecture_vault_hook",
+      "target": "ghostswap_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_the_architecture_vault_hook",
+      "target": "ghostswap_readme_why_this_is_defensible"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_why_not_zk_or_tee",
+      "target": "ghostswap_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L161",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_the_flywheel",
+      "target": "ghostswap_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_why_fhe_and_why_we_own_the_trade_off",
+      "target": "ghostswap_readme_why_not_zk_or_tee"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_why_fhe_and_why_we_own_the_trade_off",
+      "target": "ghostswap_readme_the_honest_fhe_trade_off"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_how_the_vault_generates_tvl",
+      "target": "ghostswap_readme_the_flywheel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L175",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_how_the_vault_generates_tvl",
+      "target": "ghostswap_readme_who_deposits_and_why"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L186",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_how_the_vault_generates_tvl",
+      "target": "ghostswap_readme_realistic_tvl_scaling"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L217",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_hook_lifecycle_state_machine",
+      "target": "ghostswap_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L231",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_wave_roadmap",
+      "target": "ghostswap_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L312",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_setup",
+      "target": "ghostswap_readme_codeblock_7"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L329",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_setup",
+      "target": "ghostswap_readme_environment_variables"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L331",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_readme_environment_variables",
+      "target": "ghostswap_readme_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_md",
+      "target": "ghostswap_agents_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "instructions_md",
+      "target": "ghostswap_instructions_ghostswap_instructions_md"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_1_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_2_tech_stack"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_3_sdk_migration_critical_context"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L230",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_4_project_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L283",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_5_fhe_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L415",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_6_coding_standards"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L493",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_7_user_stories"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L556",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_8_apis_and_integrations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L633",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_9_environment_variables"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L654",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_ghostswap_instructions_md",
+      "target": "ghostswap_instructions_10_known_issues_and_wave_targets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_1_overview",
+      "target": "ghostswap_instructions_project_goal"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_1_overview",
+      "target": "ghostswap_instructions_problem_statement"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_1_overview",
+      "target": "ghostswap_instructions_core_fhe_functionality"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_2_tech_stack",
+      "target": "ghostswap_instructions_smart_contracts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_2_tech_stack",
+      "target": "ghostswap_instructions_frontend"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_2_tech_stack",
+      "target": "ghostswap_instructions_networks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_3_sdk_migration_critical_context",
+      "target": "ghostswap_instructions_why_the_sdk_changed"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_3_sdk_migration_critical_context",
+      "target": "ghostswap_instructions_installation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_3_sdk_migration_critical_context",
+      "target": "ghostswap_instructions_migration_reference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_installation",
+      "target": "ghostswap_instructions_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_initialization"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L128",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_encrypting_inputs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_decrypting_for_ui_view"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L164",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_decrypting_for_onchain_publishing_new_not_in_cofhejs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L177",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_permits"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L188",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_error_handling"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_type_renames"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L218",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_migration_reference",
+      "target": "ghostswap_instructions_import_path_changes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_initialization",
+      "target": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_encrypting_inputs",
+      "target": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L150",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_decrypting_for_ui_view",
+      "target": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_permits",
+      "target": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L190",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_error_handling",
+      "target": "ghostswap_instructions_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_decrypting_for_onchain_publishing_new_not_in_cofhejs",
+      "target": "ghostswap_instructions_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_4_project_structure",
+      "target": "ghostswap_instructions_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L266",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_4_project_structure",
+      "target": "ghostswap_instructions_key_files_explained"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L285",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_5_fhe_patterns",
+      "target": "ghostswap_instructions_pattern_1_encrypt_before_send"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L311",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_5_fhe_patterns",
+      "target": "ghostswap_instructions_pattern_2_store_encrypted_onchain"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L342",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_5_fhe_patterns",
+      "target": "ghostswap_instructions_pattern_3_async_decrypt_with_permit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L377",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_5_fhe_patterns",
+      "target": "ghostswap_instructions_pattern_4_fhe_comparison_wave_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L405",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_5_fhe_patterns",
+      "target": "ghostswap_instructions_block_delay_why_15_blocks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L290",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_pattern_1_encrypt_before_send",
+      "target": "ghostswap_instructions_codeblock_9"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L313",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_pattern_2_store_encrypted_onchain",
+      "target": "ghostswap_instructions_codeblock_10"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L347",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_pattern_3_async_decrypt_with_permit",
+      "target": "ghostswap_instructions_codeblock_11"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L364",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_pattern_3_async_decrypt_with_permit",
+      "target": "ghostswap_instructions_codeblock_12"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L379",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_pattern_4_fhe_comparison_wave_3",
+      "target": "ghostswap_instructions_codeblock_13"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L417",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_6_coding_standards",
+      "target": "ghostswap_instructions_solidity"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L436",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_6_coding_standards",
+      "target": "ghostswap_instructions_naming"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L448",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_6_coding_standards",
+      "target": "ghostswap_instructions_custom_errors_over_require_strings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L460",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_6_coding_standards",
+      "target": "ghostswap_instructions_typescript_frontend"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L468",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_6_coding_standards",
+      "target": "ghostswap_instructions_foundry_testing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L419",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_solidity",
+      "target": "ghostswap_instructions_codeblock_14"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L450",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_custom_errors_over_require_strings",
+      "target": "ghostswap_instructions_codeblock_15"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L470",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_foundry_testing",
+      "target": "ghostswap_instructions_codeblock_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L495",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_7_user_stories",
+      "target": "ghostswap_instructions_trader_private_swap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L510",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_7_user_stories",
+      "target": "ghostswap_instructions_trader_reveal_result"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L524",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_7_user_stories",
+      "target": "ghostswap_instructions_compliance_party_permissioned_view_wave_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L538",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_7_user_stories",
+      "target": "ghostswap_instructions_dao_treasury_manager_large_order_wave_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L497",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_trader_private_swap",
+      "target": "ghostswap_instructions_codeblock_17"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L512",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_trader_reveal_result",
+      "target": "ghostswap_instructions_codeblock_18"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L526",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_compliance_party_permissioned_view_wave_2",
+      "target": "ghostswap_instructions_codeblock_19"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L540",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_dao_treasury_manager_large_order_wave_4",
+      "target": "ghostswap_instructions_codeblock_20"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L558",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_8_apis_and_integrations",
+      "target": "ghostswap_instructions_fhenix_cofhe_coprocessor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L577",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_8_apis_and_integrations",
+      "target": "ghostswap_instructions_uniswap_v4_poolmanager"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L593",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_8_apis_and_integrations",
+      "target": "ghostswap_instructions_cofhe_sdk_client_sdk"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L618",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_8_apis_and_integrations",
+      "target": "ghostswap_instructions_arbiscan_arbitrum_sepolia_explorer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L601",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_cofhe_sdk_client_sdk",
+      "target": "ghostswap_instructions_codeblock_21"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L622",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_arbiscan_arbitrum_sepolia_explorer",
+      "target": "ghostswap_instructions_codeblock_22"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "instructions.md",
+      "source_location": "L635",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ghostswap_instructions_9_environment_variables",
+      "target": "ghostswap_instructions_codeblock_23"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_ghostswap_frontend",
+      "target": "fe_readme_quick_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_ghostswap_frontend",
+      "target": "fe_readme_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_ghostswap_frontend",
+      "target": "fe_readme_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_quick_start",
+      "target": "fe_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_quick_start",
+      "target": "fe_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_quick_start",
+      "target": "fe_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fe/README.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fe_readme_build",
+      "target": "fe_readme_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_fhe_mock_devrel_note_md",
+      "target": "docs_fhe_mock_devrel_note_ghostswap_fhe_mock_integration_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_fhe_mock_devrel_note_ghostswap_fhe_mock_integration_notes",
+      "target": "docs_fhe_mock_devrel_note_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/fhe-mock-devrel-note.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_fhe_mock_devrel_note_ghostswap_fhe_mock_integration_notes",
+      "target": "docs_fhe_mock_devrel_note_questions_for_maintainers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "target": "fhe_assistant_main_readme_quick_start_30_seconds"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "target": "fhe_assistant_main_readme_proven_ai_prompts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "target": "fhe_assistant_main_readme_key_success_formula"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "target": "fhe_assistant_main_readme_what_s_inside"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "target": "fhe_assistant_main_readme_community_resources"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_quick_start_30_seconds",
+      "target": "fhe_assistant_main_readme_essential_file"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_quick_start_30_seconds",
+      "target": "fhe_assistant_main_readme_ai_platforms"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_essential_file",
+      "target": "fhe_assistant_main_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_ai_platforms",
+      "target": "fhe_assistant_main_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/README.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_readme_what_s_inside",
+      "target": "fhe_assistant_main_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_md",
+      "target": "fhe_assistant_main_core_fhe_library_reference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_quick_reference_for_ai"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_encrypted_data_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_type_conversion_functions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_arithmetic_operations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L119",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_comparison_operations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L145",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_logical_operations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L177",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_library_reference",
+      "target": "fhe_assistant_main_core_decryption_methods"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_quick_reference_for_ai",
+      "target": "fhe_assistant_main_core_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_quick_reference_for_ai",
+      "target": "fhe_assistant_main_core_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_encrypted_data_types",
+      "target": "fhe_assistant_main_core_supported_bit_lengths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_encrypted_data_types",
+      "target": "fhe_assistant_main_core_type_definitions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_type_definitions",
+      "target": "fhe_assistant_main_core_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_type_conversion_functions",
+      "target": "fhe_assistant_main_core_from_plaintext_to_encrypted"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_type_conversion_functions",
+      "target": "fhe_assistant_main_core_between_encrypted_types_casting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_from_plaintext_to_encrypted",
+      "target": "fhe_assistant_main_core_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_from_plaintext_to_encrypted",
+      "target": "fhe_assistant_main_core_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_between_encrypted_types_casting",
+      "target": "fhe_assistant_main_core_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_between_encrypted_types_casting",
+      "target": "fhe_assistant_main_core_codeblock_7"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L101",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_arithmetic_operations",
+      "target": "fhe_assistant_main_core_basic_arithmetic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_basic_arithmetic",
+      "target": "fhe_assistant_main_core_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_basic_arithmetic",
+      "target": "fhe_assistant_main_core_codeblock_9"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L125",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_comparison_functions",
+      "target": "fhe_assistant_main_core_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_bitwise_operations_all_euint_types",
+      "target": "fhe_assistant_main_core_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_comparison_operations",
+      "target": "fhe_assistant_main_core_comparison_functions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_comparison_functions",
+      "target": "fhe_assistant_main_core_codeblock_11"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L147",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_logical_operations",
+      "target": "fhe_assistant_main_core_boolean_logic_ebool_only"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L155",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_logical_operations",
+      "target": "fhe_assistant_main_core_bitwise_operations_all_euint_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_boolean_logic_ebool_only",
+      "target": "fhe_assistant_main_core_codeblock_12"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_bitwise_operations_all_euint_types",
+      "target": "fhe_assistant_main_core_codeblock_14"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_ai_prerequisites_for_decryption"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L187",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_decryption_timing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L194",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_ai_transaction_flow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L201",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_fhe_decrypt_request_decryption"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L230",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_fhe_getdecryptresult_retrieve_decrypted_value"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_fhe_getdecryptresultsafe_safe_retrieval"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L286",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_ai_decryption_workflow_examples"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L332",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_ai_common_decryption_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L358",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_decryption_methods",
+      "target": "fhe_assistant_main_core_ai_common_decryption_errors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L205",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_decrypt_request_decryption",
+      "target": "fhe_assistant_main_core_codeblock_15"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L218",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_decrypt_request_decryption",
+      "target": "fhe_assistant_main_core_codeblock_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L272",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_getdecryptresultsafe_safe_retrieval",
+      "target": "fhe_assistant_main_core_codeblock_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L325",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_decryption_workflow_examples",
+      "target": "fhe_assistant_main_core_codeblock_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L234",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_getdecryptresult_retrieve_decrypted_value",
+      "target": "fhe_assistant_main_core_codeblock_17"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_getdecryptresult_retrieve_decrypted_value",
+      "target": "fhe_assistant_main_core_codeblock_18"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L259",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_fhe_getdecryptresultsafe_safe_retrieval",
+      "target": "fhe_assistant_main_core_codeblock_19"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_decryption_workflow_examples",
+      "target": "fhe_assistant_main_core_codeblock_21"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L335",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_common_decryption_patterns",
+      "target": "fhe_assistant_main_core_codeblock_23"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L342",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_common_decryption_patterns",
+      "target": "fhe_assistant_main_core_codeblock_24"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L835",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_common_decryption_errors",
+      "target": "fhe_assistant_main_core_codeblock_25"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fhe-assistant-main/core.md",
+      "source_location": "L823",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fhe_assistant_main_core_ai_common_decryption_errors",
+      "target": "fhe_assistant_main_core_codeblock_41"
     }
   ],
-  "hyperedges": []
+  "hyperedges": [],
+  "built_at_commit": "4dcd978e269ed36110afc6bbd9bf4fb74ed172bc"
 }

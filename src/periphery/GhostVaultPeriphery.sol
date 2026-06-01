@@ -5,6 +5,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import {IGhostVault} from "../interface/IGhostVault.sol";
+import {IPostSettleReveal} from "../interface/IPostSettleReveal.sol";
 
 /// @title GhostVaultPeriphery
 /// @notice Lightweight periphery that queues and executes router call intents on behalf of the vault
@@ -19,6 +20,7 @@ contract GhostVaultPeriphery {
         uint256 queuedAtBlock; // block when queued
         uint256 notBeforeBlock; // earliest block allowed to execute
         uint256 deadline; // optional unix timestamp deadline for execution (0 = no deadline)
+        uint256 swapId; // Wave 4: swapId for auction gating (0 = no auction gating)
         bytes routerCallData; // calldata forwarded to `swapRouter` on execute
         bool executed; // has the intent been executed
         bool cancelled; // has the intent been cancelled
@@ -27,6 +29,7 @@ contract GhostVaultPeriphery {
     // Configuration
     address public immutable swapRouter; // contract that actually executes router semantics
     address public immutable vault; // paired vault address (used for auth checks)
+    address public immutable hook; // paired hook address (used for auction gating)
     address public owner; // periphery owner
 
     // Intent queue
@@ -42,6 +45,7 @@ contract GhostVaultPeriphery {
     error IntentTooEarly(uint256 intentId, uint256 notBeforeBlock, uint256 currentBlock);
     error IntentExpired(uint256 intentId, uint256 deadline, uint256 currentTimestamp);
     error NativeTransferFailed();
+    error AuctionWinnerMismatch(uint256 swapId, address winner, address caller);
 
     event OwnerSet(address indexed owner);
     event IntentQueued(
@@ -68,12 +72,16 @@ contract GhostVaultPeriphery {
 
     /// @param _swapRouter Router contract used to execute queued calldata
     /// @param _vault Paired `GhostVault` address used for auth checks
+    /// @param _hook Paired `PostSettleRevealHook` address used for auction gating (Wave 4)
     /// @param _owner Initial owner of the periphery
-    constructor(address _swapRouter, address _vault, address _owner) {
-        if (_swapRouter == address(0) || _vault == address(0) || _owner == address(0)) revert ZeroAddress();
+    constructor(address _swapRouter, address _vault, address _hook, address _owner) {
+        if (_swapRouter == address(0) || _vault == address(0) || _hook == address(0) || _owner == address(0)) {
+            revert ZeroAddress();
+        }
 
         swapRouter = _swapRouter;
         vault = _vault;
+        hook = _hook;
         owner = _owner;
 
         emit OwnerSet(_owner);
@@ -83,7 +91,8 @@ contract GhostVaultPeriphery {
 
     /// @notice Queue a router call to be executed later by an authorized controller
     /// @dev `notBeforeBlock` can delay execution until a specific block. `deadline` is optional timestamp.
-    function queueIntent(bytes calldata routerCallData, uint256 notBeforeBlock, uint256 deadline)
+    ///      For Wave 4 auction-bound intents, pass `swapId` to enable winner-only execution.
+    function queueIntent(bytes calldata routerCallData, uint256 notBeforeBlock, uint256 deadline, uint256 swapId)
         external
         onlyAuthorizedController
         returns (uint256 intentId)
@@ -99,6 +108,7 @@ contract GhostVaultPeriphery {
             queuedAtBlock: block.number,
             notBeforeBlock: notBeforeBlock,
             deadline: deadline,
+            swapId: swapId,
             routerCallData: routerCallData,
             executed: false,
             cancelled: false
@@ -109,6 +119,7 @@ contract GhostVaultPeriphery {
 
     /// @notice Execute a previously queued intent
     /// @dev Delegates call to `swapRouter` preserving `msg.value`. Reverts with router error on failure.
+    ///      For Wave 4 auction-bound intents, enforces that only the auction winner can execute.
     function executeIntent(uint256 intentId)
         external
         payable
@@ -123,6 +134,14 @@ contract GhostVaultPeriphery {
         }
         if (intent.deadline != 0 && block.timestamp > intent.deadline) {
             revert IntentExpired(intentId, intent.deadline, block.timestamp);
+        }
+
+        // Wave 4: Enforce auction winner-only execution if swapId is set
+        if (intent.swapId != 0) {
+            (bool bound, address winner,) = IPostSettleReveal(hook).getAuctionExecutionBinding(intent.swapId);
+            if (bound && winner != address(0) && msg.sender != winner) {
+                revert AuctionWinnerMismatch(intent.swapId, winner, msg.sender);
+            }
         }
 
         intent.executed = true;

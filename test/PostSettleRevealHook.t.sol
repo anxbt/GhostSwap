@@ -20,13 +20,14 @@ import {CoFheTest} from "@fhenixprotocol/cofhe-foundry-mocks/CoFheTest.sol";
 import {PostSettleRevealHook} from "../src/hooks/PostSettleRevealHook.sol";
 import {IPostSettleReveal} from "../src/interface/IPostSettleReveal.sol";
 import {GhostVault} from "../src/GhostVault.sol";
+import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 contract PostSettleRevealHookHarness is PostSettleRevealHook {
     
     //Wraps real hook with exposed internals for direct unit testing.
 
-    constructor(IPoolManager manager, uint256 revealDelay, address _owner)
-        PostSettleRevealHook(manager, revealDelay, _owner)
+    constructor(IPoolManager manager, uint256 revealDelay, address _owner, address _cofheVerifier)
+        PostSettleRevealHook(manager, revealDelay, _owner, _cofheVerifier)
     {}
 
     function exposedBeforeSwap(address sender, PoolKey calldata key, SwapParams calldata params, bytes calldata hookData)
@@ -96,6 +97,10 @@ contract PostSettleRevealHookTest is Test {
         uint256 bidCount
     );
 
+    event SwapEmergencyResolved(uint256 indexed swapId, address indexed caller, string reason);
+    event AuctionCancelled(uint256 indexed swapId, address indexed caller);
+    event DecryptResultPublished(bytes32 indexed ctHash, uint128 decryptedValue);
+
     CoFheTest internal cft;
     PostSettleRevealHookHarness internal hook;
     MockERC20 internal vaultAsset;
@@ -108,10 +113,13 @@ contract PostSettleRevealHookTest is Test {
     address internal solverA = makeAddr("solverA");
     address internal solverB = makeAddr("solverB");
     address internal solverC = makeAddr("solverC");
+    uint256 internal cofheVerifierPk = uint256(keccak256("cofhe-verifier"));
+    address internal cofheVerifier;
 
     function setUp() public {
         cft = new CoFheTest(false);
         trader = vm.addr(traderPk);
+        cofheVerifier = vm.addr(cofheVerifierPk);
 
         address flags = address(
             uint160(
@@ -119,7 +127,7 @@ contract PostSettleRevealHookTest is Test {
             ) ^ (0x5555 << 144)
         );
 
-        bytes memory constructorArgs = abi.encode(IPoolManager(address(this)), REVEAL_DELAY, address(this));
+        bytes memory constructorArgs = abi.encode(IPoolManager(address(this)), REVEAL_DELAY, address(this), cofheVerifier);
         deployCodeTo("PostSettleRevealHook.t.sol:PostSettleRevealHookHarness", constructorArgs, flags);
         hook = PostSettleRevealHookHarness(flags);
 
@@ -446,5 +454,437 @@ contract PostSettleRevealHookTest is Test {
         InEuint128 memory encryptedBid = cft.createInEuint128(bidAmountOut, solver);
         hook.submitSolverBid(swapId, encryptedBid);
         vm.stopPrank();
+    }
+
+    // ===== Emergency Resolution Tests =====
+
+    function testSetEmergencyDelays_ownerUpdatesValues() public {
+        // Test contract is the hook owner (deployed with address(this) as owner).
+        vm.expectEmit(false, false, false, true, address(hook));
+        emit IPostSettleReveal.EmergencyDelaysUpdated(5, 10, 3);
+        hook.setEmergencyDelays(5, 10, 3);
+
+        assertEq(hook.CANCEL_DELAY_BLOCKS(), 5);
+        assertEq(hook.FALLBACK_DELAY_BLOCKS(), 10);
+        assertEq(hook.AUCTION_TIMEOUT_BLOCKS(), 3);
+    }
+
+    function testSetEmergencyDelays_nonOwnerReverts() public {
+        vm.prank(unauthorized);
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.Unauthorized.selector, unauthorized));
+        hook.setEmergencyDelays(5, 10, 3);
+    }
+
+    function testSetEmergencyDelays_shortensCancelWindow() public {
+        // Shortening the delay lets cancel succeed far sooner — the live-demo mechanism.
+        hook.setEmergencyDelays(5, 10, 3);
+
+        uint256 swapId = _captureIntent(9e5, 150);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        vm.roll(createdAtBlock + 5);
+
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+
+        (, , , , IPostSettleReveal.SwapState state) = hook.getSwapIntent(swapId);
+        assertEq(uint256(state), uint256(IPostSettleReveal.SwapState.EmergencyResolved));
+    }
+
+    function testCancelStuckSwap_beforeDelay_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 100);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        uint256 cancelReadyBlock = createdAtBlock + hook.CANCEL_DELAY_BLOCKS();
+
+        vm.roll(cancelReadyBlock - 1);
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IPostSettleReveal.CancelDelayNotElapsed.selector,
+                swapId,
+                cancelReadyBlock,
+                cancelReadyBlock - 1
+            )
+        );
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+    }
+
+    function testCancelStuckSwap_afterDelay_succeeds() public {
+        uint256 swapId = _captureIntent(9e5, 101);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        uint256 cancelReadyBlock = createdAtBlock + hook.CANCEL_DELAY_BLOCKS();
+
+        vm.roll(cancelReadyBlock);
+
+        vm.expectEmit(true, true, false, false, address(hook));
+        emit SwapEmergencyResolved(swapId, trader, "cancel");
+
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+
+        (, , , , IPostSettleReveal.SwapState finalState) = hook.getSwapIntent(swapId);
+        assertEq(uint256(finalState), uint256(IPostSettleReveal.SwapState.EmergencyResolved));
+    }
+
+    function testCancelStuckSwap_wrongCaller_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 102);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        vm.roll(createdAtBlock + hook.CANCEL_DELAY_BLOCKS());
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.Unauthorized.selector, unauthorized));
+        vm.prank(unauthorized);
+        hook.cancelStuckSwap(swapId);
+    }
+
+    function testCancelStuckSwap_alreadyRevealed_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 103);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 settledAtBlock, uint256 readyBlock) = hook.getSettlementRecord(swapId);
+        vm.roll(readyBlock);
+        vm.warp(block.timestamp + 11);
+
+        vm.prank(trader);
+        hook.revealSwapDetails(swapId);
+
+        vm.roll(settledAtBlock + hook.CANCEL_DELAY_BLOCKS());
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.AlreadyRevealed.selector, swapId));
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+    }
+
+    function testCancelStuckSwap_doubleCancel_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 104);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        vm.roll(createdAtBlock + hook.CANCEL_DELAY_BLOCKS());
+
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.SwapAlreadyEmergencyResolved.selector, swapId));
+        vm.prank(trader);
+        hook.cancelStuckSwap(swapId);
+    }
+
+    function testAutoReleaseStuckSwap_beforeDelay_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 200);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        uint256 fallbackReadyBlock = createdAtBlock + hook.FALLBACK_DELAY_BLOCKS();
+
+        vm.roll(fallbackReadyBlock - 1);
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IPostSettleReveal.FallbackDelayNotElapsed.selector,
+                swapId,
+                fallbackReadyBlock,
+                fallbackReadyBlock - 1
+            )
+        );
+        vm.prank(unauthorized);
+        hook.autoReleaseStuckSwap(swapId);
+    }
+
+    function testAutoReleaseStuckSwap_afterDelay_succeeds() public {
+        uint256 swapId = _captureIntent(9e5, 201);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        uint256 fallbackReadyBlock = createdAtBlock + hook.FALLBACK_DELAY_BLOCKS();
+
+        vm.roll(fallbackReadyBlock);
+
+        vm.expectEmit(true, true, false, false, address(hook));
+        emit SwapEmergencyResolved(swapId, unauthorized, "auto_release");
+
+        vm.prank(unauthorized);
+        hook.autoReleaseStuckSwap(swapId);
+
+        (, , , , IPostSettleReveal.SwapState finalState) = hook.getSwapIntent(swapId);
+        assertEq(uint256(finalState), uint256(IPostSettleReveal.SwapState.EmergencyResolved));
+    }
+
+    function testAutoReleaseStuckSwap_anyoneCanCall() public {
+        uint256 swapId = _captureIntent(9e5, 202);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        vm.roll(createdAtBlock + hook.FALLBACK_DELAY_BLOCKS());
+
+        vm.prank(makeAddr("anyone"));
+        hook.autoReleaseStuckSwap(swapId);
+
+        (, , , , IPostSettleReveal.SwapState finalState) = hook.getSwapIntent(swapId);
+        assertEq(uint256(finalState), uint256(IPostSettleReveal.SwapState.EmergencyResolved));
+    }
+
+    function testAutoReleaseStuckSwap_doubleRelease_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 203);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        (, , , , uint256 createdAtBlock, ) = hook.getSettlementRecord(swapId);
+        vm.roll(createdAtBlock + hook.FALLBACK_DELAY_BLOCKS());
+
+        vm.prank(unauthorized);
+        hook.autoReleaseStuckSwap(swapId);
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.SwapAlreadyEmergencyResolved.selector, swapId));
+        vm.prank(unauthorized);
+        hook.autoReleaseStuckSwap(swapId);
+    }
+
+    function testCancelStuckAuction_beforeTimeout_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 300);
+        _submitSolverBid(swapId, solverA, 910_000);
+        hook.queueSolverAuction(swapId);
+
+        IPostSettleReveal.SolverAuction memory auction = hook.getSolverAuction(swapId);
+        uint256 auctionTimeoutBlock = auction.queuedAtBlock + hook.AUCTION_TIMEOUT_BLOCKS();
+
+        vm.roll(auctionTimeoutBlock - 1);
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IPostSettleReveal.AuctionTimeoutNotElapsed.selector,
+                swapId,
+                auctionTimeoutBlock,
+                auctionTimeoutBlock - 1
+            )
+        );
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+    }
+
+    function testCancelStuckAuction_afterTimeout_voidsTrade() public {
+        uint256 swapId = _captureIntent(9e5, 301);
+        _submitSolverBid(swapId, solverA, 910_000);
+        hook.queueSolverAuction(swapId);
+
+        IPostSettleReveal.SolverAuction memory auction = hook.getSolverAuction(swapId);
+        uint256 auctionTimeoutBlock = auction.queuedAtBlock + hook.AUCTION_TIMEOUT_BLOCKS();
+
+        vm.roll(auctionTimeoutBlock);
+
+        vm.expectEmit(true, true, false, false, address(hook));
+        emit AuctionCancelled(swapId, trader);
+
+        vm.expectEmit(true, true, false, false, address(hook));
+        emit SwapEmergencyResolved(swapId, trader, "auction_cancel");
+
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+
+        (, , , , IPostSettleReveal.SwapState finalState) = hook.getSwapIntent(swapId);
+        assertEq(uint256(finalState), uint256(IPostSettleReveal.SwapState.EmergencyResolved));
+
+        IPostSettleReveal.SolverAuction memory auctionAfter = hook.getSolverAuction(swapId);
+        assertTrue(auctionAfter.cancelled);
+    }
+
+    function testCancelStuckAuction_wrongCaller_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 302);
+        _submitSolverBid(swapId, solverA, 910_000);
+        hook.queueSolverAuction(swapId);
+
+        IPostSettleReveal.SolverAuction memory auction = hook.getSolverAuction(swapId);
+        vm.roll(auction.queuedAtBlock + hook.AUCTION_TIMEOUT_BLOCKS());
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.Unauthorized.selector, unauthorized));
+        vm.prank(unauthorized);
+        hook.cancelStuckAuction(swapId);
+    }
+
+    function testCancelStuckAuction_noAuction_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 303);
+        PoolKey memory key = _poolKey();
+        SwapParams memory params = _swapParams();
+        BalanceDelta delta = toBalanceDelta(-1e6, 9e5);
+        hook.exposedAfterSwap(trader, key, params, delta, bytes(""));
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.SolverAuctionNotQueued.selector, swapId));
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+    }
+
+    function testCancelStuckAuction_alreadyFinalized_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 304);
+        _submitSolverBid(swapId, solverA, 910_000);
+        hook.queueSolverAuction(swapId);
+
+        vm.warp(block.timestamp + 11);
+        hook.finalizeSolverAuction(swapId);
+
+        vm.roll(block.number + hook.AUCTION_TIMEOUT_BLOCKS());
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.SolverAuctionAlreadyFinalized.selector, swapId));
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+    }
+
+    function testCancelStuckAuction_doubleCancel_reverts() public {
+        uint256 swapId = _captureIntent(9e5, 305);
+        _submitSolverBid(swapId, solverA, 910_000);
+        hook.queueSolverAuction(swapId);
+
+        IPostSettleReveal.SolverAuction memory auction = hook.getSolverAuction(swapId);
+        vm.roll(auction.queuedAtBlock + hook.AUCTION_TIMEOUT_BLOCKS());
+
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+
+        vm.expectRevert(abi.encodeWithSelector(IPostSettleReveal.AuctionAlreadyCancelled.selector, swapId));
+        vm.prank(trader);
+        hook.cancelStuckAuction(swapId);
+    }
+
+    // ===== publishDecryptResult Signature Verification Tests =====
+
+    function testPublishDecryptResult_validSig_succeeds() public {
+        bytes32 ctHash = keccak256("test-ciphertext");
+        uint128 decryptedValue = 950_000;
+
+        bytes32 messageHash = keccak256(abi.encodePacked(ctHash, decryptedValue));
+        bytes32 ethSignedHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(cofheVerifierPk, ethSignedHash);
+        bytes memory signature = abi.encodePacked(r, s, v);
+
+        vm.expectEmit(true, false, false, true, address(hook));
+        emit DecryptResultPublished(ctHash, decryptedValue);
+
+        hook.publishDecryptResult(ctHash, decryptedValue, signature);
+
+        (uint128 storedValue, bool ready) = hook.getPublishedDecryptResult(ctHash);
+        assertTrue(ready);
+        assertEq(storedValue, decryptedValue);
+    }
+
+    function testPublishDecryptResult_invalidSig_reverts() public {
+        bytes32 ctHash = keccak256("test-ciphertext");
+        uint128 decryptedValue = 950_000;
+
+        uint256 wrongSignerPk = uint256(keccak256("wrong-signer"));
+        bytes32 messageHash = keccak256(abi.encodePacked(ctHash, decryptedValue));
+        bytes32 ethSignedHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(wrongSignerPk, ethSignedHash);
+        bytes memory signature = abi.encodePacked(r, s, v);
+
+        address wrongSigner = vm.addr(wrongSignerPk);
+
+        vm.expectRevert(
+            abi.encodeWithSelector(IPostSettleReveal.InvalidCoFHESignature.selector, wrongSigner, cofheVerifier)
+        );
+        hook.publishDecryptResult(ctHash, decryptedValue, signature);
+    }
+
+    function testPublishDecryptResult_overwriteSameCtHash() public {
+        bytes32 ctHash = keccak256("test-ciphertext-overwrite");
+        uint128 firstValue = 950_000;
+        uint128 secondValue = 960_000;
+
+        bytes32 messageHash1 = keccak256(abi.encodePacked(ctHash, firstValue));
+        bytes32 ethSignedHash1 = MessageHashUtils.toEthSignedMessageHash(messageHash1);
+        (uint8 v1, bytes32 r1, bytes32 s1) = vm.sign(cofheVerifierPk, ethSignedHash1);
+        bytes memory signature1 = abi.encodePacked(r1, s1, v1);
+
+        hook.publishDecryptResult(ctHash, firstValue, signature1);
+
+        bytes32 messageHash2 = keccak256(abi.encodePacked(ctHash, secondValue));
+        bytes32 ethSignedHash2 = MessageHashUtils.toEthSignedMessageHash(messageHash2);
+        (uint8 v2, bytes32 r2, bytes32 s2) = vm.sign(cofheVerifierPk, ethSignedHash2);
+        bytes memory signature2 = abi.encodePacked(r2, s2, v2);
+
+        hook.publishDecryptResult(ctHash, secondValue, signature2);
+
+        (uint128 storedValue, bool ready) = hook.getPublishedDecryptResult(ctHash);
+        assertTrue(ready);
+        assertEq(storedValue, secondValue);
+    }
+
+    function testPublishDecryptResult_differentCtHash() public {
+        bytes32 ctHash1 = keccak256("ct-hash-1");
+        bytes32 ctHash2 = keccak256("ct-hash-2");
+        uint128 value1 = 950_000;
+        uint128 value2 = 970_000;
+
+        bytes32 messageHash1 = keccak256(abi.encodePacked(ctHash1, value1));
+        bytes32 ethSignedHash1 = MessageHashUtils.toEthSignedMessageHash(messageHash1);
+        (uint8 v1, bytes32 r1, bytes32 s1) = vm.sign(cofheVerifierPk, ethSignedHash1);
+        bytes memory signature1 = abi.encodePacked(r1, s1, v1);
+
+        hook.publishDecryptResult(ctHash1, value1, signature1);
+
+        bytes32 messageHash2 = keccak256(abi.encodePacked(ctHash2, value2));
+        bytes32 ethSignedHash2 = MessageHashUtils.toEthSignedMessageHash(messageHash2);
+        (uint8 v2, bytes32 r2, bytes32 s2) = vm.sign(cofheVerifierPk, ethSignedHash2);
+        bytes memory signature2 = abi.encodePacked(r2, s2, v2);
+
+        hook.publishDecryptResult(ctHash2, value2, signature2);
+
+        (uint128 stored1, bool ready1) = hook.getPublishedDecryptResult(ctHash1);
+        assertTrue(ready1);
+        assertEq(stored1, value1);
+
+        (uint128 stored2, bool ready2) = hook.getPublishedDecryptResult(ctHash2);
+        assertTrue(ready2);
+        assertEq(stored2, value2);
+    }
+
+    function testPublishDecryptResult_isDecryptReady() public {
+        bytes32 ctHash = keccak256("ct-hash-ready");
+        uint128 decryptedValue = 950_000;
+
+        assertFalse(hook.isDecryptReady(ctHash));
+
+        bytes32 messageHash = keccak256(abi.encodePacked(ctHash, decryptedValue));
+        bytes32 ethSignedHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(cofheVerifierPk, ethSignedHash);
+        bytes memory signature = abi.encodePacked(r, s, v);
+
+        hook.publishDecryptResult(ctHash, decryptedValue, signature);
+
+        assertTrue(hook.isDecryptReady(ctHash));
     }
 }

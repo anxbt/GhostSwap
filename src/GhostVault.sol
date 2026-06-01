@@ -35,9 +35,11 @@ contract GhostVault is IGhostVault, IERC1271 {
     // - `shares[acct]` : number of vault shares held by account
     // - `rewardDebtX18[acct]` : tracks the account's last-observed accrued surplus (scaled by 1e18)
     // - `unclaimedSurplus[acct]` : surplus already materialized and awaiting claim
+    // - `surplusRecordedForSwap[swapId]` : tracks which swaps have had their surplus recorded (idempotency)
     mapping(address => uint256) public shares;
     mapping(address => uint256) public rewardDebtX18;
     mapping(address => uint256) public unclaimedSurplus;
+    mapping(uint256 => bool) public surplusRecordedForSwap;
 
     error Unauthorized(address caller);
     error ZeroAmount();
@@ -45,6 +47,7 @@ contract GhostVault is IGhostVault, IERC1271 {
     error InsufficientShares(address owner, uint256 requestedShares, uint256 availableShares);
     error InvalidTrader(address trader);
     error NoSharesOutstanding();
+    error SurplusAlreadyRecorded(uint256 swapId);
 
     event Deposited(address indexed caller, address indexed receiver, uint256 assets, uint256 shares);
     event Withdrawn(address indexed caller, address indexed receiver, address indexed owner, uint256 assets, uint256 shares);
@@ -178,9 +181,14 @@ contract GhostVault is IGhostVault, IERC1271 {
 
     /// @notice Record surplus captured from a settled swap
     /// @dev Only callable by the trusted `hook`. `trader` must be this vault (hook forwards surplus to vault address).
+    ///      Idempotent: will revert if surplus is recorded twice for the same swapId (prevents accounting errors).
     function recordSurplus(uint256 swapId, uint256 surplusAmount, address trader) external onlyHook {
         if (trader != address(this)) revert InvalidTrader(trader);
+        if (surplusRecordedForSwap[swapId]) revert SurplusAlreadyRecorded(swapId);
         if (surplusAmount > 0 && totalShares == 0) revert NoSharesOutstanding();
+
+        // Mark as recorded to prevent double-recording
+        surplusRecordedForSwap[swapId] = true;
 
         totalSurplusCaptured += surplusAmount;
 

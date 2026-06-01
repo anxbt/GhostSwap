@@ -1,0 +1,394 @@
+{
+  "communities": {
+    "0": [
+      "contracts_chainnamebyid",
+      "contracts_getexpectedchainid",
+      "fe_src_config_contracts_js",
+      "fe_src_lib_format_js",
+      "format_shortaddress",
+      "format_tonumbersafe",
+      "ghostswap_addtrackedswapid",
+      "ghostswap_computepoolid",
+      "ghostswap_getsqrtpricelimitx96",
+      "ghostswap_getstoredhooknonce",
+      "ghostswap_gettrackedswapids",
+      "ghostswap_ghostswap",
+      "ghostswap_mempoolcomparison",
+      "ghostswap_noise",
+      "ghostswap_normalizeswapids",
+      "ghostswap_pendingrevealpanel",
+      "ghostswap_readme_codeblock_1",
+      "ghostswap_readme_codeblock_5",
+      "ghostswap_readme_codeblock_6",
+      "ghostswap_readme_current_status",
+      "ghostswap_readme_hook_lifecycle_state_machine",
+      "ghostswap_readme_realistic_competition_and_positioning",
+      "ghostswap_readme_resources",
+      "ghostswap_readme_tech_stack",
+      "ghostswap_readme_the_problem_and_why_it_s_worth_billions",
+      "ghostswap_readme_wave_roadmap",
+      "ghostswap_readme_what_ghostswap_actually_is",
+      "ghostswap_readme_why_this_becomes_a_protocol_not_just_a_hook",
+      "ghostswap_revealedview",
+      "ghostswap_statusbadge",
+      "ghostswap_tokenselector",
+      "ghostswap_tostoragekey",
+      "ghostswap_totrackedswapstoragekey",
+      "ghostswap_transactionhistory"
+    ],
+    "1": [
+      "fhe_assistant_main_core_arithmetic_operations",
+      "fhe_assistant_main_core_basic_arithmetic",
+      "fhe_assistant_main_core_bitwise_operations_all_euint_types",
+      "fhe_assistant_main_core_boolean_logic_ebool_only",
+      "fhe_assistant_main_core_codeblock_1",
+      "fhe_assistant_main_core_codeblock_11",
+      "fhe_assistant_main_core_codeblock_12",
+      "fhe_assistant_main_core_codeblock_14",
+      "fhe_assistant_main_core_codeblock_2",
+      "fhe_assistant_main_core_codeblock_3",
+      "fhe_assistant_main_core_codeblock_8",
+      "fhe_assistant_main_core_codeblock_9",
+      "fhe_assistant_main_core_comparison_functions",
+      "fhe_assistant_main_core_comparison_operations",
+      "fhe_assistant_main_core_encrypted_data_types",
+      "fhe_assistant_main_core_fhe_library_reference",
+      "fhe_assistant_main_core_logical_operations",
+      "fhe_assistant_main_core_md",
+      "fhe_assistant_main_core_quick_reference_for_ai",
+      "fhe_assistant_main_core_supported_bit_lengths",
+      "fhe_assistant_main_core_type_definitions"
+    ],
+    "2": [
+      "fe_readme_build",
+      "fe_readme_codeblock_1",
+      "fe_readme_codeblock_2",
+      "fe_readme_codeblock_3",
+      "fe_readme_codeblock_4",
+      "fe_readme_ghostswap_frontend",
+      "fe_readme_notes",
+      "fe_readme_quick_start",
+      "fhe_assistant_main_readme_ai_platforms",
+      "fhe_assistant_main_readme_codeblock_1",
+      "fhe_assistant_main_readme_codeblock_2",
+      "fhe_assistant_main_readme_codeblock_3",
+      "fhe_assistant_main_readme_community_resources",
+      "fhe_assistant_main_readme_essential_file",
+      "fhe_assistant_main_readme_fhe_ai_assistant",
+      "fhe_assistant_main_readme_key_success_formula",
+      "fhe_assistant_main_readme_proven_ai_prompts",
+      "fhe_assistant_main_readme_quick_start_30_seconds",
+      "fhe_assistant_main_readme_what_s_inside",
+      "readme_md"
+    ],
+    "3": [
+      "fhe_assistant_main_core_ai_common_decryption_errors",
+      "fhe_assistant_main_core_ai_common_decryption_patterns",
+      "fhe_assistant_main_core_ai_decryption_workflow_examples",
+      "fhe_assistant_main_core_ai_prerequisites_for_decryption",
+      "fhe_assistant_main_core_ai_transaction_flow",
+      "fhe_assistant_main_core_codeblock_15",
+      "fhe_assistant_main_core_codeblock_16",
+      "fhe_assistant_main_core_codeblock_17",
+      "fhe_assistant_main_core_codeblock_18",
+      "fhe_assistant_main_core_codeblock_19",
+      "fhe_assistant_main_core_codeblock_21",
+      "fhe_assistant_main_core_codeblock_23",
+      "fhe_assistant_main_core_codeblock_24",
+      "fhe_assistant_main_core_codeblock_25",
+      "fhe_assistant_main_core_codeblock_41",
+      "fhe_assistant_main_core_decryption_methods",
+      "fhe_assistant_main_core_decryption_timing",
+      "fhe_assistant_main_core_fhe_decrypt_request_decryption",
+      "fhe_assistant_main_core_fhe_getdecryptresult_retrieve_decrypted_value",
+      "fhe_assistant_main_core_fhe_getdecryptresultsafe_safe_retrieval"
+    ],
+    "4": [
+      "ghostswap_instructions_10_known_issues_and_wave_targets",
+      "ghostswap_instructions_1_overview",
+      "ghostswap_instructions_2_tech_stack",
+      "ghostswap_instructions_4_project_structure",
+      "ghostswap_instructions_9_environment_variables",
+      "ghostswap_instructions_codeblock_23",
+      "ghostswap_instructions_codeblock_8",
+      "ghostswap_instructions_core_fhe_functionality",
+      "ghostswap_instructions_frontend",
+      "ghostswap_instructions_ghostswap_instructions_md",
+      "ghostswap_instructions_key_files_explained",
+      "ghostswap_instructions_networks",
+      "ghostswap_instructions_problem_statement",
+      "ghostswap_instructions_project_goal",
+      "ghostswap_instructions_smart_contracts",
+      "instructions_md"
+    ],
+    "5": [
+      "ghostswap_instructions_3_sdk_migration_critical_context",
+      "ghostswap_instructions_codeblock_1",
+      "ghostswap_instructions_codeblock_2",
+      "ghostswap_instructions_codeblock_5",
+      "ghostswap_instructions_decrypting_for_onchain_publishing_new_not_in_cofhejs",
+      "ghostswap_instructions_decrypting_for_ui_view",
+      "ghostswap_instructions_encrypting_inputs",
+      "ghostswap_instructions_error_handling",
+      "ghostswap_instructions_import_path_changes",
+      "ghostswap_instructions_initialization",
+      "ghostswap_instructions_installation",
+      "ghostswap_instructions_migration_reference",
+      "ghostswap_instructions_permits",
+      "ghostswap_instructions_type_renames",
+      "ghostswap_instructions_why_the_sdk_changed"
+    ],
+    "6": [
+      "ghostswap_instructions_5_fhe_patterns",
+      "ghostswap_instructions_block_delay_why_15_blocks",
+      "ghostswap_instructions_codeblock_10",
+      "ghostswap_instructions_codeblock_11",
+      "ghostswap_instructions_codeblock_12",
+      "ghostswap_instructions_codeblock_13",
+      "ghostswap_instructions_codeblock_9",
+      "ghostswap_instructions_pattern_1_encrypt_before_send",
+      "ghostswap_instructions_pattern_2_store_encrypted_onchain",
+      "ghostswap_instructions_pattern_3_async_decrypt_with_permit",
+      "ghostswap_instructions_pattern_4_fhe_comparison_wave_3"
+    ],
+    "7": [
+      "ghostswap_readme_codeblock_2",
+      "ghostswap_readme_how_the_vault_generates_tvl",
+      "ghostswap_readme_realistic_tvl_scaling",
+      "ghostswap_readme_the_architecture_vault_hook",
+      "ghostswap_readme_the_flywheel",
+      "ghostswap_readme_the_honest_fhe_trade_off",
+      "ghostswap_readme_who_deposits_and_why",
+      "ghostswap_readme_why_fhe_and_why_we_own_the_trade_off",
+      "ghostswap_readme_why_not_zk_or_tee",
+      "ghostswap_readme_why_this_is_defensible"
+    ],
+    "8": [
+      "ghostswap_instructions_6_coding_standards",
+      "ghostswap_instructions_codeblock_14",
+      "ghostswap_instructions_codeblock_15",
+      "ghostswap_instructions_codeblock_16",
+      "ghostswap_instructions_custom_errors_over_require_strings",
+      "ghostswap_instructions_foundry_testing",
+      "ghostswap_instructions_naming",
+      "ghostswap_instructions_solidity",
+      "ghostswap_instructions_typescript_frontend"
+    ],
+    "9": [
+      "ghostswap_instructions_7_user_stories",
+      "ghostswap_instructions_codeblock_17",
+      "ghostswap_instructions_codeblock_18",
+      "ghostswap_instructions_codeblock_19",
+      "ghostswap_instructions_codeblock_20",
+      "ghostswap_instructions_compliance_party_permissioned_view_wave_2",
+      "ghostswap_instructions_dao_treasury_manager_large_order_wave_4",
+      "ghostswap_instructions_trader_private_swap",
+      "ghostswap_instructions_trader_reveal_result"
+    ],
+    "10": [
+      "ghostswap_instructions_8_apis_and_integrations",
+      "ghostswap_instructions_arbiscan_arbitrum_sepolia_explorer",
+      "ghostswap_instructions_codeblock_21",
+      "ghostswap_instructions_codeblock_22",
+      "ghostswap_instructions_cofhe_sdk_client_sdk",
+      "ghostswap_instructions_fhenix_cofhe_coprocessor",
+      "ghostswap_instructions_uniswap_v4_poolmanager"
+    ],
+    "11": [
+      "fhe_assistant_main_core_between_encrypted_types_casting",
+      "fhe_assistant_main_core_codeblock_4",
+      "fhe_assistant_main_core_codeblock_5",
+      "fhe_assistant_main_core_codeblock_6",
+      "fhe_assistant_main_core_codeblock_7",
+      "fhe_assistant_main_core_from_plaintext_to_encrypted",
+      "fhe_assistant_main_core_type_conversion_functions"
+    ],
+    "12": [
+      "fe_src_hooks_usecofhe_js",
+      "ghostswap_mapsubmiterror",
+      "usecofhe_encryptminout",
+      "usecofhe_mapcofheerror",
+      "usecofhe_normalizeencryptedinput"
+    ],
+    "13": [
+      "fe_src_landingpage_jsx",
+      "landingpage_mempoolrow",
+      "landingpage_redacted",
+      "landingpage_reveal"
+    ],
+    "14": [
+      "ghostswap_readme_codeblock_7",
+      "ghostswap_readme_codeblock_8",
+      "ghostswap_readme_environment_variables",
+      "ghostswap_readme_setup"
+    ],
+    "15": [
+      "docs_fhe_mock_devrel_note_ghostswap_fhe_mock_integration_notes",
+      "docs_fhe_mock_devrel_note_md",
+      "docs_fhe_mock_devrel_note_questions_for_maintainers",
+      "docs_fhe_mock_devrel_note_summary"
+    ],
+    "16": [
+      "app_app",
+      "fe_src_app_jsx"
+    ],
+    "17": [
+      "agents_md",
+      "ghostswap_agents_graphify"
+    ],
+    "18": [
+      "hardhat_config_ts"
+    ],
+    "19": [
+      "fe_tailwind_config_js"
+    ],
+    "20": [
+      "fe_vite_config_js"
+    ],
+    "21": [
+      "fe_eslint_config_js"
+    ],
+    "22": [
+      "fe_postcss_config_js"
+    ],
+    "23": [
+      "fe_src_main_jsx"
+    ],
+    "24": [
+      "fe_src_lib_postsettlerevealabi_js"
+    ],
+    "25": [
+      "fe_src_lib_swapabis_js"
+    ]
+  },
+  "cohesion": {
+    "0": 0.07,
+    "1": 0.1,
+    "2": 0.1,
+    "3": 0.11,
+    "4": 0.12,
+    "5": 0.17,
+    "6": 0.18,
+    "7": 0.2,
+    "8": 0.22,
+    "9": 0.22,
+    "10": 0.29,
+    "11": 0.29,
+    "12": 0.5,
+    "13": 0.5,
+    "14": 0.5,
+    "15": 0.5,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0
+  },
+  "gods": [
+    {
+      "id": "ghostswap_ghostswap",
+      "label": "GhostSwap()",
+      "degree": 33
+    },
+    {
+      "id": "ghostswap_instructions_ghostswap_instructions_md",
+      "label": "GhostSwap \u2014 INSTRUCTIONS.md",
+      "degree": 11
+    },
+    {
+      "id": "fhe_assistant_main_core_decryption_methods",
+      "label": "\ud83d\udd13 Decryption Methods",
+      "degree": 10
+    },
+    {
+      "id": "ghostswap_instructions_migration_reference",
+      "label": "Migration Reference",
+      "degree": 9
+    },
+    {
+      "id": "fhe_assistant_main_core_fhe_library_reference",
+      "label": "FHE Library Reference \ud83d\udcda",
+      "degree": 8
+    },
+    {
+      "id": "ghostswap_instructions_5_fhe_patterns",
+      "label": "5. FHE Patterns",
+      "degree": 6
+    },
+    {
+      "id": "ghostswap_instructions_6_coding_standards",
+      "label": "6. Coding Standards",
+      "degree": 6
+    },
+    {
+      "id": "fhe_assistant_main_readme_fhe_ai_assistant",
+      "label": "FHE AI Assistant \ud83d\udd10",
+      "degree": 6
+    },
+    {
+      "id": "ghostswap_instructions_codeblock_2",
+      "label": "code:ts (// BEFORE (cofhejs) \u2014 DEPRECATED)",
+      "degree": 5
+    },
+    {
+      "id": "ghostswap_instructions_7_user_stories",
+      "label": "7. User Stories",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "GhostSwap()",
+      "target": "getExpectedChainId()",
+      "source_files": [
+        "fe/src/GhostSwap.jsx",
+        "fe/src/config/contracts.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `getExpectedChainId()` unexpectedly reaches hub `GhostSwap()`"
+    },
+    {
+      "source": "GhostSwap()",
+      "target": "shortAddress()",
+      "source_files": [
+        "fe/src/GhostSwap.jsx",
+        "fe/src/lib/format.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `shortAddress()` unexpectedly reaches hub `GhostSwap()`"
+    },
+    {
+      "source": "GhostSwap()",
+      "target": "chainNameById()",
+      "source_files": [
+        "fe/src/GhostSwap.jsx",
+        "fe/src/config/contracts.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `chainNameById()` unexpectedly reaches hub `GhostSwap()`"
+    },
+    {
+      "source": "mapSubmitError()",
+      "target": "mapCofheError()",
+      "source_files": [
+        "fe/src/GhostSwap.jsx",
+        "fe/src/hooks/useCofhe.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

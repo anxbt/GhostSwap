@@ -16,15 +16,16 @@ contract PostSettleRevealScript is Script, Constants {
     function run() public {
         uint256 revealDelayBlocks = vm.envOr("REVEAL_DELAY_BLOCKS", uint256(11));
         address owner = vm.envOr("HOOK_OWNER", msg.sender);
+        address cofheVerifier = vm.envAddress("COFHE_VERIFIER_ADDRESS");
 
         uint160 flags = uint160(Hooks.BEFORE_SWAP_FLAG | Hooks.AFTER_SWAP_FLAG);
 
-        bytes memory constructorArgs = abi.encode(IPoolManager(POOLMANAGER), revealDelayBlocks, owner);
+        bytes memory constructorArgs = abi.encode(IPoolManager(POOLMANAGER), revealDelayBlocks, owner, cofheVerifier);
         (address hookAddress, bytes32 salt) =
             HookMiner.find(CREATE2_DEPLOYER, flags, type(PostSettleRevealHook).creationCode, constructorArgs);
 
         vm.broadcast();
-        PostSettleRevealHook hook = new PostSettleRevealHook{salt: salt}(IPoolManager(POOLMANAGER), revealDelayBlocks, owner);
+        PostSettleRevealHook hook = new PostSettleRevealHook{salt: salt}(IPoolManager(POOLMANAGER), revealDelayBlocks, owner, cofheVerifier);
         require(address(hook) == hookAddress, "PostSettleRevealScript: hook address mismatch");
     }
 }

@@ -3,7 +3,12 @@ import { createCofheClient, createCofheConfig } from "@cofhe/sdk/web";
 import { chains } from "@cofhe/sdk/chains";
 import { createPublicClient, createWalletClient, custom } from "viem";
 
-const SUPPORTED_CHAIN = chains.arbitrumSepolia;
+// NOTE: the @cofhe/sdk chains export key is `arbSepolia` (not `arbitrumSepolia`).
+const SUPPORTED_CHAIN = chains.arbSepolia;
+
+// Chain the CoFHE coprocessor / SDK is bound to. Encryption only works here.
+// Defensive fallback so a future SDK rename can't crash module load / blank the UI.
+export const SUPPORTED_CHAIN_ID = SUPPORTED_CHAIN?.id ?? 421614;
 
 function normalizeEncryptedInput(input) {
   if (!input || input.ctHash == null || input.signature == null) {
@@ -21,7 +26,7 @@ function normalizeEncryptedInput(input) {
   };
 }
 
-export async function encryptMinOut({ minOutRaw, chainId, traderAddress, ethereumProvider }) {
+export async function encryptMinOut({ minOutRaw, chainId, traderAddress, ethereumProvider, bindAddress }) {
   if (!ethereumProvider) {
     throw new Error("No injected wallet provider found.");
   }
@@ -53,9 +58,14 @@ export async function encryptMinOut({ minOutRaw, chainId, traderAddress, ethereu
   await client.connect(publicClient, walletClient);
   await client.permits.getOrCreateSelfPermit();
 
-  const [encryptedInput] = await client
-    .encryptInputs([Encryptable.uint128(minOutRaw)])
-    .execute();
+  // Bind the encrypted-input proof to the on-chain caller of CoFHE verifyInput. In the v4-hook
+  // flow that is the PoolManager (msg.sender inside the hook's beforeSwap), NOT the trader wallet.
+  // Without this the on-chain verifier rejects the input with InvalidSigner.
+  let builder = client.encryptInputs([Encryptable.uint128(minOutRaw)]);
+  if (bindAddress) {
+    builder = builder.setAccount(bindAddress);
+  }
+  const [encryptedInput] = await builder.execute();
 
   return normalizeEncryptedInput(encryptedInput);
 }

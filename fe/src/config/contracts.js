@@ -1,11 +1,16 @@
 const DEFAULT_CHAIN_ID = 421614;
 const DEFAULT_SWAP_ROUTER = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 
+// Canonical Uniswap v4 PoolManager on Arbitrum Sepolia. Encrypted inputs must be bound to this
+// address (it is the on-chain caller of CoFHE verifyInput inside the hook's swap callbacks).
+const DEFAULT_POOL_MANAGER = "0xFB3e0C6F74eB1a21CC1Da29aeC80D2Dfe6C9a317";
+
 export const CONTRACTS = {
   postSettleRevealHook: import.meta.env.VITE_POST_SETTLE_HOOK || "",
   vault: import.meta.env.VITE_VAULT_ADDRESS || "",
   vaultPeriphery: import.meta.env.VITE_VAULT_PERIPHERY || "",
   swapRouter: import.meta.env.VITE_SWAP_ROUTER || DEFAULT_SWAP_ROUTER,
+  poolManager: import.meta.env.VITE_POOL_MANAGER || DEFAULT_POOL_MANAGER,
 };
 
 export const POOL_CONFIG = {

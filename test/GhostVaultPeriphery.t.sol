@@ -41,7 +41,7 @@ contract GhostVaultPeripheryTest is Test {
         asset = new MockERC20("Vault Asset", "VAST", 18);
         vault = new GhostVault(address(asset), hook);
         router = new MockSwapRouter();
-        periphery = new GhostVaultPeriphery(address(router), address(vault), address(this));
+        periphery = new GhostVaultPeriphery(address(router), address(vault), hook, address(this));
 
         vault.setOperator(vaultOperator);
     }
@@ -50,7 +50,7 @@ contract GhostVaultPeripheryTest is Test {
         bytes memory routerCallData = abi.encodeWithSelector(MockSwapRouter.swap.selector, bytes("intent-1"));
 
         vm.prank(vaultOperator);
-        uint256 intentId = periphery.queueIntent(routerCallData, block.number + 2, block.timestamp + 1 hours);
+        uint256 intentId = periphery.queueIntent(routerCallData, block.number + 2, block.timestamp + 1 hours, 0);
         assertEq(intentId, 1);
 
         vm.expectRevert(
@@ -78,13 +78,13 @@ contract GhostVaultPeripheryTest is Test {
 
         vm.expectRevert(abi.encodeWithSignature("Unauthorized(address)", alice));
         vm.prank(alice);
-        periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours);
+        periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours, 0);
     }
 
     function testCancelIntentPreventsExecution() public {
         bytes memory routerCallData = abi.encodeWithSelector(MockSwapRouter.swap.selector, bytes("intent-3"));
 
-        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours);
+        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours, 0);
         periphery.cancelIntent(intentId);
 
         vm.expectRevert(abi.encodeWithSignature("IntentAlreadyHandled(uint256)", intentId));
@@ -95,7 +95,7 @@ contract GhostVaultPeripheryTest is Test {
         bytes memory routerCallData = abi.encodeWithSelector(MockSwapRouter.swap.selector, bytes("intent-4"));
 
         vm.prank(vaultOperator);
-        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 5);
+        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 5, 0);
 
         vm.warp(block.timestamp + 6);
 
@@ -126,7 +126,7 @@ contract GhostVaultPeripheryTest is Test {
         bytes memory routerCallData = abi.encodeWithSelector(MockSwapRouter.swap.selector, bytes("intent-5"));
 
         vm.prank(vaultOperator);
-        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours);
+        uint256 intentId = periphery.queueIntent(routerCallData, block.number, block.timestamp + 1 hours, 0);
 
         router.setShouldRevert(true);
 
