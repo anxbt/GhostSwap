@@ -1,5 +1,4 @@
-<img width="545" height="548" alt="Screenshot 2026-06-01 at 5 46 29 PM" src="https://github.com/user-attachments/assets/4337bcf2-afa2-4de7-b96f-179a9ba6273a" />
-<img width="467" height="265" alt="Screenshot 2026-06-01 at 5 45 53 PM" src="https://github.com/user-attachments/assets/909f59b9-3a7b-4d56-a5eb-f502348c05a4" />
+
 # 👻 GhostSwap
 
 > **Private swap execution on Uniswap v4. Your reservation price is encrypted before it leaves your browser — solvers compete on a floor they mathematically cannot read, and recaptured surplus becomes yield for vault depositors.**
